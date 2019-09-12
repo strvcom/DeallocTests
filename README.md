@@ -152,9 +152,10 @@ $ git submodule update --init --recursive
 
 Issues and pull requests are welcome!
 
-## Author
+## Authors
 
-Daniel Cech [@DanielCech](https://twitter.com/DanielCech)
+Daniel Čech [GitHub](https://github.com/DanielCech) 
+Jan Kaltoun [GitHub](https://github.com/jankaltoun)
 
 ## License
 
