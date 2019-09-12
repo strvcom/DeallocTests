@@ -154,8 +154,8 @@ Issues and pull requests are welcome!
 
 ## Authors
 
-Daniel Čech [GitHub](https://github.com/DanielCech) 
-Jan Kaltoun [GitHub](https://github.com/jankaltoun)
+* Daniel Čech [GitHub](https://github.com/DanielCech) 
+* Jan Kaltoun [GitHub](https://github.com/jankaltoun)
 
 ## License
 
