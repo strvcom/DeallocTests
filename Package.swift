@@ -20,7 +20,7 @@ let package = Package(
     products: [
         .library(
             name: "DeallocTests",
-            targets: ["DeallocTests"]
+            targets: ["DeallocTests-iOS"]
         ),
     ],
     dependencies: [
