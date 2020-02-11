@@ -28,13 +28,13 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "DeallocTests",
+            name: "DeallocTests-iOS",
             dependencies: [],
             path: "Sources"
         ),
         .testTarget(
-            name: "DeallocTestsTests",
-            dependencies: ["DeallocTests"],
+            name: "DeallocTestsTests-iOS",
+            dependencies: ["DeallocTests-iOS"],
             path: "Tests"
         ),
     ],
