@@ -43,12 +43,6 @@
 
 /* Begin PBXFileReference section */
 		270EA9DE23F429FA0023D8D6 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
-		270EA9E123F44DDE0023D8D6 /* PostInitBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInitBehavior.swift; sourceTree = "<group>"; };
-		270EA9E223F44DDE0023D8D6 /* DeallocTestable+Internals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DeallocTestable+Internals.swift"; sourceTree = "<group>"; };
-		270EA9E323F44DDE0023D8D6 /* DeallocTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTester.swift; sourceTree = "<group>"; };
-		270EA9E423F44DDE0023D8D6 /* DeallocTestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestable.swift; sourceTree = "<group>"; };
-		270EA9E523F44DDE0023D8D6 /* DeinitializationObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeinitializationObserver.swift; sourceTree = "<group>"; };
-		27E5DC0723F314EA008FC5CC /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		27E5DC1423F316A4008FC5CC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		353A78F6224F762800055190 /* DeallocTests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DeallocTests.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3549BB171DA3890B00C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,13 +106,7 @@
 		3549BB161DA3890B00C63030 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				270EA9E423F44DDE0023D8D6 /* DeallocTestable.swift */,
-				270EA9E223F44DDE0023D8D6 /* DeallocTestable+Internals.swift */,
-				270EA9E323F44DDE0023D8D6 /* DeallocTester.swift */,
-				270EA9E523F44DDE0023D8D6 /* DeinitializationObserver.swift */,
-				270EA9E123F44DDE0023D8D6 /* PostInitBehavior.swift */,
 				3549BB541DA38A4000C63030 /* Supporting Files */,
-				27E5DC0723F314EA008FC5CC /* Dummy.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
