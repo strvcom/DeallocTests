@@ -1,0 +1,251 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "InstanceStorage"
+- "GraphStorage"
+- "PermanentStorage"
+- "TransientStorage"
+- "WeakStorage"
+- "CompositeStorage"
+provides-nominal:
+- "8Swinject15InstanceStorageP"
+- "8Swinject12GraphStorageC"
+- "8Swinject16PermanentStorageC"
+- "8Swinject16TransientStorageC"
+- "8Swinject11WeakStorageC"
+- "8Swinject16CompositeStorageC"
+provides-member:
+- ["8Swinject15InstanceStorageP", ""]
+- ["8Swinject12GraphStorageC", ""]
+- ["8Swinject16PermanentStorageC", ""]
+- ["8Swinject16TransientStorageC", ""]
+- ["8Swinject11WeakStorageC", ""]
+- ["8Swinject16CompositeStorageC", ""]
+- ["8Swinject15InstanceStorageP", "graphResolutionCompleted"]
+- ["8Swinject15InstanceStorageP", "instance"]
+- ["8Swinject15InstanceStorageP", "setInstance"]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "=="
+- "AnyObject"
+- "AssignmentPrecedence"
+- "CastingPrecedence"
+- "CompositeStorage"
+- "GraphIdentifier"
+- "GraphStorage"
+- "InstanceStorage"
+- "PermanentStorage"
+- "TransientStorage"
+- "Weak"
+- "WeakStorage"
+depends-member:
+- !private ["Sa", "compactMap"]
+- !private ["Sa", "first"]
+- !private ["Sa", "forEach"]
+- !private ["SK", "compactMap"]
+- !private ["SK", "first"]
+- !private ["SK", "forEach"]
+- !private ["s7CVarArgP", "compactMap"]
+- !private ["s7CVarArgP", "first"]
+- !private ["s7CVarArgP", "forEach"]
+- ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["Sl", "compactMap"]
+- !private ["Sl", "first"]
+- !private ["Sl", "forEach"]
+- ["Sl", "init"]
+- !private ["Sl", "subscript"]
+- ["8Swinject16CompositeStorageC", "GraphIdentifier"]
+- ["8Swinject16CompositeStorageC", "InstanceStorage"]
+- !private ["8Swinject16CompositeStorageC", "components"]
+- ["8Swinject16CompositeStorageC", "deinit"]
+- ["8Swinject16CompositeStorageC", "graphResolutionCompleted"]
+- ["8Swinject16CompositeStorageC", "init"]
+- ["8Swinject16CompositeStorageC", "instance"]
+- ["8Swinject16CompositeStorageC", "setInstance"]
+- !private ["10Foundation15ContiguousBytesP", "compactMap"]
+- !private ["10Foundation15ContiguousBytesP", "first"]
+- !private ["10Foundation15ContiguousBytesP", "forEach"]
+- !private ["s28CustomDebugStringConvertibleP", "compactMap"]
+- !private ["s28CustomDebugStringConvertibleP", "first"]
+- !private ["s28CustomDebugStringConvertibleP", "forEach"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s17CustomReflectableP", "compactMap"]
+- !private ["s17CustomReflectableP", "first"]
+- !private ["s17CustomReflectableP", "forEach"]
+- ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "compactMap"]
+- !private ["s23CustomStringConvertibleP", "first"]
+- !private ["s23CustomStringConvertibleP", "forEach"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["10Foundation12DataProtocolP", "compactMap"]
+- !private ["10Foundation12DataProtocolP", "first"]
+- !private ["10Foundation12DataProtocolP", "forEach"]
+- !private ["Se", "compactMap"]
+- !private ["Se", "first"]
+- !private ["Se", "forEach"]
+- ["Se", "init"]
+- !private ["Se", "subscript"]
+- ["SD", "init"]
+- !private ["SD", "subscript"]
+- !private ["SE", "compactMap"]
+- !private ["SE", "first"]
+- !private ["SE", "forEach"]
+- ["SE", "init"]
+- !private ["SE", "subscript"]
+- !private ["SQ", "compactMap"]
+- !private ["SQ", "first"]
+- !private ["SQ", "forEach"]
+- ["SQ", "init"]
+- !private ["SQ", "subscript"]
+- !private ["s25ExpressibleByArrayLiteralP", "compactMap"]
+- !private ["s25ExpressibleByArrayLiteralP", "first"]
+- !private ["s25ExpressibleByArrayLiteralP", "forEach"]
+- ["s30ExpressibleByDictionaryLiteralP", "init"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "subscript"]
+- ["8Swinject15GraphIdentifierC", "deinit"]
+- ["8Swinject12GraphStorageC", "GraphIdentifier"]
+- ["8Swinject12GraphStorageC", "Weak"]
+- ["8Swinject12GraphStorageC", "deinit"]
+- ["8Swinject12GraphStorageC", "graphResolutionCompleted"]
+- ["8Swinject12GraphStorageC", "init"]
+- ["8Swinject12GraphStorageC", "instance"]
+- !private ["8Swinject12GraphStorageC", "instances"]
+- ["8Swinject12GraphStorageC", "setInstance"]
+- !private ["SH", "compactMap"]
+- !private ["SH", "first"]
+- !private ["SH", "forEach"]
+- ["SH", "init"]
+- !private ["SH", "subscript"]
+- ["8Swinject15InstanceStorageP", "GraphIdentifier"]
+- ["8Swinject15InstanceStorageP", "Weak"]
+- ["8Swinject15InstanceStorageP", ""]
+- !private ["8Swinject15InstanceStorageP", "_instance"]
+- !private ["8Swinject15InstanceStorageP", "components"]
+- ["8Swinject15InstanceStorageP", "graphResolutionCompleted"]
+- ["8Swinject15InstanceStorageP", "instance"]
+- !private ["8Swinject15InstanceStorageP", "instances"]
+- ["8Swinject15InstanceStorageP", "setInstance"]
+- !private ["SM", "compactMap"]
+- !private ["SM", "first"]
+- !private ["SM", "forEach"]
+- !private ["10Foundation19MutableDataProtocolP", "compactMap"]
+- !private ["10Foundation19MutableDataProtocolP", "first"]
+- !private ["10Foundation19MutableDataProtocolP", "forEach"]
+- ["8Swinject16PermanentStorageC", "deinit"]
+- ["8Swinject16PermanentStorageC", "graphResolutionCompleted"]
+- ["8Swinject16PermanentStorageC", "init"]
+- ["8Swinject16PermanentStorageC", "instance"]
+- ["8Swinject16PermanentStorageC", "setInstance"]
+- !private ["Sk", "compactMap"]
+- !private ["Sk", "first"]
+- !private ["Sk", "forEach"]
+- !private ["Sm", "compactMap"]
+- !private ["Sm", "first"]
+- !private ["Sm", "forEach"]
+- !private ["ST", "compactMap"]
+- !private ["ST", "first"]
+- !private ["ST", "forEach"]
+- ["ST", "init"]
+- !private ["ST", "subscript"]
+- ["8Swinject16TransientStorageC", "deinit"]
+- ["8Swinject16TransientStorageC", "graphResolutionCompleted"]
+- ["8Swinject16TransientStorageC", "init"]
+- ["8Swinject16TransientStorageC", "instance"]
+- ["8Swinject16TransientStorageC", "setInstance"]
+- ["8Swinject11WeakStorageC", "Weak"]
+- !private ["8Swinject11WeakStorageC", "_instance"]
+- ["8Swinject11WeakStorageC", "deinit"]
+- ["8Swinject11WeakStorageC", "graphResolutionCompleted"]
+- ["8Swinject11WeakStorageC", "init"]
+- ["8Swinject11WeakStorageC", "instance"]
+- ["8Swinject11WeakStorageC", "setInstance"]
+- !private ["s14_ArrayProtocolP", "compactMap"]
+- !private ["s14_ArrayProtocolP", "first"]
+- !private ["s14_ArrayProtocolP", "forEach"]
+- !private ["s24_DestructorSafeContainerP", "compactMap"]
+- !private ["s24_DestructorSafeContainerP", "first"]
+- !private ["s24_DestructorSafeContainerP", "forEach"]
+- !private ["s19_HasContiguousBytesP", "compactMap"]
+- !private ["s19_HasContiguousBytesP", "first"]
+- !private ["s19_HasContiguousBytesP", "forEach"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "compactMap"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "first"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "forEach"]
+- ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["s21_ObjectiveCBridgeableP", "compactMap"]
+- !private ["s21_ObjectiveCBridgeableP", "first"]
+- !private ["s21_ObjectiveCBridgeableP", "forEach"]
+- ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+depends-nominal:
+- !private "Sa"
+- !private "SK"
+- "s7CVarArgP"
+- "Sl"
+- "8Swinject16CompositeStorageC"
+- !private "10Foundation15ContiguousBytesP"
+- "s28CustomDebugStringConvertibleP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "10Foundation12DataProtocolP"
+- "Se"
+- "SD"
+- "SE"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- "s30ExpressibleByDictionaryLiteralP"
+- "8Swinject15GraphIdentifierC"
+- "8Swinject12GraphStorageC"
+- "SH"
+- "8Swinject15InstanceStorageP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
+- "8Swinject16PermanentStorageC"
+- !private "Sk"
+- !private "Sm"
+- "ST"
+- "8Swinject16TransientStorageC"
+- "8Swinject11WeakStorageC"
+- !private "s14_ArrayProtocolP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s19_HasContiguousBytesP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/XPC.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/ObjectiveC.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Dispatch.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Darwin.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Foundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/CoreFoundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/CoreGraphics.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Swift.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/IOKit.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/SwiftOnoneSupport.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/x86_64-apple-macos.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "f0bf3d2c8f5e84b27e5ae6af6486ef27"

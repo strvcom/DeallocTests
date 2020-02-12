@@ -1,0 +1,41 @@
+{
+  "": {
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/master.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTestable+Internals.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable+Internals.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable+Internals.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable+Internals~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable+Internals.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTestable.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTestable.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTester.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTester.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTester~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeallocTester.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeinitializationObserver.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeinitializationObserver.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeinitializationObserver.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeinitializationObserver~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/DeinitializationObserver.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/PostInitBehavior.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/PostInitBehavior.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/PostInitBehavior.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/PostInitBehavior~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Core/PostInitBehavior.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Dummy.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Dummy.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Dummy.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Dummy~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/DeallocTests_iOS.build/Dummy.swiftdeps"
+  }
+}

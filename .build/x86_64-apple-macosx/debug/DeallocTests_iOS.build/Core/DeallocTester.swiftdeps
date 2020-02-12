@@ -1,0 +1,675 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "DeallocTest"
+- "DeallocTester"
+provides-nominal:
+- "16DeallocTests_iOS0A4TestV"
+- "16DeallocTests_iOS0A6TesterC"
+provides-member:
+- ["16DeallocTests_iOS0A4TestV", ""]
+- ["16DeallocTests_iOS0A6TesterC", ""]
+provides-dynamic-lookup:
+- "applyAssembliesToContainer"
+- "checkTestResult"
+- "setUp"
+- "tearDown"
+depends-top-level:
+- !private "+"
+- !private "=="
+- "AnyClass"
+- "AnyObject"
+- "Assembler"
+- "AssignmentPrecedence"
+- "Container"
+- "DeallocTest"
+- "DeallocTester"
+- !private "FloatLiteralType"
+- "Int"
+- !private "IntegerLiteralType"
+- !private "ManagerAssembly"
+- !private "PostInitBehavior"
+- !private "ServiceAssembly"
+- !private "StringLiteralType"
+- !private "UIScreen"
+- "UIViewController"
+- !private "UIWindow"
+- !private "ViewModelAssembly"
+- "Void"
+- !private "XCTFail"
+- "XCTestCase"
+- "XCTestExpectation"
+- !private "allocatedClasses"
+- !private "deallocatedClasses"
+- !private "delay"
+- !private "print"
+depends-member:
+- !private ["Sa", "count"]
+- !private ["Sa", "filter"]
+- !private ["Sa", "first"]
+- ["Sa", "init"]
+- !private ["Sa", "isNotEmpty"]
+- !private ["Sa", "subscript"]
+- !private ["8Swinject9AssemblerC", "init"]
+- !private ["8Swinject8BehaviorP", "init"]
+- !private ["SK", "count"]
+- !private ["SK", "filter"]
+- !private ["SK", "first"]
+- ["SK", "init"]
+- !private ["SK", "isNotEmpty"]
+- !private ["SK", "subscript"]
+- !private ["s7CVarArgP", "Assembler"]
+- !private ["s7CVarArgP", "Container"]
+- ["s7CVarArgP", "DeallocTest"]
+- !private ["s7CVarArgP", "ManagerAssembly"]
+- !private ["s7CVarArgP", "PostInitBehavior"]
+- !private ["s7CVarArgP", "ServiceAssembly"]
+- !private ["s7CVarArgP", "UIScreen"]
+- ["s7CVarArgP", "UIViewController"]
+- !private ["s7CVarArgP", "UIWindow"]
+- !private ["s7CVarArgP", "ViewModelAssembly"]
+- !private ["s7CVarArgP", "XCTFail"]
+- ["s7CVarArgP", ""]
+- !private ["s7CVarArgP", "allocatedClasses"]
+- !private ["s7CVarArgP", "applyAssembliesToContainer"]
+- !private ["s7CVarArgP", "assembler"]
+- !private ["s7CVarArgP", "container"]
+- !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "deallocatedClasses"]
+- !private ["s7CVarArgP", "delay"]
+- !private ["s7CVarArgP", "filter"]
+- !private ["s7CVarArgP", "first"]
+- !private ["s7CVarArgP", "fulfill"]
+- ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "isNotEmpty"]
+- !private ["s7CVarArgP", "print"]
+- !private ["s7CVarArgP", "setUp"]
+- !private ["s7CVarArgP", "subscript"]
+- !private ["s7CVarArgP", "tearDown"]
+- !private ["Sl", "count"]
+- !private ["Sl", "filter"]
+- !private ["Sl", "first"]
+- ["Sl", "init"]
+- !private ["Sl", "isNotEmpty"]
+- !private ["Sl", "subscript"]
+- !private ["8Swinject9ContainerC", "init"]
+- !private ["8Swinject9ContainerC", "removeAll"]
+- !private ["8Swinject9ContainerC", "resetObjectScope"]
+- !private ["10Foundation15ContiguousBytesP", "count"]
+- !private ["10Foundation15ContiguousBytesP", "filter"]
+- !private ["10Foundation15ContiguousBytesP", "first"]
+- ["10Foundation15ContiguousBytesP", "init"]
+- !private ["10Foundation15ContiguousBytesP", "isNotEmpty"]
+- !private ["10Foundation15ContiguousBytesP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "Assembler"]
+- !private ["s28CustomDebugStringConvertibleP", "Container"]
+- ["s28CustomDebugStringConvertibleP", "DeallocTest"]
+- !private ["s28CustomDebugStringConvertibleP", "ManagerAssembly"]
+- !private ["s28CustomDebugStringConvertibleP", "PostInitBehavior"]
+- !private ["s28CustomDebugStringConvertibleP", "ServiceAssembly"]
+- !private ["s28CustomDebugStringConvertibleP", "UIScreen"]
+- ["s28CustomDebugStringConvertibleP", "UIViewController"]
+- !private ["s28CustomDebugStringConvertibleP", "UIWindow"]
+- !private ["s28CustomDebugStringConvertibleP", "ViewModelAssembly"]
+- !private ["s28CustomDebugStringConvertibleP", "XCTFail"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "allocatedClasses"]
+- !private ["s28CustomDebugStringConvertibleP", "applyAssembliesToContainer"]
+- !private ["s28CustomDebugStringConvertibleP", "assembler"]
+- !private ["s28CustomDebugStringConvertibleP", "container"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "deallocatedClasses"]
+- !private ["s28CustomDebugStringConvertibleP", "delay"]
+- !private ["s28CustomDebugStringConvertibleP", "filter"]
+- !private ["s28CustomDebugStringConvertibleP", "first"]
+- !private ["s28CustomDebugStringConvertibleP", "fulfill"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "isNotEmpty"]
+- !private ["s28CustomDebugStringConvertibleP", "print"]
+- !private ["s28CustomDebugStringConvertibleP", "removeAll"]
+- !private ["s28CustomDebugStringConvertibleP", "resetObjectScope"]
+- !private ["s28CustomDebugStringConvertibleP", "setUp"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s28CustomDebugStringConvertibleP", "tearDown"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "filter"]
+- !private ["s17CustomReflectableP", "first"]
+- ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "isNotEmpty"]
+- !private ["s17CustomReflectableP", "removeAll"]
+- !private ["s17CustomReflectableP", "resetObjectScope"]
+- !private ["s17CustomReflectableP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "Assembler"]
+- !private ["s23CustomStringConvertibleP", "Container"]
+- ["s23CustomStringConvertibleP", "DeallocTest"]
+- !private ["s23CustomStringConvertibleP", "ManagerAssembly"]
+- !private ["s23CustomStringConvertibleP", "PostInitBehavior"]
+- !private ["s23CustomStringConvertibleP", "ServiceAssembly"]
+- !private ["s23CustomStringConvertibleP", "UIScreen"]
+- ["s23CustomStringConvertibleP", "UIViewController"]
+- !private ["s23CustomStringConvertibleP", "UIWindow"]
+- !private ["s23CustomStringConvertibleP", "ViewModelAssembly"]
+- !private ["s23CustomStringConvertibleP", "XCTFail"]
+- ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "allocatedClasses"]
+- !private ["s23CustomStringConvertibleP", "appendInterpolation"]
+- !private ["s23CustomStringConvertibleP", "appendLiteral"]
+- !private ["s23CustomStringConvertibleP", "applyAssembliesToContainer"]
+- !private ["s23CustomStringConvertibleP", "assembler"]
+- !private ["s23CustomStringConvertibleP", "container"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "deallocatedClasses"]
+- !private ["s23CustomStringConvertibleP", "delay"]
+- !private ["s23CustomStringConvertibleP", "filter"]
+- !private ["s23CustomStringConvertibleP", "first"]
+- !private ["s23CustomStringConvertibleP", "fulfill"]
+- ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "isNotEmpty"]
+- !private ["s23CustomStringConvertibleP", "print"]
+- !private ["s23CustomStringConvertibleP", "removeAll"]
+- !private ["s23CustomStringConvertibleP", "resetObjectScope"]
+- !private ["s23CustomStringConvertibleP", "setUp"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["s23CustomStringConvertibleP", "tearDown"]
+- !private ["10Foundation12DataProtocolP", "count"]
+- !private ["10Foundation12DataProtocolP", "filter"]
+- !private ["10Foundation12DataProtocolP", "first"]
+- ["10Foundation12DataProtocolP", "init"]
+- !private ["10Foundation12DataProtocolP", "isNotEmpty"]
+- !private ["10Foundation12DataProtocolP", "subscript"]
+- ["16DeallocTests_iOS0A4TestV", "AnyClass"]
+- ["16DeallocTests_iOS0A4TestV", "AnyObject"]
+- ["16DeallocTests_iOS0A4TestV", "Container"]
+- ["16DeallocTests_iOS0A4TestV", "ObjectCreationClosure"]
+- ["16DeallocTests_iOS0A4TestV", "SimpleClosure"]
+- ["16DeallocTests_iOS0A4TestV", "Void"]
+- ["16DeallocTests_iOS0A4TestV", "actionBeforeCheck"]
+- ["16DeallocTests_iOS0A4TestV", "checkClasses"]
+- ["16DeallocTests_iOS0A4TestV", "init"]
+- ["16DeallocTests_iOS0A4TestV", "objectCreation"]
+- ["16DeallocTests_iOS0A6TesterC", "AnyClass"]
+- ["16DeallocTests_iOS0A6TesterC", "Assembler"]
+- ["16DeallocTests_iOS0A6TesterC", "Container"]
+- ["16DeallocTests_iOS0A6TesterC", "DeallocTest"]
+- ["16DeallocTests_iOS0A6TesterC", "Int"]
+- !private ["16DeallocTests_iOS0A6TesterC", "ManagerAssembly"]
+- !private ["16DeallocTests_iOS0A6TesterC", "PostInitBehavior"]
+- !private ["16DeallocTests_iOS0A6TesterC", "ServiceAssembly"]
+- !private ["16DeallocTests_iOS0A6TesterC", "UIScreen"]
+- ["16DeallocTests_iOS0A6TesterC", "UIViewController"]
+- !private ["16DeallocTests_iOS0A6TesterC", "UIWindow"]
+- !private ["16DeallocTests_iOS0A6TesterC", "ViewModelAssembly"]
+- !private ["16DeallocTests_iOS0A6TesterC", "XCTFail"]
+- ["16DeallocTests_iOS0A6TesterC", "XCTestExpectation"]
+- !private ["16DeallocTests_iOS0A6TesterC", "allocatedClasses"]
+- ["16DeallocTests_iOS0A6TesterC", "applyAssembliesToContainer"]
+- ["16DeallocTests_iOS0A6TesterC", "assembler"]
+- ["16DeallocTests_iOS0A6TesterC", "checkTestResult"]
+- ["16DeallocTests_iOS0A6TesterC", "container"]
+- ["16DeallocTests_iOS0A6TesterC", "continueWithNextStep"]
+- ["16DeallocTests_iOS0A6TesterC", "deallocTests"]
+- !private ["16DeallocTests_iOS0A6TesterC", "deallocatedClasses"]
+- ["16DeallocTests_iOS0A6TesterC", "deinit"]
+- !private ["16DeallocTests_iOS0A6TesterC", "delay"]
+- ["16DeallocTests_iOS0A6TesterC", "init"]
+- ["16DeallocTests_iOS0A6TesterC", "performDeallocTest"]
+- !private ["16DeallocTests_iOS0A6TesterC", "print"]
+- ["16DeallocTests_iOS0A6TesterC", "setUp"]
+- ["16DeallocTests_iOS0A6TesterC", "tearDown"]
+- !private ["Se", "count"]
+- !private ["Se", "filter"]
+- !private ["Se", "first"]
+- ["Se", "init"]
+- !private ["Se", "isNotEmpty"]
+- !private ["Se", "removeAll"]
+- !private ["Se", "resetObjectScope"]
+- !private ["Se", "subscript"]
+- !private ["s26DefaultStringInterpolationV", "appendInterpolation"]
+- !private ["s26DefaultStringInterpolationV", "appendLiteral"]
+- !private ["SE", "count"]
+- !private ["SE", "filter"]
+- !private ["SE", "first"]
+- ["SE", "init"]
+- !private ["SE", "isNotEmpty"]
+- !private ["SE", "removeAll"]
+- !private ["SE", "resetObjectScope"]
+- !private ["SE", "subscript"]
+- !private ["SQ", "Assembler"]
+- !private ["SQ", "Container"]
+- ["SQ", "DeallocTest"]
+- !private ["SQ", "ManagerAssembly"]
+- !private ["SQ", "PostInitBehavior"]
+- !private ["SQ", "ServiceAssembly"]
+- !private ["SQ", "UIScreen"]
+- ["SQ", "UIViewController"]
+- !private ["SQ", "UIWindow"]
+- !private ["SQ", "ViewModelAssembly"]
+- !private ["SQ", "XCTFail"]
+- ["SQ", ""]
+- !private ["SQ", "allocatedClasses"]
+- !private ["SQ", "applyAssembliesToContainer"]
+- !private ["SQ", "assembler"]
+- !private ["SQ", "container"]
+- !private ["SQ", "count"]
+- !private ["SQ", "deallocatedClasses"]
+- !private ["SQ", "delay"]
+- !private ["SQ", "filter"]
+- !private ["SQ", "first"]
+- !private ["SQ", "fulfill"]
+- ["SQ", "init"]
+- !private ["SQ", "isNotEmpty"]
+- !private ["SQ", "print"]
+- !private ["SQ", "removeAll"]
+- !private ["SQ", "resetObjectScope"]
+- !private ["SQ", "setUp"]
+- !private ["SQ", "subscript"]
+- !private ["SQ", "tearDown"]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- !private ["s25ExpressibleByArrayLiteralP", "filter"]
+- !private ["s25ExpressibleByArrayLiteralP", "first"]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "isNotEmpty"]
+- !private ["s25ExpressibleByArrayLiteralP", "subscript"]
+- !private ["s23ExpressibleByNilLiteralP", "removeAll"]
+- !private ["s23ExpressibleByNilLiteralP", "resetObjectScope"]
+- !private ["SH", "Assembler"]
+- !private ["SH", "Container"]
+- ["SH", "DeallocTest"]
+- !private ["SH", "ManagerAssembly"]
+- !private ["SH", "PostInitBehavior"]
+- !private ["SH", "ServiceAssembly"]
+- !private ["SH", "UIScreen"]
+- ["SH", "UIViewController"]
+- !private ["SH", "UIWindow"]
+- !private ["SH", "ViewModelAssembly"]
+- !private ["SH", "XCTFail"]
+- ["SH", ""]
+- !private ["SH", "allocatedClasses"]
+- !private ["SH", "applyAssembliesToContainer"]
+- !private ["SH", "assembler"]
+- !private ["SH", "container"]
+- !private ["SH", "count"]
+- !private ["SH", "deallocatedClasses"]
+- !private ["SH", "delay"]
+- !private ["SH", "filter"]
+- !private ["SH", "first"]
+- !private ["SH", "fulfill"]
+- ["SH", "init"]
+- !private ["SH", "isNotEmpty"]
+- !private ["SH", "print"]
+- !private ["SH", "removeAll"]
+- !private ["SH", "resetObjectScope"]
+- !private ["SH", "setUp"]
+- !private ["SH", "subscript"]
+- !private ["SH", "tearDown"]
+- !private ["8Swinject15InstanceWrapperP", "removeAll"]
+- !private ["8Swinject15InstanceWrapperP", "resetObjectScope"]
+- !private ["SM", "count"]
+- !private ["SM", "filter"]
+- !private ["SM", "first"]
+- ["SM", "init"]
+- !private ["SM", "isNotEmpty"]
+- !private ["SM", "subscript"]
+- !private ["10Foundation19MutableDataProtocolP", "count"]
+- !private ["10Foundation19MutableDataProtocolP", "filter"]
+- !private ["10Foundation19MutableDataProtocolP", "first"]
+- ["10Foundation19MutableDataProtocolP", "init"]
+- !private ["10Foundation19MutableDataProtocolP", "isNotEmpty"]
+- !private ["10Foundation19MutableDataProtocolP", "subscript"]
+- ["So8NSObjectC", "AnyClass"]
+- ["So8NSObjectC", "Assembler"]
+- ["So8NSObjectC", "Container"]
+- ["So8NSObjectC", "DeallocTest"]
+- ["So8NSObjectC", "Int"]
+- !private ["So8NSObjectC", "ManagerAssembly"]
+- !private ["So8NSObjectC", "PostInitBehavior"]
+- !private ["So8NSObjectC", "ServiceAssembly"]
+- !private ["So8NSObjectC", "UIScreen"]
+- ["So8NSObjectC", "UIViewController"]
+- !private ["So8NSObjectC", "UIWindow"]
+- !private ["So8NSObjectC", "ViewModelAssembly"]
+- !private ["So8NSObjectC", "XCTFail"]
+- ["So8NSObjectC", "XCTestExpectation"]
+- !private ["So8NSObjectC", "allocatedClasses"]
+- ["So8NSObjectC", "applyAssembliesToContainer"]
+- ["So8NSObjectC", "assembler"]
+- ["So8NSObjectC", "checkTestResult"]
+- ["So8NSObjectC", "container"]
+- ["So8NSObjectC", "continueWithNextStep"]
+- ["So8NSObjectC", "deallocTests"]
+- !private ["So8NSObjectC", "deallocatedClasses"]
+- !private ["So8NSObjectC", "delay"]
+- !private ["So8NSObjectC", "fulfill"]
+- ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "performDeallocTest"]
+- !private ["So8NSObjectC", "print"]
+- ["So8NSObjectC", "setUp"]
+- ["So8NSObjectC", "tearDown"]
+- !private ["So8NSObjectP", "Assembler"]
+- !private ["So8NSObjectP", "Container"]
+- ["So8NSObjectP", "DeallocTest"]
+- !private ["So8NSObjectP", "ManagerAssembly"]
+- !private ["So8NSObjectP", "PostInitBehavior"]
+- !private ["So8NSObjectP", "ServiceAssembly"]
+- !private ["So8NSObjectP", "UIScreen"]
+- ["So8NSObjectP", "UIViewController"]
+- !private ["So8NSObjectP", "UIWindow"]
+- !private ["So8NSObjectP", "ViewModelAssembly"]
+- !private ["So8NSObjectP", "XCTFail"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "allocatedClasses"]
+- !private ["So8NSObjectP", "applyAssembliesToContainer"]
+- !private ["So8NSObjectP", "assembler"]
+- !private ["So8NSObjectP", "container"]
+- !private ["So8NSObjectP", "deallocatedClasses"]
+- !private ["So8NSObjectP", "delay"]
+- !private ["So8NSObjectP", "fulfill"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "print"]
+- !private ["So8NSObjectP", "setUp"]
+- !private ["So8NSObjectP", "tearDown"]
+- !private ["8Swinject11ObjectScopeC", "container"]
+- !private ["8Swinject19ObjectScopeProtocolP", "container"]
+- !private ["Sq", "removeAll"]
+- !private ["Sq", "resetObjectScope"]
+- !private ["16DeallocTests_iOS16PostInitBehaviorC", "deinit"]
+- !private ["16DeallocTests_iOS16PostInitBehaviorC", "init"]
+- !private ["Sk", "count"]
+- !private ["Sk", "filter"]
+- !private ["Sk", "first"]
+- ["Sk", "init"]
+- !private ["Sk", "isNotEmpty"]
+- !private ["Sk", "subscript"]
+- !private ["Sm", "count"]
+- !private ["Sm", "filter"]
+- !private ["Sm", "first"]
+- ["Sm", "init"]
+- !private ["Sm", "isNotEmpty"]
+- !private ["Sm", "subscript"]
+- !private ["8Swinject8ResolverP", "init"]
+- !private ["8Swinject8ResolverP", "removeAll"]
+- !private ["8Swinject8ResolverP", "resetObjectScope"]
+- !private ["ST", "count"]
+- !private ["ST", "filter"]
+- !private ["ST", "first"]
+- ["ST", "init"]
+- !private ["ST", "isNotEmpty"]
+- !private ["ST", "subscript"]
+- !private ["s27StringInterpolationProtocolP", "appendInterpolation"]
+- !private ["s27StringInterpolationProtocolP", "appendLiteral"]
+- !private ["s16TextOutputStreamP", "appendInterpolation"]
+- !private ["s16TextOutputStreamP", "appendLiteral"]
+- !private ["So11XCTActivityP", "Assembler"]
+- !private ["So11XCTActivityP", "Container"]
+- ["So11XCTActivityP", "DeallocTest"]
+- !private ["So11XCTActivityP", "ManagerAssembly"]
+- !private ["So11XCTActivityP", "PostInitBehavior"]
+- !private ["So11XCTActivityP", "ServiceAssembly"]
+- !private ["So11XCTActivityP", "UIScreen"]
+- ["So11XCTActivityP", "UIViewController"]
+- !private ["So11XCTActivityP", "UIWindow"]
+- !private ["So11XCTActivityP", "ViewModelAssembly"]
+- !private ["So11XCTActivityP", "XCTFail"]
+- ["So11XCTActivityP", ""]
+- !private ["So11XCTActivityP", "allocatedClasses"]
+- !private ["So11XCTActivityP", "applyAssembliesToContainer"]
+- !private ["So11XCTActivityP", "assembler"]
+- !private ["So11XCTActivityP", "container"]
+- !private ["So11XCTActivityP", "deallocatedClasses"]
+- !private ["So11XCTActivityP", "delay"]
+- !private ["So11XCTActivityP", "init"]
+- !private ["So11XCTActivityP", "print"]
+- !private ["So11XCTActivityP", "setUp"]
+- !private ["So11XCTActivityP", "tearDown"]
+- !private ["So17XCTWaiterDelegateP", "Assembler"]
+- !private ["So17XCTWaiterDelegateP", "Container"]
+- ["So17XCTWaiterDelegateP", "DeallocTest"]
+- !private ["So17XCTWaiterDelegateP", "ManagerAssembly"]
+- !private ["So17XCTWaiterDelegateP", "PostInitBehavior"]
+- !private ["So17XCTWaiterDelegateP", "ServiceAssembly"]
+- !private ["So17XCTWaiterDelegateP", "UIScreen"]
+- ["So17XCTWaiterDelegateP", "UIViewController"]
+- !private ["So17XCTWaiterDelegateP", "UIWindow"]
+- !private ["So17XCTWaiterDelegateP", "ViewModelAssembly"]
+- !private ["So17XCTWaiterDelegateP", "XCTFail"]
+- ["So17XCTWaiterDelegateP", ""]
+- !private ["So17XCTWaiterDelegateP", "allocatedClasses"]
+- !private ["So17XCTWaiterDelegateP", "applyAssembliesToContainer"]
+- !private ["So17XCTWaiterDelegateP", "assembler"]
+- !private ["So17XCTWaiterDelegateP", "container"]
+- !private ["So17XCTWaiterDelegateP", "deallocatedClasses"]
+- !private ["So17XCTWaiterDelegateP", "delay"]
+- !private ["So17XCTWaiterDelegateP", "init"]
+- !private ["So17XCTWaiterDelegateP", "print"]
+- !private ["So17XCTWaiterDelegateP", "setUp"]
+- !private ["So17XCTWaiterDelegateP", "tearDown"]
+- ["So6XCTestC", "AnyClass"]
+- ["So6XCTestC", "Assembler"]
+- ["So6XCTestC", "Container"]
+- ["So6XCTestC", "DeallocTest"]
+- ["So6XCTestC", "Int"]
+- !private ["So6XCTestC", "ManagerAssembly"]
+- !private ["So6XCTestC", "PostInitBehavior"]
+- !private ["So6XCTestC", "ServiceAssembly"]
+- !private ["So6XCTestC", "UIScreen"]
+- ["So6XCTestC", "UIViewController"]
+- !private ["So6XCTestC", "UIWindow"]
+- !private ["So6XCTestC", "ViewModelAssembly"]
+- !private ["So6XCTestC", "XCTFail"]
+- ["So6XCTestC", "XCTestExpectation"]
+- !private ["So6XCTestC", "allocatedClasses"]
+- ["So6XCTestC", "applyAssembliesToContainer"]
+- ["So6XCTestC", "assembler"]
+- ["So6XCTestC", "checkTestResult"]
+- ["So6XCTestC", "container"]
+- ["So6XCTestC", "continueWithNextStep"]
+- ["So6XCTestC", "deallocTests"]
+- !private ["So6XCTestC", "deallocatedClasses"]
+- !private ["So6XCTestC", "delay"]
+- ["So6XCTestC", "init"]
+- ["So6XCTestC", "performDeallocTest"]
+- !private ["So6XCTestC", "print"]
+- ["So6XCTestC", "setUp"]
+- ["So6XCTestC", "tearDown"]
+- ["So10XCTestCaseC", "AnyClass"]
+- ["So10XCTestCaseC", "Assembler"]
+- ["So10XCTestCaseC", "Container"]
+- ["So10XCTestCaseC", "DeallocTest"]
+- ["So10XCTestCaseC", "Int"]
+- !private ["So10XCTestCaseC", "ManagerAssembly"]
+- !private ["So10XCTestCaseC", "PostInitBehavior"]
+- !private ["So10XCTestCaseC", "ServiceAssembly"]
+- !private ["So10XCTestCaseC", "UIScreen"]
+- ["So10XCTestCaseC", "UIViewController"]
+- !private ["So10XCTestCaseC", "UIWindow"]
+- !private ["So10XCTestCaseC", "ViewModelAssembly"]
+- !private ["So10XCTestCaseC", "XCTFail"]
+- ["So10XCTestCaseC", "XCTestExpectation"]
+- ["So10XCTestCaseC", ""]
+- !private ["So10XCTestCaseC", "allocatedClasses"]
+- ["So10XCTestCaseC", "applyAssembliesToContainer"]
+- ["So10XCTestCaseC", "assembler"]
+- ["So10XCTestCaseC", "checkTestResult"]
+- ["So10XCTestCaseC", "container"]
+- ["So10XCTestCaseC", "continueWithNextStep"]
+- ["So10XCTestCaseC", "deallocTests"]
+- !private ["So10XCTestCaseC", "deallocatedClasses"]
+- !private ["So10XCTestCaseC", "delay"]
+- ["So10XCTestCaseC", "init"]
+- ["So10XCTestCaseC", "performDeallocTest"]
+- !private ["So10XCTestCaseC", "print"]
+- ["So10XCTestCaseC", "setUp"]
+- ["So10XCTestCaseC", "tearDown"]
+- !private ["So17XCTestExpectationC", "fulfill"]
+- !private ["s14_ArrayProtocolP", "count"]
+- !private ["s14_ArrayProtocolP", "filter"]
+- !private ["s14_ArrayProtocolP", "first"]
+- ["s14_ArrayProtocolP", "init"]
+- !private ["s14_ArrayProtocolP", "isNotEmpty"]
+- !private ["s14_ArrayProtocolP", "subscript"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- !private ["s24_DestructorSafeContainerP", "filter"]
+- !private ["s24_DestructorSafeContainerP", "first"]
+- ["s24_DestructorSafeContainerP", "init"]
+- !private ["s24_DestructorSafeContainerP", "isNotEmpty"]
+- !private ["s24_DestructorSafeContainerP", "subscript"]
+- !private ["s19_HasContiguousBytesP", "count"]
+- !private ["s19_HasContiguousBytesP", "filter"]
+- !private ["s19_HasContiguousBytesP", "first"]
+- ["s19_HasContiguousBytesP", "init"]
+- !private ["s19_HasContiguousBytesP", "isNotEmpty"]
+- !private ["s19_HasContiguousBytesP", "subscript"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "filter"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "first"]
+- ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "isNotEmpty"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "Assembler"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "Container"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "DeallocTest"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "ManagerAssembly"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "PostInitBehavior"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "ServiceAssembly"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "UIScreen"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "UIViewController"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "UIWindow"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "ViewModelAssembly"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "XCTFail"]
+- ["10Foundation27_KeyValueCodingAndObservingP", ""]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "allocatedClasses"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "applyAssembliesToContainer"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "assembler"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "container"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "deallocatedClasses"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "delay"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "fulfill"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "print"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "setUp"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "tearDown"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "Assembler"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "Container"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "DeallocTest"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "ManagerAssembly"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "PostInitBehavior"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "ServiceAssembly"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "UIScreen"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "UIViewController"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "UIWindow"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "ViewModelAssembly"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "XCTFail"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", ""]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "allocatedClasses"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "applyAssembliesToContainer"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "assembler"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "container"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "deallocatedClasses"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "delay"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "fulfill"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "print"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "setUp"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "tearDown"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "filter"]
+- !private ["s21_ObjectiveCBridgeableP", "first"]
+- ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "isNotEmpty"]
+- !private ["s21_ObjectiveCBridgeableP", "removeAll"]
+- !private ["s21_ObjectiveCBridgeableP", "resetObjectScope"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+- !private ["8Swinject9_ResolverP", "init"]
+- !private ["8Swinject9_ResolverP", "removeAll"]
+- !private ["8Swinject9_ResolverP", "resetObjectScope"]
+depends-nominal:
+- "Sa"
+- !private "8Swinject9AssemblerC"
+- !private "8Swinject8BehaviorP"
+- "SK"
+- "s7CVarArgP"
+- "Sl"
+- !private "8Swinject9ContainerC"
+- "10Foundation15ContiguousBytesP"
+- "s28CustomDebugStringConvertibleP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- "10Foundation12DataProtocolP"
+- "16DeallocTests_iOS0A4TestV"
+- "16DeallocTests_iOS0A6TesterC"
+- "Se"
+- !private "s26DefaultStringInterpolationV"
+- "SE"
+- "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- !private "s23ExpressibleByNilLiteralP"
+- "SH"
+- !private "8Swinject15InstanceWrapperP"
+- "SM"
+- "10Foundation19MutableDataProtocolP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "8Swinject11ObjectScopeC"
+- !private "8Swinject19ObjectScopeProtocolP"
+- !private "Sq"
+- !private "16DeallocTests_iOS16PostInitBehaviorC"
+- "Sk"
+- "Sm"
+- !private "8Swinject8ResolverP"
+- "ST"
+- !private "s27StringInterpolationProtocolP"
+- !private "s16TextOutputStreamP"
+- "So11XCTActivityP"
+- "So17XCTWaiterDelegateP"
+- "So6XCTestC"
+- "So10XCTestCaseC"
+- !private "So17XCTestExpectationC"
+- "s14_ArrayProtocolP"
+- "s24_DestructorSafeContainerP"
+- "s19_HasContiguousBytesP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- "s21_ObjectiveCBridgeableP"
+- !private "8Swinject9_ResolverP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/XPC.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/ObjectiveC.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Dispatch.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Darwin.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Foundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/CoreFoundation.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/CoreGraphics.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/Swift.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/IOKit.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/swift/SwiftOnoneSupport.swiftmodule/x86_64.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/x86_64-apple-macos.swiftinterface"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreData.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreImage.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/QuartzCore.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Metal.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/AppKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework/Modules/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework/Headers/XCTest.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "62d1059dc0f302fa4c12abd5f4f26f22"

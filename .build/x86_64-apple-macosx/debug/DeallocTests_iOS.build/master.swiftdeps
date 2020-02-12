@@ -1,0 +1,10 @@
+version: "Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+options: "b59dae82a462be58851d0c0508e4e893"
+build_time: [1581516864, 97502000]
+inputs:
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTestable+Internals.swift": [1577970522, 0]
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTestable.swift": [1577970522, 0]
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift": !dirty [1581353299, 218079217]
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/DeinitializationObserver.swift": [1577970522, 0]
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Core/PostInitBehavior.swift": [1581352307, 315920986]
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/Sources/Dummy.swift": [1581440854, 542279009]

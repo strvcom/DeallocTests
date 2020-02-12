@@ -1,0 +1,143 @@
+{
+  "": {
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/master.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Assembler.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembler.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembler.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembler~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembler.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Assembly.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembly.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembly.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembly~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Assembly.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Behavior.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Behavior.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Behavior.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Behavior~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Behavior.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Container.Arguments.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Arguments.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Arguments.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Arguments~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Arguments.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Container.Logging.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Logging.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Logging.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Logging~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.Logging.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Container.TypeForwarding.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.TypeForwarding.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.TypeForwarding.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.TypeForwarding~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.TypeForwarding.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Container.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Container.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/DebugHelper.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/DebugHelper.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/DebugHelper.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/DebugHelper~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/DebugHelper.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/FunctionType.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/FunctionType.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/FunctionType.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/FunctionType~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/FunctionType.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/GraphIdentifier.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/GraphIdentifier.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/GraphIdentifier.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/GraphIdentifier~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/GraphIdentifier.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/InstanceStorage.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceStorage.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceStorage.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceStorage~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceStorage.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/InstanceWrapper.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceWrapper.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceWrapper.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceWrapper~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/InstanceWrapper.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/ObjectScope.Standard.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.Standard.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.Standard.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.Standard~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.Standard.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/ObjectScope.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ObjectScope.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/Resolver.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Resolver.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Resolver.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Resolver~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/Resolver.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/ServiceEntry.TypeForwarding.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.TypeForwarding.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.TypeForwarding.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.TypeForwarding~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.TypeForwarding.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/ServiceEntry.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceEntry.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/ServiceKey.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceKey.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceKey.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceKey~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/ServiceKey.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/SpinLock.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SpinLock.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SpinLock.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SpinLock~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SpinLock.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/SynchronizedResolver.Arguments.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.Arguments.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.Arguments.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.Arguments~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.Arguments.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/SynchronizedResolver.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/SynchronizedResolver.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/UnavailableItems.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/UnavailableItems.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/UnavailableItems.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/UnavailableItems~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/UnavailableItems.swiftdeps"
+  },
+  "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/checkouts/Swinject/Sources/_Resolver.swift": {
+    "dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/_Resolver.d",
+    "object": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/_Resolver.swift.o",
+    "swiftmodule": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/_Resolver~partial.swiftmodule",
+    "swift-dependencies": "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/.build/x86_64-apple-macosx/debug/Swinject.build/_Resolver.swiftdeps"
+  }
+}
