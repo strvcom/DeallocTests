@@ -1,1 +1,0 @@
-{"object": {"dependencies": [{"basedOn": null, "packageRef": {"identity": "swinject", "isLocal": false, "name": "Swinject", "path": "https://github.com/Swinject/Swinject.git"}, "state": {"checkoutState": {"branch": null, "revision": "8a76d2c74bafbb455763487cc6a08e91bad1f78b", "version": "2.7.1"}, "name": "checkout"}, "subpath": "Swinject"}]}, "version": 2}
