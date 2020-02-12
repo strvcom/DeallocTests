@@ -1,42 +1,37 @@
 // swift-tools-version:5.0
-//
-//  DeallocTests.swift
-//  DeallocTests
-//
-//  Created by Daniel Cech on 01/04/19.
-//  Copyright © 2019 DanielCech. All rights reserved.
-//
 
 import PackageDescription
 
 let package = Package(
     name: "DeallocTests",
     platforms: [
-        .iOS(.v8),
-        .macOS(.v10_10),
-        .tvOS(.v9),
-        .watchOS(.v2),
+        .iOS(.v8)
     ],
     products: [
-        .library(
-            name: "DeallocTests",
-            targets: ["DeallocTests-iOS"]
-        ),
+        .library(name: "DeallocTests", targets: ["DeallocTests"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.1"),
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.1"),
     ],
-    targets: [
-        .target(
-            name: "DeallocTests-iOS",
-            dependencies: ["Swinject"],
-            path: "Sources"
-        ),
-        .testTarget(
-            name: "DeallocTestsTests-iOS",
-            dependencies: ["DeallocTests-iOS"],
-            path: "Tests"
-        ),
-    ],
+    targets: {
+        var targets: [Target] = [
+            .testTarget(
+                name: "DeallocTestsTests",
+                dependencies: [],
+                path: "Tests"
+            ),
+        ]
+// #if os(macOS)
+//        targets.append(contentsOf: [
+//            .target(name: "QuickSpecBase", dependencies: []),
+//            .target(name: "Quick", dependencies: [ "QuickSpecBase" ]),
+//        ])
+// #else
+        targets.append(contentsOf: [
+            .target(name: "DeallocTests", dependencies: [], path: "Sources"),
+        ])
+//#endif
+        return targets
+    }(),
     swiftLanguageVersions: [.v5]
 )
