@@ -1,8 +1,0 @@
-author: Daniel Cech, Jan Kaltoun
-author_url: https://twitter.com/DanielCech, jankaltoun
-github_url: https://github.com/DanielCech, jankaltoun/DeallocTests
-root_url: https://DanielCech, jankaltoun.github.io/DeallocTests/
-module: DeallocTests
-output: docs
-theme: fullwidth
-xcodebuild_arguments: [-workspace, 'DeallocTests.xcworkspace', -scheme, 'DeallocTests-iOS']
