@@ -1,0 +1,18 @@
+PODS:
+  - DeallocTests (0.0.1):
+    - DeallocTests/Core (= 0.0.1)
+  - DeallocTests/Core (0.0.1)
+
+DEPENDENCIES:
+  - "DeallocTests (from `/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests`)"
+
+EXTERNAL SOURCES:
+  DeallocTests:
+    :path: "/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests"
+
+SPEC CHECKSUMS:
+  DeallocTests: 0e8fcc0c3e1208c7a441259d18ccacd39a8e1cd9
+
+PODFILE CHECKSUM: a7b5ba389bfb978aec316ac81ec02245d195e885
+
+COCOAPODS: 1.8.4
