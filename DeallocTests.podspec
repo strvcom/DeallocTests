@@ -5,10 +5,19 @@ Pod::Spec.new do |s|
  s.summary = 'Easy-to-use framework for custom deallocation tests.'
  s.homepage = 'http://strv.com'
  s.social_media_url = 'https://twitter.com/DanielCech'
- s.authors = { "Daniel Cech" => "daniel.cech@strv.com" }
- s.source = { :git => "https://github.com/DanielCech/DeallocTests.git", :tag => "v"+s.version.to_s }
- s.platforms = { :ios => "9.0", :osx => "10.10", :tvos => "9.0", :watchos => "2.0" }
+ s.authors = { "Daniel Cech" => "daniel.cech@strv.com", "Jan Kaltoun" => "jan.kaltoun@strv.com" }
+ s.source = { :git => "git@github.com:strvcom/ios-research-dealloc-tests.git", :tag => "v"+s.version.to_s }
+ s.platforms = { :ios => "12.0" }
  s.requires_arc = true
+
+ s.pod_target_xcconfig = {
+   'APPLICATION_EXTENSION_API_ONLY' => 'YES',
+   'DEFINES_MODULE' => 'YES',
+   'ENABLE_BITCODE' => 'NO',
+   'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest -Xlinker -no_application_extension',
+   'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
+   'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
+ }
 
  s.default_subspec = "Core"
  s.subspec "Core" do |ss|

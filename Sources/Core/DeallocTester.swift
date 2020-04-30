@@ -35,7 +35,7 @@ class DeallocTester: XCTestCase {
     var presentingController: UIViewController!
 
     func applyAssembliesToContainer() {
-        // Initialize assembler from main project
+        // TODO: Initialize assembler from main project
         
 //        assembler.apply(
 //            assemblies: [

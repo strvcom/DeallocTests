@@ -4,7 +4,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'DeallocTestsAppCocoapods' do
-  pod 'DeallocTests', :path=>'/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests'
+  pod 'DeallocTests', :path=>'../../'
 end
 
 post_install do |installer|
