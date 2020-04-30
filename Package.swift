@@ -13,9 +13,6 @@ let package = Package(
     name: "DeallocTests",
     platforms: [
         .iOS(.v8),
-        .macOS(.v10_10),
-        .tvOS(.v9),
-        .watchOS(.v2),
     ],
     products: [
         .library(
@@ -25,7 +22,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "1.0.0"),
     ],
     targets: [
         .target(

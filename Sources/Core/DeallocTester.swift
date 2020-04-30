@@ -35,13 +35,15 @@ class DeallocTester: XCTestCase {
     var presentingController: UIViewController!
 
     func applyAssembliesToContainer() {
-        assembler.apply(
-            assemblies: [
-                ManagerAssembly(),
-                ServiceAssembly(),
-                ViewModelAssembly()
-            ]
-        )
+        // Initialize assembler from main project
+        
+//        assembler.apply(
+//            assemblies: [
+//                ManagerAssembly(),
+//                ServiceAssembly(),
+//                ViewModelAssembly()
+//            ]
+//        )
     }
 
     /// Controller for presenting tested controllers
@@ -161,7 +163,7 @@ class DeallocTester: XCTestCase {
     func checkTestResult(checkedClasses: [AnyClass]) {
         let notFoundClassNames = checkedClasses.filter { testedClass in deallocatedClasses.first(where: { $0 == testedClass }) == nil }
 
-        if notFoundClassNames.isNotEmpty {
+        if !notFoundClassNames.isEmpty {
             XCTFail("Failed: dealloc test failed on classes: \(notFoundClassNames)")
         }
     }

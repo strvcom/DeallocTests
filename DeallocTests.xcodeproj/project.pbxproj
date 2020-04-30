@@ -12,6 +12,8 @@
 		27465D0C23F75F5A007059CE /* PostInitBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0023F75F5A007059CE /* PostInitBehavior.swift */; };
 		27465D1023F75F5A007059CE /* DeinitializationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0123F75F5A007059CE /* DeinitializationObserver.swift */; };
 		27465D1423F75F5A007059CE /* DeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0223F75F5A007059CE /* DeallocTester.swift */; };
+		27B1EF92245B717500123E5E /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; };
+		27B1EF95245B781700123E5E /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B1EF94245B781700123E5E /* TestHelper.swift */; };
 		3549BB501DA38A2000C63030 /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* DeallocTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3549BB661DA38ADB00C63030 /* DeallocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3549BB211DA389CD00C63030 /* DeallocTests.framework */; };
 		3549BB8B1DA38C0A00C63030 /* DeallocTestsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3549BB8A1DA38C0A00C63030 /* DeallocTestsSpec.swift */; };
@@ -54,6 +56,8 @@
 		27465D0123F75F5A007059CE /* DeinitializationObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeinitializationObserver.swift; sourceTree = "<group>"; };
 		27465D0223F75F5A007059CE /* DeallocTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTester.swift; sourceTree = "<group>"; };
 		27465D0323F75F5A007059CE /* Dummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		27B1EF91245B717500123E5E /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
+		27B1EF94245B781700123E5E /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		3549BB171DA3890B00C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3549BB181DA3890B00C63030 /* DeallocTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocTests.h; sourceTree = "<group>"; };
 		3549BB211DA389CD00C63030 /* DeallocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeallocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,13 +66,9 @@
 		3549BB581DA38A8800C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3549BB611DA38ADB00C63030 /* DeallocTestsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeallocTestsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3549BB8A1DA38C0A00C63030 /* DeallocTestsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestsSpec.swift; sourceTree = "<group>"; };
-		354AD5841F8A659800B18FAE /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/tvOS/Quick.framework; sourceTree = "<group>"; };
-		354AD5851F8A659800B18FAE /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/tvOS/Nimble.framework; sourceTree = "<group>"; };
 		359649021FB18CBF00FC7ADC /* DeallocTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTests.swift; sourceTree = "<group>"; };
 		35B7422D1F82A5DF00829B21 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		35B7422E1F82A5E000829B21 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
-		35B742341F82A61D00829B21 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/Mac/Nimble.framework; sourceTree = "<group>"; };
-		35B742351F82A61E00829B21 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/Mac/Quick.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B1EF92245B717500123E5E /* Swinject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,12 +152,9 @@
 		357D954B1DA3F2B400AEC55F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				35B742341F82A61D00829B21 /* Nimble.framework */,
-				35B742351F82A61E00829B21 /* Quick.framework */,
+				27B1EF91245B717500123E5E /* Swinject.framework */,
 				35B7422D1F82A5DF00829B21 /* Nimble.framework */,
 				35B7422E1F82A5E000829B21 /* Quick.framework */,
-				354AD5851F8A659800B18FAE /* Nimble.framework */,
-				354AD5841F8A659800B18FAE /* Quick.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,6 +162,7 @@
 		359649011FB18CBF00FC7ADC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				27B1EF94245B781700123E5E /* TestHelper.swift */,
 				27465CFE23F75F5A007059CE /* DeallocTestable.swift */,
 				27465CFF23F75F5A007059CE /* DeallocTestable+Internals.swift */,
 				27465D0223F75F5A007059CE /* DeallocTester.swift */,
@@ -291,6 +290,7 @@
 			files = (
 				27465D0423F75F5A007059CE /* DeallocTestable.swift in Sources */,
 				27465D0823F75F5A007059CE /* DeallocTestable+Internals.swift in Sources */,
+				27B1EF95245B781700123E5E /* TestHelper.swift in Sources */,
 				27465D1023F75F5A007059CE /* DeinitializationObserver.swift in Sources */,
 				359649031FB18CC000FC7ADC /* DeallocTests.swift in Sources */,
 				27465D0C23F75F5A007059CE /* PostInitBehavior.swift in Sources */,
@@ -446,12 +446,22 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					XCTest,
+					"-weak-lswiftXCTest",
+					"-Xlinker",
+					"-no_application_extension",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTests;
 				PRODUCT_NAME = DeallocTests;
 				SKIP_INSTALL = YES;
@@ -468,12 +478,22 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					XCTest,
+					"-weak-lswiftXCTest",
+					"-Xlinker",
+					"-no_application_extension",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTests;
 				PRODUCT_NAME = DeallocTests;
 				SKIP_INSTALL = YES;
