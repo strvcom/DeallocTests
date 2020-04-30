@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
  s.source = { :git => "git@github.com:strvcom/ios-research-dealloc-tests.git", :tag => "v"+s.version.to_s }
  s.platforms = { :ios => "12.0" }
  s.requires_arc = true
+ s.swift_versions = ['5.0']
 
  s.pod_target_xcconfig = {
    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
