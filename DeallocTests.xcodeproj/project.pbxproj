@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2736569F245B7F1200C8FECB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; platformFilter = ios; };
-		273656A0245B7F1200C8FECB /* Swinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27465D0423F75F5A007059CE /* DeallocTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFE23F75F5A007059CE /* DeallocTestable.swift */; };
 		27465D0823F75F5A007059CE /* DeallocTestable+Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFF23F75F5A007059CE /* DeallocTestable+Internals.swift */; };
 		27465D0C23F75F5A007059CE /* PostInitBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0023F75F5A007059CE /* PostInitBehavior.swift */; };
@@ -36,17 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		273656A1245B7F1200C8FECB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				273656A0245B7F1200C8FECB /* Swinject.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		35B7422C1F82A2C700829B21 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,8 +196,7 @@
 				3549BB1D1DA389CD00C63030 /* Frameworks */,
 				3549BB1E1DA389CD00C63030 /* Headers */,
 				3549BB1F1DA389CD00C63030 /* Resources */,
-				273656A1245B7F1200C8FECB /* Embed Frameworks */,
-				273656A2245B7F9300C8FECB /* Carthage */,
+				273656A5245B81B700C8FECB /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -298,7 +285,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		273656A2245B7F9300C8FECB /* Carthage */ = {
+		273656A5245B81B700C8FECB /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
