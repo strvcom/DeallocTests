@@ -16,7 +16,7 @@ class MainCoordinatorDeallocTester: DeallocTester {
     var mainCoordinator: MainCoordinator? {
         applyAssembliesToContainer()
 
-        return ForecastCoordinator(assembler: assembler)
+        return MainCoordinator()
     }
 
     func test_mainCoordinatorDealloc() {

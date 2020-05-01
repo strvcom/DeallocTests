@@ -14,14 +14,23 @@ protocol SecondViewControllerDelegate: class {
 
 class SecondViewController: UIViewController {
     
-    weak var flowDelegate: SecondViewControllerDelegate?
-
+    var flowDelegate: SecondViewControllerDelegate?
+    var a: ((Int) -> ())!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        a = { number in self.view(number) }
+        a(5)
+        
         // Do any additional setup after loading the view.
     }
         
+    func view(_ number: Int) {
+        
+    }
+    
     @IBAction func continueToNextScreen() {
         flowDelegate?.secondControllerWillContinue()
     }

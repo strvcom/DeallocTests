@@ -43,7 +43,7 @@ extension DeallocTestable {
     }
 
     /// This is what you call to add a block that should execute on `deinit`
-    func initializeDeallocTestSupport() {
+    public func initializeDeallocTestSupport() {
         if deallocTestSupportInstalled != nil {
             return
         }

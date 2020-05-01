@@ -12,21 +12,21 @@ import Swinject
 import XCTest
 
 public struct DeallocTest {
-    typealias ObjectCreationClosure = (Container) -> AnyObject?
-    typealias SimpleClosure = (() -> Void)
+    public typealias ObjectCreationClosure = (Container) -> AnyObject?
+    public typealias SimpleClosure = (() -> Void)
 
-    var objectCreation: ObjectCreationClosure
-    var checkClasses: [AnyClass]?
-    var actionBeforeCheck: SimpleClosure?
+    public var objectCreation: ObjectCreationClosure
+    public var checkClasses: [AnyClass]?
+    public var actionBeforeCheck: SimpleClosure?
 
-    init(objectCreation: @escaping ObjectCreationClosure, checkClasses: [AnyClass]? = nil, actionBeforeCheck: SimpleClosure? = nil) {
+    public init(objectCreation: @escaping ObjectCreationClosure, checkClasses: [AnyClass]? = nil, actionBeforeCheck: SimpleClosure? = nil) {
         self.objectCreation = objectCreation
         self.checkClasses = checkClasses
         self.actionBeforeCheck = actionBeforeCheck
     }
 }
 
-public class DeallocTester: XCTestCase {
+open class DeallocTester: XCTestCase {
     // MARK: - Properties
 
     public var deallocTests = [DeallocTest]()

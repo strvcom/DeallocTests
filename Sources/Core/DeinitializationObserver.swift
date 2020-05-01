@@ -17,7 +17,7 @@ public protocol ClassNameIdentifiable: AnyObject {
     var myClass: AnyClass { get }
 }
 
-extension ClassNameIdentifiable {
+public extension ClassNameIdentifiable {
     var myClass: AnyClass {
         return type(of: self)
     }
