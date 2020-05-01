@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  DeallocTestsAppCocoapods
 //
-//  Created by Daniel Cech on 12/02/2020.
-//  Copyright © 2020 Daniel Cech. All rights reserved.
+//  Created by Daniel Cech on 01/05/2020.
+//  Copyright © 2020 STRV. All rights reserved.
 //
 
 import UIKit

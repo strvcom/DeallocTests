@@ -12,10 +12,6 @@ import Nimble
 
 class DeallocTestsSpec: QuickSpec {
     override func spec() {
-        describe("DeallocTestsSpec") {
-            it("works") {
-                expect(DeallocTests.name) == "DeallocTests"
-            }
-        }
+        
     }
 }

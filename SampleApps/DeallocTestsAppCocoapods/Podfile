@@ -3,7 +3,7 @@ project 'DeallocTestsAppCocoapods.xcodeproj'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'DeallocTestsAppCocoapods' do
+target 'DeallocTestsAppCocoapodsTests' do
   pod 'DeallocTests', :path=>'../../'
 end
 
