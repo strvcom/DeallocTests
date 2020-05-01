@@ -1,6 +1,6 @@
 //
 //  DeallocTester.swift
-//  iWeather MVVM Tests
+//  DeallocTests
 //
 //  Created by Dan Cech on 17.01.2019.
 //  Copyright © 2019 STRV. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 import Swinject
 import XCTest
 
-struct DeallocTest {
+public struct DeallocTest {
     typealias ObjectCreationClosure = (Container) -> AnyObject?
     typealias SimpleClosure = (() -> Void)
 
@@ -26,15 +26,15 @@ struct DeallocTest {
     }
 }
 
-class DeallocTester: XCTestCase {
+public class DeallocTester: XCTestCase {
     // MARK: - Properties
 
-    var deallocTests = [DeallocTest]()
+    public var deallocTests = [DeallocTest]()
 
     // swiftlint:disable:next implicitly_unwrapped_optional
-    var presentingController: UIViewController!
+    public var presentingController: UIViewController!
 
-    func applyAssembliesToContainer() {
+    public func applyAssembliesToContainer() {
         // TODO: Initialize assembler from main project
         
 //        assembler.apply(
@@ -47,7 +47,7 @@ class DeallocTester: XCTestCase {
     }
 
     /// Controller for presenting tested controllers
-    func showPresentingController() -> UIViewController {
+    public func showPresentingController() -> UIViewController {
         let window = UIWindow(frame: UIScreen.main.bounds)
 
         let viewController = UIViewController()
@@ -62,13 +62,13 @@ class DeallocTester: XCTestCase {
 
     /// Dependency Injection assembler
     // swiftlint:disable:next implicitly_unwrapped_optional
-    var assembler: Assembler!
+    public var assembler: Assembler!
 
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
     var container: Container!
 
-    override func setUp() {
+    public override func setUp() {
         super.setUp()
 
         container = Container(behaviors: [PostInitBehavior()])
@@ -81,12 +81,12 @@ class DeallocTester: XCTestCase {
         applyAssembliesToContainer()
     }
 
-    override func tearDown() {
+    public override func tearDown() {
         super.tearDown()
     }
 
     /// Instantiate and release tested item
-    func performDeallocTest(
+    public func performDeallocTest(
         index: Int,
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
@@ -146,7 +146,7 @@ class DeallocTester: XCTestCase {
     }
 
     /// Start testing of next item
-    func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) {
+    private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) {
         container.resetObjectScope(.container)
 
         let dependencyDeallocTest = deallocTests[index]
@@ -160,7 +160,7 @@ class DeallocTester: XCTestCase {
     }
 
     /// Check proper deallocation
-    func checkTestResult(checkedClasses: [AnyClass]) {
+    private func checkTestResult(checkedClasses: [AnyClass]) {
         let notFoundClassNames = checkedClasses.filter { testedClass in deallocatedClasses.first(where: { $0 == testedClass }) == nil }
 
         if !notFoundClassNames.isEmpty {

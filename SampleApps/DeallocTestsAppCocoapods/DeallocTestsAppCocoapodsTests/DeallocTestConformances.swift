@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import DeallocTests
+@testable import DeallocTestsAppCocoapods
+
+extension MainCoordinator: DeallocTestable {}
+extension FirstViewController: DeallocTestable {}
+extension SecondViewController: DeallocTestable {}
+extension ThirdViewController: DeallocTestable {}

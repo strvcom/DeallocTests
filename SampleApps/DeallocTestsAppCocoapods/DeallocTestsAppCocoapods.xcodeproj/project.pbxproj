@@ -11,12 +11,13 @@
 		27A0802E245C859C0037F1DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802C245C859C0037F1DB /* Main.storyboard */; };
 		27A08030245C859E0037F1DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802F245C859E0037F1DB /* Assets.xcassets */; };
 		27A08033245C859E0037F1DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A08031245C859E0037F1DB /* LaunchScreen.storyboard */; };
-		27A0803E245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0803D245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.swift */; };
 		27A08049245C876E0037F1DB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08048245C876E0037F1DB /* FirstViewController.swift */; };
 		27A0804C245C878E0037F1DB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0804B245C878E0037F1DB /* SecondViewController.swift */; };
 		27A0804E245C879C0037F1DB /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0804D245C879C0037F1DB /* ThirdViewController.swift */; };
 		27A08051245C87C40037F1DB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08050245C87C40037F1DB /* MainCoordinator.swift */; };
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
+		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
+		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
 		449260BA42AF2D6CBAD72848 /* Pods_DeallocTestsAppCocoapodsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,13 +40,14 @@
 		27A08032245C859E0037F1DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27A08034245C859E0037F1DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A08039245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeallocTestsAppCocoapodsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		27A0803D245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestsAppCocoapodsTests.swift; sourceTree = "<group>"; };
 		27A0803F245C859E0037F1DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A08048245C876E0037F1DB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		27A0804B245C878E0037F1DB /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		27A0804D245C879C0037F1DB /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		27A08050245C87C40037F1DB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
+		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
 		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE92493CA0F312540C2E21A /* Pods-DeallocTestsAppCocoapodsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeallocTestsAppCocoapodsTests.release.xcconfig"; path = "Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,8 +117,9 @@
 		27A0803C245C859E0037F1DB /* DeallocTestsAppCocoapodsTests */ = {
 			isa = PBXGroup;
 			children = (
-				27A0803D245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.swift */,
 				27A0803F245C859E0037F1DB /* Info.plist */,
+				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
+				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
 			);
 			path = DeallocTestsAppCocoapodsTests;
 			sourceTree = "<group>";
@@ -306,7 +309,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A0803E245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.swift in Sources */,
+				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
+				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,6 @@
 //
 //  DeinitializationObserver.swift
-//  iWeather MVVM Tests
+//  DeallocTests
 //
 //  Created by Dan Cech on 16.03.2019.
 //  Copyright © 2019 STRV. All rights reserved.
@@ -13,7 +13,7 @@ typealias ClassClosureType = (AnyClass) -> Void
 var allocatedClasses = [AnyClass]()
 var deallocatedClasses = [AnyClass]()
 
-protocol ClassNameIdentifiable: AnyObject {
+public protocol ClassNameIdentifiable: AnyObject {
     var myClass: AnyClass { get }
 }
 

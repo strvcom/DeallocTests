@@ -1,6 +1,6 @@
 //
 //  PostInitBehavior.swift
-//  iWeather MVVM Tests
+//  DeallocTests
 //
 //  Created by Jan Kaltoun on 10.05.2019.
 //  Copyright © 2019 STRV. All rights reserved.
