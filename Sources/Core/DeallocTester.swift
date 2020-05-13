@@ -50,7 +50,8 @@ open class DeallocTester: XCTestCase {
     public func showPresentingController() -> UIViewController {
         let window: UIWindow
         if #available(iOS 13.0, *),
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
+            let windowScene = application.connectedScenes.first as? UIWindowScene {
             window = UIWindow(windowScene: windowScene)
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
