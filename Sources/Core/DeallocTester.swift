@@ -48,7 +48,13 @@ open class DeallocTester: XCTestCase {
 
     /// Controller for presenting tested controllers
     public func showPresentingController() -> UIViewController {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        let window: UIWindow
+        if #available(iOS 13.0, *),
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            window = UIWindow(windowScene: windowScene)
+        } else {
+            window = UIWindow(frame: UIScreen.main.bounds)
+        }
 
         let viewController = UIViewController()
         viewController.view.backgroundColor = .clear

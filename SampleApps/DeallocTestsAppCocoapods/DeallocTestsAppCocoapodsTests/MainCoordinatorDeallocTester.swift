@@ -25,26 +25,17 @@ class MainCoordinatorDeallocTester: DeallocTester {
         deallocTests = [
             DeallocTest(
                 objectCreation: { [weak self] _ in
-                    guard let firstController = self?.mainCoordinator?.createFirstViewController() else {
-                        return nil
-                    }
-                    return firstController
+                    return self?.mainCoordinator?.createFirstViewController()
                 }
             ),
             DeallocTest(
                 objectCreation: { [weak self] _ in
-                    guard let secondController = self?.mainCoordinator?.createSecondViewController() else {
-                        return nil
-                    }
-                    return secondController
+                    return self?.mainCoordinator?.createSecondViewController()
                 }
             ),
             DeallocTest(
                 objectCreation: { [weak self] _ in
-                    guard let thirdController = self?.mainCoordinator?.createThirdViewController() else {
-                        return nil
-                    }
-                    return thirdController
+                    return self?.mainCoordinator?.createThirdViewController()
                 }
             ),
         ]
