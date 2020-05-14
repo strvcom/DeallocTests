@@ -1,8 +1,8 @@
 PODS:
-  - DeallocTests (0.0.3):
-    - DeallocTests/Core (= 0.0.3)
+  - DeallocTests (0.0.4):
+    - DeallocTests/Core (= 0.0.4)
     - Swinject (~> 2.7.0)
-  - DeallocTests/Core (0.0.3):
+  - DeallocTests/Core (0.0.4):
     - Swinject (~> 2.7.0)
   - Swinject (2.7.1)
 
@@ -18,7 +18,7 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  DeallocTests: 0b691cf1ef1c1cc303cc416730d58b80a9e96de7
+  DeallocTests: 22eae8038a92e6dbc0bfec73f0c257ca2f0f595e
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
 
 PODFILE CHECKSUM: 084cc2152c8b6f3d3493fc2a7afa6432fee061b8

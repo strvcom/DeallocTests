@@ -133,6 +133,7 @@ open class DeallocTester: XCTestCase {
 
             delay(1) { [weak self] in
                 if let controller = instance as? UIViewController {
+                    controller.modalPresentationStyle = .fullScreen
                     self?.presentingController.present(controller, animated: true) {
                         delay(1) {
                             self?.presentingController.dismiss(animated: true, completion: {

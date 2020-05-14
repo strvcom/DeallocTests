@@ -14,21 +14,24 @@ protocol SecondViewControllerDelegate: class {
 
 class SecondViewController: UIViewController {
     
-    var flowDelegate: SecondViewControllerDelegate?
-    var a: ((Int) -> ())!
+    weak var flowDelegate: SecondViewControllerDelegate?
+    var someClosure: ((Int) -> ())!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        a = { number in self.view(number) }
-        a(5)
+        // strong self in this closure creates a retain cycle; make it weak and it will work
+        someClosure = { number in self.view(number) }
+        // someClosure = { [weak self] number in self?.view(number) }
+        
+        someClosure(5)
         
         // Do any additional setup after loading the view.
     }
         
     func view(_ number: Int) {
-        
+        // some method
     }
     
     @IBAction func continueToNextScreen() {

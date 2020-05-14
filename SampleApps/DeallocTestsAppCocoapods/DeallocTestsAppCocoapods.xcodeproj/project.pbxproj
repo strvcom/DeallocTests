@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B4246C917A00F45280 /* TestAppDelegate.swift */; };
+		275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */; };
+		2775D5B8246C917A00F45280 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B5246C917A00F45280 /* main.swift */; };
+		2775D5C1246C9A3A00F45280 /* SceneManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5BD246C9A3A00F45280 /* SceneManifest.swift */; };
+		2775D5C2246C9A3A00F45280 /* SceneConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5BE246C9A3A00F45280 /* SceneConfiguration.swift */; };
+		2775D5C3246C9A3A00F45280 /* SceneConfigurationsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5BF246C9A3A00F45280 /* SceneConfigurationsContainer.swift */; };
+		2775D5C4246C9A3A00F45280 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5C0246C9A3A00F45280 /* Configuration.swift */; };
 		27A08027245C859C0037F1DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08026245C859C0037F1DB /* AppDelegate.swift */; };
 		27A0802E245C859C0037F1DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802C245C859C0037F1DB /* Main.storyboard */; };
 		27A08030245C859E0037F1DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802F245C859E0037F1DB /* Assets.xcassets */; };
@@ -33,6 +40,13 @@
 
 /* Begin PBXFileReference section */
 		2385675838769753F8969123 /* Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig"; path = "Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
+		2775D5B4246C917A00F45280 /* TestAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
+		2775D5B5246C917A00F45280 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2775D5BD246C9A3A00F45280 /* SceneManifest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneManifest.swift; sourceTree = "<group>"; };
+		2775D5BE246C9A3A00F45280 /* SceneConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneConfiguration.swift; sourceTree = "<group>"; };
+		2775D5BF246C9A3A00F45280 /* SceneConfigurationsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneConfigurationsContainer.swift; sourceTree = "<group>"; };
+		2775D5C0246C9A3A00F45280 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		27A08023245C859C0037F1DB /* DeallocTestsAppCocoapods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeallocTestsAppCocoapods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A08026245C859C0037F1DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A0802D245C859C0037F1DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +93,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2775D5BB246C9A3A00F45280 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				2775D5BC246C9A3A00F45280 /* SceneConfiguration */,
+				2775D5C0246C9A3A00F45280 /* Configuration.swift */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		2775D5BC246C9A3A00F45280 /* SceneConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				2775D5BD246C9A3A00F45280 /* SceneManifest.swift */,
+				2775D5BE246C9A3A00F45280 /* SceneConfiguration.swift */,
+				2775D5BF246C9A3A00F45280 /* SceneConfigurationsContainer.swift */,
+			);
+			path = SceneConfiguration;
+			sourceTree = "<group>";
+		};
 		27A0801A245C859C0037F1DB = {
 			isa = PBXGroup;
 			children = (
@@ -102,14 +135,18 @@
 		27A08025245C859C0037F1DB /* DeallocTestsAppCocoapods */ = {
 			isa = PBXGroup;
 			children = (
+				2775D5BB246C9A3A00F45280 /* Configurations */,
 				27A0804A245C87730037F1DB /* ViewController */,
 				27A0804F245C87A40037F1DB /* ViewCoordinator */,
 				27A08026245C859C0037F1DB /* AppDelegate.swift */,
-				27A08052245CBA790037F1DB /* SceneDelegate.swift */,
-				27A0802C245C859C0037F1DB /* Main.storyboard */,
 				27A0802F245C859E0037F1DB /* Assets.xcassets */,
-				27A08031245C859E0037F1DB /* LaunchScreen.storyboard */,
 				27A08034245C859E0037F1DB /* Info.plist */,
+				27A08031245C859E0037F1DB /* LaunchScreen.storyboard */,
+				27A0802C245C859C0037F1DB /* Main.storyboard */,
+				2775D5B5246C917A00F45280 /* main.swift */,
+				27A08052245CBA790037F1DB /* SceneDelegate.swift */,
+				2775D5B4246C917A00F45280 /* TestAppDelegate.swift */,
+				2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */,
 			);
 			path = DeallocTestsAppCocoapods;
 			sourceTree = "<group>";
@@ -298,9 +335,14 @@
 			files = (
 				27A0804C245C878E0037F1DB /* SecondViewController.swift in Sources */,
 				27A08051245C87C40037F1DB /* MainCoordinator.swift in Sources */,
+				2775D5B8246C917A00F45280 /* main.swift in Sources */,
 				27A08027245C859C0037F1DB /* AppDelegate.swift in Sources */,
+				2775D5C2246C9A3A00F45280 /* SceneConfiguration.swift in Sources */,
+				2775D5C3246C9A3A00F45280 /* SceneConfigurationsContainer.swift in Sources */,
 				27A0804E245C879C0037F1DB /* ThirdViewController.swift in Sources */,
+				2775D5C4246C9A3A00F45280 /* Configuration.swift in Sources */,
 				27A08049245C876E0037F1DB /* FirstViewController.swift in Sources */,
+				2775D5C1246C9A3A00F45280 /* SceneManifest.swift in Sources */,
 				27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +353,8 @@
 			files = (
 				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
 				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
+				275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */,
+				275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
