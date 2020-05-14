@@ -1,8 +1,8 @@
 //
 //  TestSceneDelegate.swift
-//  iWeather MVVM
+//  DeallocTestsApp
 //
-//  Created by Jan on 12/05/2020.
+//  Created by Jan Schwarz on 12/05/2020.
 //  Copyright © 2020 STRV. All rights reserved.
 //
 

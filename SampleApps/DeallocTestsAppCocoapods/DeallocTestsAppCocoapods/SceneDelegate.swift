@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  DeallocTestsAppCocoapods
+//  DeallocTestsApp
 //
 //  Created by Daniel Cech on 12/02/2020.
 //  Copyright © 2020 Daniel Cech. All rights reserved.

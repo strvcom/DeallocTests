@@ -1,8 +1,8 @@
 //
 //  main.swift
-//  iWeather MVVM
+//  DeallocTestsApp
 //
-//  Created by Jiri Ostatnicky on 13/02/2019.
+//  Created by Jan Schwarz on 13/02/2019.
 //  Copyright © 2019 STRV. All rights reserved.
 //
 
