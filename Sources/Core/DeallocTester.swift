@@ -34,7 +34,7 @@ open class DeallocTester: XCTestCase {
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var presentingController: UIViewController!
 
-    public func applyAssembliesToContainer() {
+    open func applyAssembliesToContainer() {
         // TODO: Initialize assembler from main project
         
 //        assembler.apply(
