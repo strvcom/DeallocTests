@@ -43,6 +43,12 @@ extension String: DefaultInitializable {
     }
 }
 
+extension URL: DefaultInitializable {
+    public static var defaultValue: URL {
+        return URL(string: "http://google.com")!
+    }
+}
+
 extension Array: DefaultInitializable {
     public static var defaultValue: Array {
         return []
@@ -60,3 +66,10 @@ extension Set: DefaultInitializable {
         return Set()
     }
 }
+
+extension Optional: DefaultInitializable {
+    public static var defaultValue: Optional {
+        return nil
+    }
+}
+
