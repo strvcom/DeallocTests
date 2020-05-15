@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2736569F245B7F1200C8FECB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; platformFilter = ios; };
 		2738D305246EEE2F00BF0AF6 /* Container+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D304246EEE2F00BF0AF6 /* Container+Convenience.swift */; };
+		2738D307246F155800BF0AF6 /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D306246F155800BF0AF6 /* DefaultValue.swift */; };
 		27465D0423F75F5A007059CE /* DeallocTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFE23F75F5A007059CE /* DeallocTestable.swift */; };
 		27465D0823F75F5A007059CE /* DeallocTestable+Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFF23F75F5A007059CE /* DeallocTestable+Internals.swift */; };
 		27465D0C23F75F5A007059CE /* PostInitBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0023F75F5A007059CE /* PostInitBehavior.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		2738D304246EEE2F00BF0AF6 /* Container+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+Convenience.swift"; sourceTree = "<group>"; };
+		2738D306246F155800BF0AF6 /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		27465CFE23F75F5A007059CE /* DeallocTestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestable.swift; sourceTree = "<group>"; };
 		27465CFF23F75F5A007059CE /* DeallocTestable+Internals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DeallocTestable+Internals.swift"; sourceTree = "<group>"; };
 		27465D0023F75F5A007059CE /* PostInitBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInitBehavior.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				27465D0223F75F5A007059CE /* DeallocTester.swift */,
 				27465D0123F75F5A007059CE /* DeinitializationObserver.swift */,
 				27465D0023F75F5A007059CE /* PostInitBehavior.swift */,
+				2738D306246F155800BF0AF6 /* DefaultValue.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				27465D1023F75F5A007059CE /* DeinitializationObserver.swift in Sources */,
 				27465D0C23F75F5A007059CE /* PostInitBehavior.swift in Sources */,
 				27465D1423F75F5A007059CE /* DeallocTester.swift in Sources */,
+				2738D307246F155800BF0AF6 /* DefaultValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

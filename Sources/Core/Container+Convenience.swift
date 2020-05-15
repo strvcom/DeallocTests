@@ -10,10 +10,10 @@ import Foundation
 import Swinject
 
 public extension Container {
-    func forceResolve<Service>(_ serviceType: Service.Type) -> Service {
+    func forceResolve<Service>(_ serviceType: Service.Type) -> AnyObject {
         guard let service = resolve(serviceType) else {
             fatalError("forceResolve method could not resolve \(serviceType)")
         }
-        return service
+        return service as AnyObject
     }
 }
