@@ -86,6 +86,11 @@ func test_mainCoordinatorDealloc() {
                 return self?.mainCoordinator?.createThirdViewController()
             }
         ),
+        DeallocTest(
+            objectCreation: { _ in
+                return MainCoordinator()
+            }
+        )
     ]
 
     let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
@@ -99,8 +104,32 @@ func test_mainCoordinatorDealloc() {
     waitForExpectations(timeout: 200, handler: nil)
 }
 ```
-The array `deallocTests` consists of three items, one per each controller. The `objectCreation` closure initializes the particular view controller from view coordinator. The `expectation` is standard `XCTestExpectation` used to wait for result of test. The main test processing is hidden in `performDeallocTest` call.
+The array `deallocTests` consists of four items. First three are for view controllers and last one is for view coordinator itself. The `objectCreation` closure initializes the particular view controller from view coordinator. The `expectation` is standard `XCTestExpectation` used to wait for result of test. The main test processing is hidden in `performDeallocTest` call.
 
+The sample app contains intentionally a memory leak in SecondViewController.swift. This class contains the closure with strong reference to `self`.
+The DeallocTests console output looks like this:
+```
+Checking:
+Alloc FirstViewController
+Dealloc FirstViewController
+
+Checking:
+Alloc SecondViewController
+/Users/danielcech/Documents/[Development]/[Projects]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift:175: error: -[DeallocTestsAppCocoapodsTests.MainCoordinatorDeallocTester test_mainCoordinatorDealloc] : failed - Failed: dealloc test failed on classes: [DeallocTestsAppCocoapods.SecondViewController]
+
+Checking:
+Alloc ThirdViewController
+Dealloc ThirdViewController
+
+Checking:
+Alloc MainCoordinator
+Dealloc MainCoordinator
+```
+If you comment first line and uncomment the second one, you will see that retain cycle disappears and test will succeed.
+```swift
+    someClosure = { number in self.view(number) }
+     // someClosure = { [weak self] number in self?.view(number) }
+```
 
 You can find more advanced example of usage bellow. These dealloc tests contain both view coordinator testing and also "invisible" objects testing under real app conditions.
 * https://github.com/strvcom/ios-learning-department-app.git
