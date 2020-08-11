@@ -27,13 +27,17 @@ DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) a
 
 ####  Does it sound too good to be true :-)? Hold on…
 
-1) We can focus on view controller testing. The applications in MVVM-C have often many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator.
+1) We can focus on view controller testing. The apps in MVVM-C have often many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests presents the view controllers in view coordinator one-by-one (the method of presentation is not important). If memory leak is found, test fails and shows the details. After successful test of all view coordinator's controllers is the view coordinator itself checked for memory leaks.
 
-2) Testing of "invisible" objects
+2) Testing of "invisible" objects. The apps have often a plenty of classes that encapsulate the business logic - Managers, Services, Models, ViewModels, etc. Those objects can be checked for deallocation too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, then the classes that uses already tested as it's dependencies, etc. The dependency graph can look like this:
+
+<p align="center">
+    <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
+</p>
 
 ## Sample App
 
-The folder SampleApps contains the demo project that demostrates all features. We recommend to use DeallocTests with Cocoapods, the support for Carthage and SPM is possible but not maintained. The application itself is very simple - there are just three screens in navigation stack. All screens are handled by `MainCoordinator`.
+The folder SampleApps contains the demo project that demostrates at least some features. We recommend to use DeallocTests with Cocoapods, the support for Carthage and SPM is possible but not maintained. The application itself is very simple - there are just three screens in navigation stack. All screens are handled by `MainCoordinator`.
 
 The file `DeallocTestsConformances.swift` contains the `DeallocTestable` protocol conformances to all tested classes. 
 
@@ -52,7 +56,7 @@ The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines th
 You can find more advanced example of usage here:
 * https://github.com/strvcom/ios-learning-department-app.git
 * https://github.com/strvcom/iWeather-MVVM.git
-The DeallocTests there are used for both view controllers and other 
+These dealloc tests contain both view coordinator testing and also "invisible" objects testing in real app conditions. 
 
 
 The Podfile adds DeallocTests support to the app's test target. 
