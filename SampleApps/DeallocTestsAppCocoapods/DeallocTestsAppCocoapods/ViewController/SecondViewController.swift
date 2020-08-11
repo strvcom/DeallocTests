@@ -23,7 +23,7 @@ class SecondViewController: UIViewController {
 
         // strong self in this closure creates a retain cycle; make it weak and it will work
         someClosure = { number in self.view(number) }
-        // someClosure = { [weak self] number in self?.view(number) }
+//         someClosure = { [weak self] number in self?.view(number) }
         
         someClosure(5)
         

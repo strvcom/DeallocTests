@@ -38,6 +38,11 @@ class MainCoordinatorDeallocTester: DeallocTester {
                     return self?.mainCoordinator?.createThirdViewController()
                 }
             ),
+            DeallocTest(
+                objectCreation: { _ in
+                    return MainCoordinator()
+                }
+            )
         ]
 
         let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
