@@ -67,7 +67,7 @@ var mainCoordinator: MainCoordinator? {
     return MainCoordinator()
 }
 ```
-This will inicialize the Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in main target. The  scenario for main coordinator test looks like this:
+This will inicialize the Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in main target. The  scenario for main coordinator test looks like this (don't be scared, it is almost boilerplate code which is common for every test scenario):
 ```swift
 func test_mainCoordinatorDealloc() {
     presentingController = showPresentingController()
