@@ -39,6 +39,13 @@ DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) a
 
 The folder SampleApps contains the demo project that demostrates at least some features. We recommend to use DeallocTests with Cocoapods, the support for Carthage and SPM is possible but not maintained. The application itself is very simple - there are just three screens in navigation stack. All screens are handled by `MainCoordinator`.
 
+The Podfile adds DeallocTests support to the app's test target. 
+```ruby
+target 'DeallocTestsAppCocoapodsTests' do
+  pod 'DeallocTests', :path=>'../../'
+end
+```
+
 The file `DeallocTestsConformances.swift` contains the `DeallocTestable` protocol conformances to all tested classes. 
 
 ```swift
@@ -51,21 +58,59 @@ extension SecondViewController: DeallocTestable {}
 extension ThirdViewController: DeallocTestable {}
 ```
 
-The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator.
+The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator. Let's talk about it's parts.
+```swift
+var mainCoordinator: MainCoordinator? {
+    applyAssembliesToContainer()
+    return MainCoordinator()
+}
+```
+This will inicialize the Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in main target. The  scenario for main coordinator test looks like this:
+```swift
+func test_mainCoordinatorDealloc() {
+    presentingController = showPresentingController()
 
-You can find more advanced example of usage here:
+    deallocTests = [
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createFirstViewController()
+            }
+        ),
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createSecondViewController()
+            }
+        ),
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createThirdViewController()
+            }
+        ),
+    ]
+
+    let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
+
+    performDeallocTest(
+        index: 0,
+        deallocTests: deallocTests,
+        expectation: expectation
+    )
+
+    waitForExpectations(timeout: 200, handler: nil)
+}
+```
+The array `deallocTests` consists of three items, one per each controller. The `objectCreation` closure initializes the particular view controller from view coordinator. The `expectation` is standard `XCTestExpectation` used to wait for result of test. The main test processing is hidden in `performDeallocTest` call.
+
+
+You can find more advanced example of usage bellow. These dealloc tests contain both view coordinator testing and also "invisible" objects testing under real app conditions.
 * https://github.com/strvcom/ios-learning-department-app.git
 * https://github.com/strvcom/iWeather-MVVM.git
-These dealloc tests contain both view coordinator testing and also "invisible" objects testing in real app conditions. 
 
-
-The Podfile adds DeallocTests support to the app's test target. 
 
 ##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Usage](#usage)
 - [License](#license)
 
 ## Requirements
@@ -197,15 +242,14 @@ $ git submodule update --init --recursive
 
 </p></details>
 
-## Usage
-
 ## Contributing
 
 Issues and pull requests are welcome!
 
-## Author
+## Authors
 
-Daniel Cech [@DanielCech](https://twitter.com/DanielCech)
+* Daniel Čech [GitHub](https://github.com/DanielCech) 
+* Jan Kaltoun [GitHub](https://github.com/jankaltoun)
 
 ## License
 
