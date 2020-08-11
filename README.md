@@ -10,7 +10,11 @@
 [![Travis](https://img.shields.io/travis/DanielCech/DeallocTests/master.svg)](https://travis-ci.org/DanielCech/DeallocTests/branches)
 [![SwiftFrameworkTemplate](https://img.shields.io/badge/SwiftFramework-Template-red.svg)](http://github.com/RahulKatariya/SwiftFrameworkTemplate)
 
-DeallocTests are tool for memory leak detection of your app. DeallocTests are special kind of unit tests that can be easily added to your existing project. They can check separately the isolated parts of your app whether they manage the memory correctly. The basic principle is easy: DeallocationTests try to instantiate the object (ViewController, ViewModel, Manager, …) and after short period try to deallocate it from memory. DeallocTests are checking whether object’s `deinit` was called properly. It means that there is no retain cycle and possible memory leak.
+<p align="center">
+    <img src="https://ibb.co/9cbQP0v" width="480" max-width="90%" alt="MemoryLeak" />
+</p>
+
+DeallocTests are tool for memory leak detection of your app. DeallocTests are special kind of unit tests that can be easily added to your existing project. They can check separately the isolated parts of your app whether they manage the memory correctly. The basic principle is easy: DeallocationTests try to instantiate the object (ViewController, ViewModel, Manager, â€¦) and after short period try to deallocate it from memory. DeallocTests are checking whether objectâ€™s `deinit` was called properly. It means that there is no retain cycle and possible memory leak.
 
 Of course there are also other tools for memory leaks detection - Instruments and more recently also Memory Debugger within the Xcode. These tools are useful when catching particular memory leak. On the other side DeallocTests  provide tests automatically and it is possible to run them also on CI.
 
@@ -19,7 +23,7 @@ It is very easy to create memory leak by mistake.
 When can I use DeallocTests?
 DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructable. DeallocTests work great with Swinject dependency injection framework.
 
-Does it sound too good to be true :-)? Hold on…
+Does it sound too good to be true :-)? Hold onâ€¦
 
 
 DeallocTests. Easy-to-use framework for custom deallocation tests.
