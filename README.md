@@ -27,6 +27,8 @@ DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) a
 
 ####  Does it sound too good to be true :-)? Hold on…
 
+## Testing
+
 1) We can focus on view controller testing. The apps in MVVM-C have often many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests presents the view controllers in view coordinator one-by-one (the method of presentation is not important). If memory leak is found, test fails and shows the details. After successful test of all view coordinator's controllers is the view coordinator itself checked for memory leaks.
 
 2) Testing of "invisible" objects. The apps have often a plenty of classes that encapsulate the business logic - Managers, Services, Models, ViewModels, etc. Those objects can be checked for deallocation too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, then the classes that uses already tested as it's dependencies, etc. The dependency graph can look like this:
