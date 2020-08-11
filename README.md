@@ -11,7 +11,7 @@
 [![SwiftFrameworkTemplate](https://img.shields.io/badge/SwiftFramework-Template-red.svg)](http://github.com/RahulKatariya/SwiftFrameworkTemplate)
 
 <p align="center">
-    <img src="https://i.ibb.co/YPcHgSW/png-transparent-water-filter-leak-plumbing-tap-pipe-plumber-miscellaneous-text-logo.png" width="480" max-width="90%" alt="MemoryLeak" />
+    <img src="https://i.ibb.co/z4KTcDq/Pipe.jpg" width="320" max-width="90%" alt="MemoryLeak" />
 </p>
 
 DeallocTests are tool for memory leak detection of your app. DeallocTests are special kind of unit tests that can be easily added to your existing project. They can check separately the isolated parts of your app whether they manage the memory correctly. The basic principle is easy: DeallocationTests try to instantiate the object (ViewController, ViewModel, Manager, …) and after short period try to deallocate it from memory. DeallocTests are checking whether object’s `deinit` was called properly. It means that there is no retain cycle and possible memory leak.
