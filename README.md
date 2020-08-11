@@ -21,10 +21,11 @@ Of course there are also other tools for memory leaks detection - Instruments an
 
 It is very easy to create memory leak by mistake.
 
-When can I use DeallocTests?
-DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructable. DeallocTests work great with Swinject dependency injection framework.
+## When can I use DeallocTests?
 
-Does it sound too good to be true :-)? Hold on…
+DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructable. DeallocTests work great with Swinject dependency injection framework. And best of all - DeallocTests need no modification of main target of your app.
+
+###  Does it sound too good to be true :-)? Hold on…
 
 
 DeallocTests. Easy-to-use framework for custom deallocation tests.
