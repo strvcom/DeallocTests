@@ -1,4 +1,4 @@
-# DeallocTests
+
 
 [![Platforms](https://img.shields.io/cocoapods/p/DeallocTests.svg)](https://cocoapods.org/pods/DeallocTests)
 [![License](https://img.shields.io/cocoapods/l/DeallocTests.svg)](https://raw.githubusercontent.com/DanielCech/DeallocTests/master/LICENSE)
@@ -14,6 +14,7 @@
     <img src="https://i.ibb.co/z4KTcDq/Pipe.jpg" width="320" max-width="90%" alt="MemoryLeak" />
 </p>
 
+# DeallocTests
 DeallocTests are tool for memory leak detection of your app. DeallocTests are special kind of unit tests that can be easily added to your existing project. They can check separately the isolated parts of your app whether they manage the memory correctly. The basic principle is easy: DeallocationTests try to instantiate the object (ViewController, ViewModel, Manager, …) and after short period try to deallocate it from memory. DeallocTests are checking whether object’s `deinit` was called properly. It means that there is no retain cycle and possible memory leak.
 
 Of course there are also other tools for memory leaks detection - Instruments and more recently also Memory Debugger within the Xcode. These tools are useful when catching particular memory leak. On the other side DeallocTests  provide tests automatically and it is possible to run them also on CI.
