@@ -19,16 +19,45 @@ DeallocTests are tool for memory leak detection of your app. DeallocTests are sp
 
 Of course there are also other tools for memory leaks detection - Instruments and more recently also Memory Debugger within the Xcode. These tools are useful when catching particular memory leak. On the other side DeallocTests  provide tests automatically and it is possible to run them also on CI.
 
-It is very easy to create memory leak by mistake.
+It is very easy to create memory leak by mistake. Memory leaks have different forms - it is simply not always forgotten `[weak self]`. That's why it is very important to prevent of them. DeallocTests can help with their detection.
 
 ## When can I use DeallocTests?
 
 DeallocTests work well with app which uses MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructable. DeallocTests work great with Swinject dependency injection framework. And best of all - DeallocTests need no modification of main target of your app.
 
-###  Does it sound too good to be true :-)? Hold on…
+####  Does it sound too good to be true :-)? Hold on…
+
+1) We can focus on view controller testing. The applications in MVVM-C have often many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator.
+
+2) Testing of "invisible" objects
+
+## Sample App
+
+The folder SampleApps contains the demo project that demostrates all features. We recommend to use DeallocTests with Cocoapods, the support for Carthage and SPM is possible but not maintained. The application itself is very simple - there are just three screens in navigation stack. All screens are handled by `MainCoordinator`.
+
+The file `DeallocTestsConformances.swift` contains the `DeallocTestable` protocol conformances to all tested classes. 
+
+```swift
+import DeallocTests
+@testable import DeallocTestsAppCocoapods
+
+extension MainCoordinator: DeallocTestable {}
+extension FirstViewController: DeallocTestable {}
+extension SecondViewController: DeallocTestable {}
+extension ThirdViewController: DeallocTestable {}
+```
+
+The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator.
+
+You can find more advanced example of usage here:
+* https://github.com/strvcom/ios-learning-department-app.git
+* https://github.com/strvcom/iWeather-MVVM.git
+The DeallocTests there are used for both view controllers and other 
 
 
-DeallocTests. Easy-to-use framework for custom deallocation tests.
+The Podfile adds DeallocTests support to the app's test target. 
+
+##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
