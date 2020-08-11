@@ -19,7 +19,7 @@ DeallocTests are tool for memory leak detection of your app. DeallocTests are sp
 
 Of course there are also other tools for memory leaks detection - Instruments and more recently also Memory Debugger within the Xcode. These tools are useful when catching particular memory leak. On the other side DeallocTests  provide tests automatically and it is possible to run them also on CI.
 
-It is very easy to create memory leak by mistake. Memory leaks have different forms - it is simply not always forgotten `[weak self]`. That's why it is very important to prevent of them. DeallocTests can help with their detection.
+It is very easy to create memory leak by mistake. Memory leaks have different forms - it is simply not always forgotten `[weak self]`. That's why it is very important to prevent them from happening. DeallocTests can help with their detection.
 
 ## When can I use DeallocTests?
 
