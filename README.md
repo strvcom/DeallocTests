@@ -1,17 +1,5 @@
-
-
-[![Platforms](https://img.shields.io/cocoapods/p/DeallocTests.svg)](https://cocoapods.org/pods/DeallocTests)
-[![License](https://img.shields.io/cocoapods/l/DeallocTests.svg)](https://raw.githubusercontent.com/DanielCech/DeallocTests/master/LICENSE)
-
-[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/DeallocTests.svg)](https://cocoapods.org/pods/DeallocTests)
-
-[![Travis](https://img.shields.io/travis/DanielCech/DeallocTests/master.svg)](https://travis-ci.org/DanielCech/DeallocTests/branches)
-[![SwiftFrameworkTemplate](https://img.shields.io/badge/SwiftFramework-Template-red.svg)](http://github.com/RahulKatariya/SwiftFrameworkTemplate)
-
 <p align="center">
-    <img src="https://i.ibb.co/z4KTcDq/Pipe.jpg" width="320" max-width="90%" alt="MemoryLeak" />
+    <img src="https://i.ibb.co/pWcqs9c/Dealloc-Tests-Git-Hub.png" max-width="90%" alt="MemoryLeak" />
 </p>
 
 # DeallocTests
