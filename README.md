@@ -15,23 +15,23 @@
 </p>
 
 # DeallocTests
-DeallocTests is a tool for automated memory leak detection in Swift iOS apps. DeallocTests are a special kind of unit tests that can be easily added to your existing project. They can separately check isolated parts of your app if they manage memory correctly. The basic principle is easy: DeallocationTests try to instantiate an object (ViewController, ViewModel, Manager, …) and after a short period try to deallocate it from memory. DeallocTests are checking whether the object’s `deinit` was called properly. It means that there is no retain cycle and possible memory leak.
+DeallocTests are a tool for automated memory leak detection in Swift iOS apps. DeallocTests are a special kind of unit tests that can be easily added to your existing project. They can separately check isolated parts of your app to ensure that every part is managing memory correctly. The basic principle is easy: DeallocationTests try to instantiate an object (ViewController, ViewModel, Manager, etc.) and, after a short period, try to deallocate it from memory. DeallocTests check whether the object’s `deinit` was called properly—which is the case if there is no retain cycle and possible memory leak.
 
-Of course, there are also other tools for memory leaks detection - Instruments and more recently also Memory Debugger within the Xcode. These tools are useful when catching a particular memory leak. On the other side, DeallocTests provide tests automatically and it is possible to run them also on CI.
+Of course, there are also other tools for memory leak detection, namely Instruments and, more recently, Memory Debugger within Xcode. These tools are useful for catching a particular memory leak. What is specific about DeallocTests is that they provide tests automatically and it is possible to run them on CI as well.
 
-It is very easy to create a memory leak by mistake. Memory leaks have different forms - it is simply not always forgotten `[weak self]`. That's why it is very important to prevent them from happening. DeallocTests can help with their detection.
+It is very easy to create a memory leak by mistake. Memory leaks have various forms; it’s not always about just forgetting to add `[weak self]` to closures. That's why it is very important to prevent them from happening. DeallocTests can help with their detection.
 
 ## When can I use DeallocTests?
 
-DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with Swinject - the dependency injection framework. And best of all - DeallocTests need no modification of the main target of your app.
+DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with Swinject, the dependency injection framework. And best of all—DeallocTests don’t need any modifications of the main target of your app.
 
 ####  Does it sound too good to be true :-)? Hold on…
 
 ## Testing
 
-1) We can focus on view controller testing. Apps written in MVVM-C architecture have often many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests presents the view controllers in view coordinator one-by-one (the method of presentation is not important). If a memory leak is found, the test fails with an error that can help you find the leak. After successful tests of all coordinator's controllers, the coordinator itself IS checked for memory leaks.
+1) We can focus on view controller testing. Apps written in MVVM-C architecture often have many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests present the view controllers in view coordinator one-by-one (the method of presentation is not important). If a memory leak is found, the test fails with an error that can help you find the leak. After successful tests of all of the coordinator's controllers, the coordinator itself is checked for memory leaks.
 
-2) Testing of "invisible" objects - apps often have plenty of classes that encapsulate business logic - Managers, Services, Models, ViewModels, etc. These objects can be checked for deallocation too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, then the classes that use already tested classes as it's dependencies, etc. The dependency graph can look like this:
+2) Testing of "invisible" objects. Apps often have plenty of classes that encapsulate business logic: Managers, Services, Models, ViewModels, etc. These objects can be checked for deallocation, too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, followed by the classes that use the already-tested classes as their dependencies, etc. The dependency graph can look like this:
 
 <p align="center">
     <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
@@ -39,7 +39,7 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
 
 ## Sample App
 
-The folder SampleApps contains a demo project that demonstrates at least some features. We recommend using DeallocTests with Cocoapods, the support for Carthage and SPM is possible but not maintained. The application itself is very simple - there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
+The folder SampleApps contains a demo project that demonstrates at least some features. We recommend using DeallocTests with Cocoapods; the support for Carthage and SPM is possible but not maintained. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
 
 The Podfile adds DeallocTests support to the app's test target.
 
@@ -49,7 +49,7 @@ target 'DeallocTestsAppCocoapodsTests' do
 end
 ```
 
-The file `DeallocTestsConformances.swift` contains the `DeallocTestable` protocol conformances to all tested classes. 
+The file `DeallocTestsConformances.swift` contains the DeallocTestable protocol conformances to all tested classes.
 
 ```swift
 import DeallocTests
@@ -70,7 +70,7 @@ var mainCoordinator: MainCoordinator? {
 }
 ```
 
-This will initialize a Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this (don't be scared, it is almost boilerplate code which is common for every test scenario):
+This will initialize a Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
 
 ```swift
 func test_mainCoordinatorDealloc() {
@@ -111,10 +111,9 @@ func test_mainCoordinatorDealloc() {
 }
 ```
 
-The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for view coordinator itself. The `objectCreation` closure initializes the particular view controller from view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in `performDeallocTest` call.
+The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
 
-The sample app contains intentionally a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`.
-The DeallocTests console output looks like this:
+The sample app intentionally contains a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`. The DeallocTests console output looks like this:
 
 ```
 Checking:
@@ -140,11 +139,6 @@ If you comment out the first line and uncomment the second one, you will see tha
     someClosure = { number in self.view(number) }
      // someClosure = { [weak self] number in self?.view(number) }
 ```
-
-You can find a more advanced example of usage below. These dealloc tests contain both view coordinator testing and also "invisible" objects testing under real app conditions.
-* https://github.com/strvcom/ios-learning-department-app.git
-* https://github.com/strvcom/iWeather-MVVM.git
-
 
 ##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
