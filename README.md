@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://i.ibb.co/pWcqs9c/Dealloc-Tests-Git-Hub.png" max-width="90%" alt="MemoryLeak" />
+    <img src="https://i.ibb.co/pWcqs9c/Dealloc-Tests-Git-Hub.png" width="100%" alt="MemoryLeak" />
 </p>
 
 # DeallocTests
