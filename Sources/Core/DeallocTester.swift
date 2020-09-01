@@ -94,6 +94,14 @@ open class DeallocTester: XCTestCase {
 
     /// Instantiate and release tested item
     public func performDeallocTest(
+        deallocTests: [DeallocTest],
+        expectation: XCTestExpectation
+    ) {
+        performDeallocTest(index: 0, deallocTests: deallocTests, expectation: expectation)
+    }
+    
+    /// Instantiate and release tested item
+    private func performDeallocTest(
         index: Int,
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
