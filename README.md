@@ -225,7 +225,6 @@ func test_mainCoordinatorDealloc() {
     let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
 
     performDeallocTest(
-        index: 0,
         deallocTests: deallocTests,
         expectation: expectation
     )
@@ -234,7 +233,7 @@ func test_mainCoordinatorDealloc() {
 }
 ```
 
-The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
+The variable `presentingController` is just simple empty controller on top of everything - it is handled by DeallocTests framework. The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
 
 The sample app intentionally contains a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`. The DeallocTests console output looks like this:
 
