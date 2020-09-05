@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/danielcech/Documents/[Development]/[Projects]/[DeallocTests]/ios-research-dealloc-tests/SampleApps/DeallocTestsAppSPM/DeallocTestsAppSPM.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

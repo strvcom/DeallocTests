@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2751B6172504412800DD70AB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 2751B6162504412800DD70AB /* DeallocTests */; };
 		275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B4246C917A00F45280 /* TestAppDelegate.swift */; };
 		275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */; };
 		2775D5B8246C917A00F45280 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B5246C917A00F45280 /* main.swift */; };
@@ -21,7 +22,6 @@
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
 		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
-		449260BA42AF2D6CBAD72848 /* Pods_DeallocTestsAppCocoapodsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				449260BA42AF2D6CBAD72848 /* Pods_DeallocTestsAppCocoapodsTests.framework in Frameworks */,
+				2751B6172504412800DD70AB /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,11 +172,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27A08045245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppSPMTests" */;
 			buildPhases = (
-				641A12CEDFBD6F4A3BF00EC9 /* [CP] Check Pods Manifest.lock */,
 				27A08035245C859E0037F1DB /* Sources */,
 				27A08036245C859E0037F1DB /* Frameworks */,
 				27A08037245C859E0037F1DB /* Resources */,
-				11BF75DBA1962E8D25CD35EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,6 +182,9 @@
 				27A0803B245C859E0037F1DB /* PBXTargetDependency */,
 			);
 			name = DeallocTestsAppSPMTests;
+			packageProductDependencies = (
+				2751B6162504412800DD70AB /* DeallocTests */,
+			);
 			productName = DeallocTestsAppCocoapodsTests;
 			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -216,6 +217,9 @@
 				Base,
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
+			packageReferences = (
+				2751B6152504412800DD70AB /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */,
+			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -245,48 +249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		11BF75DBA1962E8D25CD35EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		641A12CEDFBD6F4A3BF00EC9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeallocTestsAppCocoapodsTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		27A0801F245C859C0037F1DB /* Sources */ = {
@@ -498,14 +460,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppSPMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapodsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -519,14 +481,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppSPMTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapodsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,6 +527,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2751B6152504412800DD70AB /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/strvcom/ios-research-dealloc-tests";
+			requirement = {
+				branch = "feature/spm-support";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2751B6162504412800DD70AB /* DeallocTests */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2751B6152504412800DD70AB /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */;
+			productName = DeallocTests;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27A0801B245C859C0037F1DB /* Project object */;
 }

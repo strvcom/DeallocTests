@@ -8,7 +8,7 @@
 
 import Foundation
 import DeallocTests
-@testable import DeallocTestsAppCocoapods
+@testable import DeallocTestsAppSPM
 
 extension MainCoordinator: DeallocTestable {}
 extension FirstViewController: DeallocTestable {}
