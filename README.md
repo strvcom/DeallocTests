@@ -67,26 +67,6 @@ $ pod install
 </details>
 
 <details>
-  <summary><strong>Carthage</strong></summary>
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate DeallocTests into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "DanielCech/DeallocTests" ~> 0.0.1
-```
-
-</details>
-
-<details>
   <summary><strong>Swift Package Manager</strong></summary>
 
 To use DeallocTests as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
@@ -162,7 +142,7 @@ $ git submodule update --init --recursive
 
 ## Sample App
 
-The folder SampleApps contains a demo project that demonstrates at least some features. We recommend using DeallocTests with Cocoapods; the support for Carthage and SPM is possible but not maintained. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
+The folder SampleApps contains a demo project that demonstrates at least some features. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
 
 The Podfile adds DeallocTests support to the app's test target.
 
