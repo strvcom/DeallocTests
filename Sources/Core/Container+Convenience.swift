@@ -7,13 +7,16 @@
 //
 
 import Foundation
-import Swinject
 
-public extension Container {
-    func forceResolve<Service>(_ serviceType: Service.Type) -> AnyObject {
-        guard let service = resolve(serviceType) else {
-            fatalError("forceResolve method could not resolve \(serviceType)")
+#if canImport(Swinject)
+    import Swinject
+
+    public extension Container {
+        func forceResolve<Service>(_ serviceType: Service.Type) -> AnyObject {
+            guard let service = resolve(serviceType) else {
+                fatalError("forceResolve method could not resolve \(serviceType)")
+            }
+            return service as AnyObject
         }
-        return service as AnyObject
     }
-}
+#endif
