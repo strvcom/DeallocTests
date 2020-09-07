@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		273990BA25068B57000B8972 /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 273990B925068B57000B8972 /* DeallocTests */; };
 		275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B4246C917A00F45280 /* TestAppDelegate.swift */; };
 		275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */; };
 		2775D5B8246C917A00F45280 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B5246C917A00F45280 /* main.swift */; };
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273990BA25068B57000B8972 /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +183,7 @@
 			);
 			name = DeallocTestsAppSPMTests;
 			packageProductDependencies = (
+				273990B925068B57000B8972 /* DeallocTests */,
 			);
 			productName = DeallocTestsAppCocoapodsTests;
 			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
@@ -215,6 +218,7 @@
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
 			packageReferences = (
+				273990B825068B57000B8972 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */,
 			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
@@ -523,6 +527,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		273990B825068B57000B8972 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/strvcom/ios-research-dealloc-tests";
+			requirement = {
+				branch = "feature/swinject-free";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		273990B925068B57000B8972 /* DeallocTests */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 273990B825068B57000B8972 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */;
+			productName = DeallocTests;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27A0801B245C859C0037F1DB /* Project object */;
 }

@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DeallocTests",
+        "repositoryURL": "https://github.com/strvcom/ios-research-dealloc-tests",
+        "state": {
+          "branch": "feature/swinject-free",
+          "revision": "7f64f956d2cf1f449b565f722a338c1d183e4f29",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
