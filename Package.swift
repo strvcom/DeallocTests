@@ -22,12 +22,11 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.0"),
     ],
     targets: [
         .target(
             name: "DeallocTests",
-            dependencies: ["Swinject"],
+            dependencies: [],
             path: "Sources"
         ),
         .testTarget(
