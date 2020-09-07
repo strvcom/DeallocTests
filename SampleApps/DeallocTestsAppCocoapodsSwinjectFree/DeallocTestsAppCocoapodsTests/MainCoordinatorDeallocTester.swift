@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Swinject
 import DeallocTests
 @testable import DeallocTestsAppCocoapods
 
@@ -21,7 +20,7 @@ class MainCoordinatorDeallocTester: DeallocTester {
 
     func test_mainCoordinatorDealloc() {
         presentingController = showPresentingController()
-        
+
         deallocTests = [
             DeallocTest(
                 objectCreation: { [weak self] _ in
