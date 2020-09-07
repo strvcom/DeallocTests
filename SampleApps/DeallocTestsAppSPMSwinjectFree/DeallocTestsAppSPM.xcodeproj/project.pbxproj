@@ -10,7 +10,7 @@
 		275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B4246C917A00F45280 /* TestAppDelegate.swift */; };
 		275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */; };
 		2775D5B8246C917A00F45280 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2775D5B5246C917A00F45280 /* main.swift */; };
-		279CF9C52506760C008EAE53 /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 279CF9C42506760C008EAE53 /* DeallocTests */; };
+		279CF9C8250676B3008EAE53 /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 279CF9C7250676B3008EAE53 /* DeallocTests */; };
 		27A08027245C859C0037F1DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08026245C859C0037F1DB /* AppDelegate.swift */; };
 		27A0802E245C859C0037F1DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802C245C859C0037F1DB /* Main.storyboard */; };
 		27A08030245C859E0037F1DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27A0802F245C859E0037F1DB /* Assets.xcassets */; };
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				279CF9C52506760C008EAE53 /* DeallocTests in Frameworks */,
+				279CF9C8250676B3008EAE53 /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +183,7 @@
 			);
 			name = DeallocTestsAppSPMTests;
 			packageProductDependencies = (
-				279CF9C42506760C008EAE53 /* DeallocTests */,
+				279CF9C7250676B3008EAE53 /* DeallocTests */,
 			);
 			productName = DeallocTestsAppCocoapodsTests;
 			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
@@ -218,7 +218,7 @@
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
 			packageReferences = (
-				279CF9C32506760C008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */,
+				279CF9C6250676B3008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */,
 			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
@@ -529,7 +529,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		279CF9C32506760C008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */ = {
+		279CF9C6250676B3008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/strvcom/ios-research-dealloc-tests";
 			requirement = {
@@ -540,9 +540,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		279CF9C42506760C008EAE53 /* DeallocTests */ = {
+		279CF9C7250676B3008EAE53 /* DeallocTests */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 279CF9C32506760C008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */;
+			package = 279CF9C6250676B3008EAE53 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */;
 			productName = DeallocTests;
 		};
 /* End XCSwiftPackageProductDependency section */

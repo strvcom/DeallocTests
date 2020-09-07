@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
  s.platforms = { :ios => "12.0" }
  s.requires_arc = true
  s.swift_versions = ['5.0']
- s.dependency "Swinject", "~> 2.7.0"
 
  s.pod_target_xcconfig = {
    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
