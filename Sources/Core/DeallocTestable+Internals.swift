@@ -1,6 +1,6 @@
 //
 //  DeallocTestable+Internals.swift
-//  iWeather MVVM
+//  DeallocTests
 //
 //  Created by Dan Cech on 08.04.2019.
 //  Copyright © 2019 STRV. All rights reserved.
@@ -43,7 +43,7 @@ extension DeallocTestable {
     }
 
     /// This is what you call to add a block that should execute on `deinit`
-    func initializeDeallocTestSupport() {
+    public func initializeDeallocTestSupport() {
         if deallocTestSupportInstalled != nil {
             return
         }

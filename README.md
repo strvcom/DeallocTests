@@ -1,20 +1,34 @@
+<p align="center">
+    <img src="https://i.ibb.co/pWcqs9c/Dealloc-Tests-Git-Hub.png" width="100%" alt="MemoryLeak" />
+</p>
+
 # DeallocTests
+DeallocTests are a tool for automated memory leak detection in Swift iOS apps. DeallocTests are a special kind of unit tests that can be easily added to your existing project. They can separately check isolated parts of your app to ensure that every part is managing memory correctly. The basic principle is easy: DeallocTests try to instantiate an object (ViewController, ViewModel, Manager, etc.) and, after a short period, try to deallocate it from memory. DeallocTests check whether the object’s `deinit` was called properly—which is the case if there is no retain cycle and possible memory leak.
 
-[![Platforms](https://img.shields.io/cocoapods/p/DeallocTests.svg)](https://cocoapods.org/pods/DeallocTests)
-[![License](https://img.shields.io/cocoapods/l/DeallocTests.svg)](https://raw.githubusercontent.com/DanielCech/DeallocTests/master/LICENSE)
+Of course, there are also other tools for memory leak detection, namely Instruments and, more recently, Memory Debugger within Xcode. These tools are useful for catching a particular memory leak. What is specific about DeallocTests is that they provide tests automatically and it is possible to run them on CI as well.
 
-[![Swift Package Manager](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods compatible](https://img.shields.io/cocoapods/v/DeallocTests.svg)](https://cocoapods.org/pods/DeallocTests)
+It is very easy to create a memory leak by mistake. Memory leaks have various forms; it’s not always about just forgetting to add `[weak self]` to closures. That's why it is very important to prevent them from happening. DeallocTests can help with their detection.
 
-[![Travis](https://img.shields.io/travis/DanielCech/DeallocTests/master.svg)](https://travis-ci.org/DanielCech/DeallocTests/branches)
-[![SwiftFrameworkTemplate](https://img.shields.io/badge/SwiftFramework-Template-red.svg)](http://github.com/RahulKatariya/SwiftFrameworkTemplate)
+## When can I use DeallocTests?
 
-A library for easy deallocation testing for MVVM-C projects with Swinject
+DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with Swinject, the dependency injection framework. And best of all—DeallocTests don’t need any modifications of the main target of your app.
+
+####  Does it sound too good to be true :-)? Hold on…
+
+## Testing
+
+1) We can focus on view controller testing. Apps written in MVVM-C architecture often have many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests present the view controllers in view coordinator one-by-one (the method of presentation is not important). If a memory leak is found, the test fails with an error that can help you find the leak. After successful tests of all of the coordinator's controllers, the coordinator itself is checked for memory leaks.
+
+2) Testing of "invisible" objects. Apps often have plenty of classes that encapsulate business logic: Managers, Services, Models, ViewModels, etc. These objects can be checked for deallocation, too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, followed by the classes that use the already-tested classes as their dependencies, etc. On the following figure you are supposed to test the `APIManager` first, then `WeatherService` and only then `ForecastViewModel`:
+
+<p align="center">
+    <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
+</p>
+
+##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Usage](#usage)
 - [License](#license)
 
 ## Requirements
@@ -146,7 +160,107 @@ $ git submodule update --init --recursive
 
 </p></details>
 
-## Usage
+## Sample App
+
+The folder SampleApps contains a demo project that demonstrates at least some features. We recommend using DeallocTests with Cocoapods; the support for Carthage and SPM is possible but not maintained. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
+
+The Podfile adds DeallocTests support to the app's test target.
+
+```ruby
+target 'DeallocTestsAppCocoapodsTests' do
+  pod 'DeallocTests', :path=>'../../'
+end
+```
+
+The file `DeallocTestsConformances.swift` contains the DeallocTestable protocol conformances to all tested classes.
+
+```swift
+import DeallocTests
+@testable import DeallocTestsAppCocoapods
+
+extension MainCoordinator: DeallocTestable {}
+extension FirstViewController: DeallocTestable {}
+extension SecondViewController: DeallocTestable {}
+extension ThirdViewController: DeallocTestable {}
+```
+
+The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator.
+
+```swift
+var mainCoordinator: MainCoordinator? {
+    applyAssembliesToContainer()
+    return MainCoordinator()
+}
+```
+
+This will initialize a Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
+
+```swift
+func test_mainCoordinatorDealloc() {
+    presentingController = showPresentingController()
+
+    deallocTests = [
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createFirstViewController()
+            }
+        ),
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createSecondViewController()
+            }
+        ),
+        DeallocTest(
+            objectCreation: { [weak self] _ in
+                return self?.mainCoordinator?.createThirdViewController()
+            }
+        ),
+        DeallocTest(
+            objectCreation: { _ in
+                return MainCoordinator()
+            }
+        )
+    ]
+
+    let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
+
+    performDeallocTest(
+        deallocTests: deallocTests,
+        expectation: expectation
+    )
+
+    waitForExpectations(timeout: 200, handler: nil)
+}
+```
+
+The variable `presentingController` is just simple empty controller on top of everything - it is handled by DeallocTests framework. The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
+
+The sample app intentionally contains a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`. The DeallocTests console output looks like this:
+
+```
+Checking:
+Alloc FirstViewController
+Dealloc FirstViewController
+
+Checking:
+Alloc SecondViewController
+/Users/danielcech/Documents/[Development]/[Projects]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift:175: error: -[DeallocTestsAppCocoapodsTests.MainCoordinatorDeallocTester test_mainCoordinatorDealloc] : failed - Failed: dealloc test failed on classes: [DeallocTestsAppCocoapods.SecondViewController]
+
+Checking:
+Alloc ThirdViewController
+Dealloc ThirdViewController
+
+Checking:
+Alloc MainCoordinator
+Dealloc MainCoordinator
+```
+
+If you comment out the first line and uncomment the second one, you will see that the retain cycle disappears and the test will succeed.
+
+```swift
+    someClosure = { number in self.view(number) }
+     // someClosure = { [weak self] number in self?.view(number) }
+```
 
 ## Contributing
 
@@ -154,7 +268,7 @@ Issues and pull requests are welcome!
 
 ## Authors
 
-* Daniel Čech [GitHub](https://github.com/DanielCech) 
+* Daniel Čech [GitHub](https://github.com/DanielCech)
 * Jan Kaltoun [GitHub](https://github.com/jankaltoun)
 
 ## License

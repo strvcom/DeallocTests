@@ -1,6 +1,6 @@
 //
 //  DeallocTestable.swift
-//  iWeather MVVM
+//  DeallocTests
 //
 //  Created by Dan Cech on 16.01.2019.
 //  Copyright © 2019 STRV. All rights reserved.
@@ -17,6 +17,6 @@ enum AssociatedKeys {
 }
 
 /// Protocol for any object that implements this logic
-protocol DeallocTestable: ClassNameIdentifiable {
+public protocol DeallocTestable: ClassNameIdentifiable {
     func initializeDeallocTestSupport()
 }

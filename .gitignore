@@ -43,6 +43,8 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+*.xcuserdatad/
+IDEWorkspaceChecks.plist
 
 ## Other
 *.moved-aside
@@ -78,8 +80,8 @@ Pods/
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-**/Carthage/Checkouts
-**/Carthage/Build
+Carthage/Checkouts
+Carthage/Build
 
 # fastlane
 #
