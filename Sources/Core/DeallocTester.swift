@@ -7,9 +7,12 @@
 //
 
 import Foundation
-import UIKit
 import Swinject
 import XCTest
+
+#if canImport(UIKit)
+    import UIKit
+#endif
 
 public struct DeallocTest {
     public typealias ObjectCreationClosure = (Container) -> AnyObject?
@@ -31,8 +34,10 @@ open class DeallocTester: XCTestCase {
 
     public var deallocTests = [DeallocTest]()
 
+#if canImport(UIKit)
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var presentingController: UIViewController!
+#endif
 
     open func applyAssembliesToContainer() {
         // TODO: Initialize assembler from main project
@@ -46,6 +51,7 @@ open class DeallocTester: XCTestCase {
 //        )
     }
 
+#if canImport(UIKit)
     /// Controller for presenting tested controllers
     public func showPresentingController() -> UIViewController {
         let window: UIWindow
@@ -66,6 +72,7 @@ open class DeallocTester: XCTestCase {
 
         return viewController
     }
+#endif
 
     /// Dependency Injection assembler
     // swiftlint:disable:next implicitly_unwrapped_optional
@@ -94,6 +101,14 @@ open class DeallocTester: XCTestCase {
 
     /// Instantiate and release tested item
     public func performDeallocTest(
+        deallocTests: [DeallocTest],
+        expectation: XCTestExpectation
+    ) {
+        performDeallocTest(index: 0, deallocTests: deallocTests, expectation: expectation)
+    }
+    
+    /// Instantiate and release tested item
+    private func performDeallocTest(
         index: Int,
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
@@ -131,6 +146,7 @@ open class DeallocTester: XCTestCase {
 
             (instance as? DeallocTestable)?.initializeDeallocTestSupport()
 
+#if canImport(UIKit)
             delay(1) { [weak self] in
                 if let controller = instance as? UIViewController {
                     controller.modalPresentationStyle = .fullScreen
@@ -150,6 +166,7 @@ open class DeallocTester: XCTestCase {
                     self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                 }
             }
+#endif
         }
     }
 

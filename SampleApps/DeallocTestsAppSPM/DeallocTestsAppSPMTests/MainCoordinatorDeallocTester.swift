@@ -9,7 +9,7 @@
 import Foundation
 import Swinject
 import DeallocTests
-@testable import DeallocTestsAppCocoapods
+@testable import DeallocTestsAppSPM
 
 
 class MainCoordinatorDeallocTester: DeallocTester {
