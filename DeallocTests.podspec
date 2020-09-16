@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name = 'DeallocTests'
- s.version = '0.0.7'
+ s.version = '1.0.0'
  s.license = { :type => "MIT", :file => "LICENSE" }
  s.summary = 'Easy-to-use framework for custom deallocation tests.'
  s.homepage = 'http://strv.com'
@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
  s.platforms = { :ios => "12.0" }
  s.requires_arc = true
  s.swift_versions = ['5.0']
- s.dependency "Swinject", "~> 2.7.0"
 
  s.pod_target_xcconfig = {
    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
@@ -21,9 +20,17 @@ Pod::Spec.new do |s|
    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
  }
 
- s.default_subspec = "Core"
- s.subspec "Core" do |ss|
+ s.default_subspec = "DeallocTests"
+
+ s.subspec "DeallocTests" do |ss|
+     ss.source_files  = "Sources/**/*.swift"
+     ss.framework  = "Foundation"
+     ss.dependency "Swinject", "~> 2.7.0"
+ end
+
+ s.subspec "DeallocTestsSwinjectFree" do |ss|
      ss.source_files  = "Sources/**/*.swift"
      ss.framework  = "Foundation"
  end
+
 end
