@@ -7,17 +7,22 @@
 //
 
 import Foundation
-import Swinject
 
-class PostInitBehavior: Behavior {
-    func container<Type, Service>(
-        _: Container,
-        didRegisterType _: Type.Type,
-        toService entry: ServiceEntry<Service>,
-        withName _: String?
-    ) {
-        entry.initCompleted { _, service in
-            (service as? DeallocTestable)?.initializeDeallocTestSupport()
+#if canImport(Swinject)
+    import Swinject
+
+
+    class PostInitBehavior: Behavior {
+        func container<Type, Service>(
+            _: Container,
+            didRegisterType _: Type.Type,
+            toService entry: ServiceEntry<Service>,
+            withName _: String?
+        ) {
+            entry.initCompleted { _, service in
+                (service as? DeallocTestable)?.initializeDeallocTestSupport()
+            }
         }
     }
-}
+#endif
+    

@@ -19,6 +19,10 @@ let package = Package(
             name: "DeallocTests",
             targets: ["DeallocTests"]
         ),
+        .library(
+            name: "DeallocTestsSwinjectFree",
+            targets: ["DeallocTestsSwinjectFree"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -28,7 +32,11 @@ let package = Package(
         .target(
             name: "DeallocTests",
             dependencies: ["Swinject"],
-            path: "Sources"
+            path: "Sources/DeallocTests"
+        ),
+        .target(
+            name: "DeallocTestsSwinjectFree",
+            path: "Sources/DeallocTestsSwinjectFree"
         ),
         .testTarget(
             name: "DeallocTestsTests",

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271B0EC725125E0100CC7F0E /* DeallocTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFE23F75F5A007059CE /* DeallocTestable.swift */; };
+		271B0EC825125E0100CC7F0E /* DeallocTestable+Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465CFF23F75F5A007059CE /* DeallocTestable+Internals.swift */; };
+		271B0EC925125E0100CC7F0E /* Container+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D304246EEE2F00BF0AF6 /* Container+Convenience.swift */; };
+		271B0ECA25125E0100CC7F0E /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B1EF94245B781700123E5E /* TestHelper.swift */; };
+		271B0ECB25125E0100CC7F0E /* DeinitializationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0123F75F5A007059CE /* DeinitializationObserver.swift */; };
+		271B0ECC25125E0100CC7F0E /* PostInitBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0023F75F5A007059CE /* PostInitBehavior.swift */; };
+		271B0ECD25125E0100CC7F0E /* DeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465D0223F75F5A007059CE /* DeallocTester.swift */; };
+		271B0ECE25125E0100CC7F0E /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D306246F155800BF0AF6 /* DefaultValue.swift */; };
+		271B0ED225125E0100CC7F0E /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* DeallocTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		271B0EDC2512614A00CC7F0E /* DeallocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271B0EDB2512614A00CC7F0E /* DeallocTests.swift */; };
+		271B0EDF2512615400CC7F0E /* DeallocTestsSwinjectFree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */; };
 		2736569F245B7F1200C8FECB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; platformFilter = ios; };
 		2738D305246EEE2F00BF0AF6 /* Container+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D304246EEE2F00BF0AF6 /* Container+Convenience.swift */; };
 		2738D307246F155800BF0AF6 /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738D306246F155800BF0AF6 /* DefaultValue.swift */; };
@@ -51,6 +62,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		271B0ED825125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "DeallocTestsSwinjectFree-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		271B0EDB2512614A00CC7F0E /* DeallocTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTests.swift; sourceTree = "<group>"; };
+		271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestsSwinjectFree.swift; sourceTree = "<group>"; };
+		271B0EE22512622B00CC7F0E /* DeallocTestsSwinjectFree-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeallocTestsSwinjectFree-Info.plist"; sourceTree = "<group>"; };
+		271B0EE32512622B00CC7F0E /* DeallocTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeallocTests-Info.plist"; sourceTree = "<group>"; };
 		2738D304246EEE2F00BF0AF6 /* Container+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Container+Convenience.swift"; sourceTree = "<group>"; };
 		2738D306246F155800BF0AF6 /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		27465CFE23F75F5A007059CE /* DeallocTestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestable.swift; sourceTree = "<group>"; };
@@ -60,7 +76,6 @@
 		27465D0223F75F5A007059CE /* DeallocTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTester.swift; sourceTree = "<group>"; };
 		27B1EF91245B717500123E5E /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		27B1EF94245B781700123E5E /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
-		3549BB171DA3890B00C63030 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3549BB181DA3890B00C63030 /* DeallocTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeallocTests.h; sourceTree = "<group>"; };
 		3549BB211DA389CD00C63030 /* DeallocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeallocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3549BB571DA38A8800C63030 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
@@ -72,6 +87,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		271B0ECF25125E0100CC7F0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3549BB1D1DA389CD00C63030 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +115,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		271B0EDA2512614A00CC7F0E /* DeallocTests */ = {
+			isa = PBXGroup;
+			children = (
+				271B0EDB2512614A00CC7F0E /* DeallocTests.swift */,
+			);
+			path = DeallocTests;
+			sourceTree = "<group>";
+		};
+		271B0EDD2512615400CC7F0E /* DeallocTestsSwinjectFree */ = {
+			isa = PBXGroup;
+			children = (
+				271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */,
+			);
+			path = DeallocTestsSwinjectFree;
+			sourceTree = "<group>";
+		};
 		3549BAFB1DA387DB00C63030 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +146,7 @@
 			children = (
 				3549BB211DA389CD00C63030 /* DeallocTests.framework */,
 				3549BB611DA38ADB00C63030 /* DeallocTestsTests-iOS.xctest */,
+				271B0ED825125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +154,8 @@
 		3549BB161DA3890B00C63030 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				271B0EDD2512615400CC7F0E /* DeallocTestsSwinjectFree */,
+				271B0EDA2512614A00CC7F0E /* DeallocTests */,
 				359649011FB18CBF00FC7ADC /* Core */,
 				3549BB541DA38A4000C63030 /* Supporting Files */,
 			);
@@ -133,8 +174,9 @@
 		3549BB541DA38A4000C63030 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				271B0EE32512622B00CC7F0E /* DeallocTests-Info.plist */,
+				271B0EE22512622B00CC7F0E /* DeallocTestsSwinjectFree-Info.plist */,
 				3549BB181DA3890B00C63030 /* DeallocTests.h */,
-				3549BB171DA3890B00C63030 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -176,6 +218,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		271B0ED125125E0100CC7F0E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				271B0ED225125E0100CC7F0E /* DeallocTests.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3549BB1E1DA389CD00C63030 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,6 +237,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		271B0EC525125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 271B0ED525125E0100CC7F0E /* Build configuration list for PBXNativeTarget "DeallocTestsSwinjectFree-iOS" */;
+			buildPhases = (
+				271B0EC625125E0100CC7F0E /* Sources */,
+				271B0ECF25125E0100CC7F0E /* Frameworks */,
+				271B0ED125125E0100CC7F0E /* Headers */,
+				271B0ED325125E0100CC7F0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DeallocTestsSwinjectFree-iOS";
+			productName = "DeallocTests-iOS";
+			productReference = 271B0ED825125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		3549BB201DA389CD00C63030 /* DeallocTests-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3549BB261DA389CD00C63030 /* Build configuration list for PBXNativeTarget "DeallocTests-iOS" */;
@@ -261,12 +329,20 @@
 			projectRoot = "";
 			targets = (
 				3549BB201DA389CD00C63030 /* DeallocTests-iOS */,
+				271B0EC525125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS */,
 				3549BB601DA38ADB00C63030 /* DeallocTestsTests-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		271B0ED325125E0100CC7F0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3549BB1F1DA389CD00C63030 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,12 +383,29 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		271B0EC625125E0100CC7F0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				271B0EC725125E0100CC7F0E /* DeallocTestable.swift in Sources */,
+				271B0EC825125E0100CC7F0E /* DeallocTestable+Internals.swift in Sources */,
+				271B0EC925125E0100CC7F0E /* Container+Convenience.swift in Sources */,
+				271B0ECA25125E0100CC7F0E /* TestHelper.swift in Sources */,
+				271B0ECB25125E0100CC7F0E /* DeinitializationObserver.swift in Sources */,
+				271B0ECC25125E0100CC7F0E /* PostInitBehavior.swift in Sources */,
+				271B0EDF2512615400CC7F0E /* DeallocTestsSwinjectFree.swift in Sources */,
+				271B0ECD25125E0100CC7F0E /* DeallocTester.swift in Sources */,
+				271B0ECE25125E0100CC7F0E /* DefaultValue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3549BB1C1DA389CD00C63030 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				27465D0423F75F5A007059CE /* DeallocTestable.swift in Sources */,
 				27465D0823F75F5A007059CE /* DeallocTestable+Internals.swift in Sources */,
+				271B0EDC2512614A00CC7F0E /* DeallocTests.swift in Sources */,
 				2738D305246EEE2F00BF0AF6 /* Container+Convenience.swift in Sources */,
 				27B1EF95245B781700123E5E /* TestHelper.swift in Sources */,
 				27465D1023F75F5A007059CE /* DeinitializationObserver.swift in Sources */,
@@ -341,6 +434,83 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		271B0ED625125E0100CC7F0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Sources/DeallocTestsSwinjectFree-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					XCTest,
+					"-weak-lswiftXCTest",
+					"-Xlinker",
+					"-no_application_extension",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		271B0ED725125E0100CC7F0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "Sources/DeallocTestsSwinjectFree-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					XCTest,
+					"-weak-lswiftXCTest",
+					"-Xlinker",
+					"-no_application_extension",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		3549BB0B1DA387DB00C63030 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -471,11 +641,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = "Sources/DeallocTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -509,11 +680,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = "Sources/DeallocTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -584,6 +756,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		271B0ED525125E0100CC7F0E /* Build configuration list for PBXNativeTarget "DeallocTestsSwinjectFree-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				271B0ED625125E0100CC7F0E /* Debug */,
+				271B0ED725125E0100CC7F0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3549BAFF1DA387DB00C63030 /* Build configuration list for PBXProject "DeallocTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
