@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,7 +21,7 @@
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
 		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
-		27E60A4F25135DE2003F8AD8 /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 27E60A4E25135DE2003F8AD8 /* DeallocTests */; };
+		449260BA42AF2D6CBAD72848 /* Pods_DeallocTestsAppCocoapodsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,16 +35,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2385675838769753F8969123 /* Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig"; path = "Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSceneDelegate.swift; sourceTree = "<group>"; };
 		2775D5B4246C917A00F45280 /* TestAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		2775D5B5246C917A00F45280 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		27A08023245C859C0037F1DB /* DeallocTestsAppSPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeallocTestsAppSPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A08023245C859C0037F1DB /* DeallocTestsAppCocoapods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeallocTestsAppCocoapods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A08026245C859C0037F1DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27A0802D245C859C0037F1DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27A0802F245C859E0037F1DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27A08032245C859E0037F1DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27A08034245C859E0037F1DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeallocTestsAppSPMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27A08039245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeallocTestsAppCocoapodsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27A0803F245C859E0037F1DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A08048245C876E0037F1DB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		27A0804B245C878E0037F1DB /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
 		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAE92493CA0F312540C2E21A /* Pods-DeallocTestsAppCocoapodsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeallocTestsAppCocoapodsTests.release.xcconfig"; path = "Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27E60A4F25135DE2003F8AD8 /* DeallocTests in Frameworks */,
+				449260BA42AF2D6CBAD72848 /* Pods_DeallocTestsAppCocoapodsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,9 +88,10 @@
 		27A0801A245C859C0037F1DB = {
 			isa = PBXGroup;
 			children = (
-				27A08025245C859C0037F1DB /* DeallocTestsAppSPM */,
-				27A0803C245C859E0037F1DB /* DeallocTestsAppSPMTests */,
+				27A08025245C859C0037F1DB /* DeallocTestsAppCocoapods */,
+				27A0803C245C859E0037F1DB /* DeallocTestsAppCocoapodsTests */,
 				27A08024245C859C0037F1DB /* Products */,
+				A08936B64EE3A03D23B15DE6 /* Pods */,
 				06E1F9A1168AA9DFAC7A7F7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -96,13 +99,13 @@
 		27A08024245C859C0037F1DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				27A08023245C859C0037F1DB /* DeallocTestsAppSPM.app */,
-				27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */,
+				27A08023245C859C0037F1DB /* DeallocTestsAppCocoapods.app */,
+				27A08039245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		27A08025245C859C0037F1DB /* DeallocTestsAppSPM */ = {
+		27A08025245C859C0037F1DB /* DeallocTestsAppCocoapods */ = {
 			isa = PBXGroup;
 			children = (
 				27A0804A245C87730037F1DB /* ViewController */,
@@ -117,17 +120,17 @@
 				2775D5B4246C917A00F45280 /* TestAppDelegate.swift */,
 				2775D5B3246C917A00F45280 /* TestSceneDelegate.swift */,
 			);
-			path = DeallocTestsAppSPM;
+			path = DeallocTestsAppCocoapods;
 			sourceTree = "<group>";
 		};
-		27A0803C245C859E0037F1DB /* DeallocTestsAppSPMTests */ = {
+		27A0803C245C859E0037F1DB /* DeallocTestsAppCocoapodsTests */ = {
 			isa = PBXGroup;
 			children = (
 				27A0803F245C859E0037F1DB /* Info.plist */,
 				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
 				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
 			);
-			path = DeallocTestsAppSPMTests;
+			path = DeallocTestsAppCocoapodsTests;
 			sourceTree = "<group>";
 		};
 		27A0804A245C87730037F1DB /* ViewController */ = {
@@ -148,12 +151,21 @@
 			path = ViewCoordinator;
 			sourceTree = "<group>";
 		};
+		A08936B64EE3A03D23B15DE6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2385675838769753F8969123 /* Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig */,
+				DAE92493CA0F312540C2E21A /* Pods-DeallocTestsAppCocoapodsTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		27A08022245C859C0037F1DB /* DeallocTestsAppSPM */ = {
+		27A08022245C859C0037F1DB /* DeallocTestsAppCocoapods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 27A08042245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppSPM" */;
+			buildConfigurationList = 27A08042245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppCocoapods" */;
 			buildPhases = (
 				27A0801F245C859C0037F1DB /* Sources */,
 				27A08020245C859C0037F1DB /* Frameworks */,
@@ -163,32 +175,29 @@
 			);
 			dependencies = (
 			);
-			name = DeallocTestsAppSPM;
-			packageProductDependencies = (
-			);
+			name = DeallocTestsAppCocoapods;
 			productName = DeallocTestsAppCocoapods;
-			productReference = 27A08023245C859C0037F1DB /* DeallocTestsAppSPM.app */;
+			productReference = 27A08023245C859C0037F1DB /* DeallocTestsAppCocoapods.app */;
 			productType = "com.apple.product-type.application";
 		};
-		27A08038245C859E0037F1DB /* DeallocTestsAppSPMTests */ = {
+		27A08038245C859E0037F1DB /* DeallocTestsAppCocoapodsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 27A08045245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppSPMTests" */;
+			buildConfigurationList = 27A08045245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppCocoapodsTests" */;
 			buildPhases = (
+				641A12CEDFBD6F4A3BF00EC9 /* [CP] Check Pods Manifest.lock */,
 				27A08035245C859E0037F1DB /* Sources */,
 				27A08036245C859E0037F1DB /* Frameworks */,
 				27A08037245C859E0037F1DB /* Resources */,
+				11BF75DBA1962E8D25CD35EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				27A0803B245C859E0037F1DB /* PBXTargetDependency */,
 			);
-			name = DeallocTestsAppSPMTests;
-			packageProductDependencies = (
-				27E60A4E25135DE2003F8AD8 /* DeallocTests */,
-			);
+			name = DeallocTestsAppCocoapodsTests;
 			productName = DeallocTestsAppCocoapodsTests;
-			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
+			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppCocoapodsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 27A0801E245C859C0037F1DB /* Build configuration list for PBXProject "DeallocTestsAppSPM" */;
+			buildConfigurationList = 27A0801E245C859C0037F1DB /* Build configuration list for PBXProject "DeallocTestsAppCocoapods" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,15 +228,12 @@
 				Base,
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
-			packageReferences = (
-				27E60A4D25135DE2003F8AD8 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */,
-			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				27A08022245C859C0037F1DB /* DeallocTestsAppSPM */,
-				27A08038245C859E0037F1DB /* DeallocTestsAppSPMTests */,
+				27A08022245C859C0037F1DB /* DeallocTestsAppCocoapods */,
+				27A08038245C859E0037F1DB /* DeallocTestsAppCocoapodsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +257,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11BF75DBA1962E8D25CD35EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeallocTestsAppCocoapodsTests/Pods-DeallocTestsAppCocoapodsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		641A12CEDFBD6F4A3BF00EC9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DeallocTestsAppCocoapodsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		27A0801F245C859C0037F1DB /* Sources */ = {
@@ -283,7 +331,7 @@
 /* Begin PBXTargetDependency section */
 		27A0803B245C859E0037F1DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 27A08022245C859C0037F1DB /* DeallocTestsAppSPM */;
+			target = 27A08022245C859C0037F1DB /* DeallocTestsAppCocoapods */;
 			targetProxy = 27A0803A245C859E0037F1DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -427,12 +475,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppSPM/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppCocoapods/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapods;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -444,12 +492,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppSPM/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppCocoapods/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPM;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapods;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,50 +506,52 @@
 		};
 		27A08046245C859E0037F1DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2385675838769753F8969123 /* Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppSPMTests/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPMTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapodsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeallocTestsAppSPM.app/DeallocTestsAppSPM";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeallocTestsAppCocoapods.app/DeallocTestsAppCocoapods";
 			};
 			name = Debug;
 		};
 		27A08047245C859E0037F1DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAE92493CA0F312540C2E21A /* Pods-DeallocTestsAppCocoapodsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeallocTestsAppSPMTests/Info.plist;
+				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppSPMTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.DeallocTestsAppCocoapodsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeallocTestsAppSPM.app/DeallocTestsAppSPM";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeallocTestsAppCocoapods.app/DeallocTestsAppCocoapods";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		27A0801E245C859C0037F1DB /* Build configuration list for PBXProject "DeallocTestsAppSPM" */ = {
+		27A0801E245C859C0037F1DB /* Build configuration list for PBXProject "DeallocTestsAppCocoapods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				27A08040245C859E0037F1DB /* Debug */,
@@ -510,7 +560,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		27A08042245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppSPM" */ = {
+		27A08042245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppCocoapods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				27A08043245C859E0037F1DB /* Debug */,
@@ -519,7 +569,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		27A08045245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppSPMTests" */ = {
+		27A08045245C859E0037F1DB /* Build configuration list for PBXNativeTarget "DeallocTestsAppCocoapodsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				27A08046245C859E0037F1DB /* Debug */,
@@ -529,25 +579,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		27E60A4D25135DE2003F8AD8 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/strvcom/ios-research-dealloc-tests.git";
-			requirement = {
-				branch = "feature/two-targets";
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		27E60A4E25135DE2003F8AD8 /* DeallocTests */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27E60A4D25135DE2003F8AD8 /* XCRemoteSwiftPackageReference "ios-research-dealloc-tests" */;
-			productName = DeallocTests;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27A0801B245C859C0037F1DB /* Project object */;
 }

@@ -1,0 +1,16 @@
+PODS:
+  - DeallocTests/DeallocTestsSwinjectFree (1.0.0)
+
+DEPENDENCIES:
+  - DeallocTests/DeallocTestsSwinjectFree (from `../../`)
+
+EXTERNAL SOURCES:
+  DeallocTests:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  DeallocTests: dc7b3d3051b625f840972849ed95902e221faea3
+
+PODFILE CHECKSUM: a29a9388a27cc5c7b171a1953c6fd0ed27242fb0
+
+COCOAPODS: 1.9.3
