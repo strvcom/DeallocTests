@@ -5,8 +5,8 @@
         "package": "DeallocTests",
         "repositoryURL": "https://github.com/strvcom/ios-research-dealloc-tests",
         "state": {
-          "branch": "feature/spm-support",
-          "revision": "e61b822dcbb115394ab4f30fd4135f53498e411c",
+          "branch": "feature/two-targets",
+          "revision": "9c5bd4fb008400d9818adc9646abd889afac8a4f",
           "version": null
         }
       },

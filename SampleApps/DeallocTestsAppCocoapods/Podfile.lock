@@ -1,26 +1,16 @@
 PODS:
-  - DeallocTests (0.0.7):
-    - DeallocTests/Core (= 0.0.7)
-    - Swinject (~> 2.7.0)
-  - DeallocTests/Core (0.0.7):
-    - Swinject (~> 2.7.0)
-  - Swinject (2.7.1)
+  - DeallocTests/DeallocTestsSwinjectFree (1.0.0)
 
 DEPENDENCIES:
-  - DeallocTests (from `../../`)
-
-SPEC REPOS:
-  trunk:
-    - Swinject
+  - DeallocTests/DeallocTestsSwinjectFree (from `../../`)
 
 EXTERNAL SOURCES:
   DeallocTests:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  DeallocTests: 40abf875f529a5bfada6699991640459fe2cca49
-  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
+  DeallocTests: dc7b3d3051b625f840972849ed95902e221faea3
 
-PODFILE CHECKSUM: 084cc2152c8b6f3d3493fc2a7afa6432fee061b8
+PODFILE CHECKSUM: 4daf539bb34e31ea965e0b39948a4bd43b3eee89
 
 COCOAPODS: 1.9.3
