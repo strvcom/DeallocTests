@@ -25,6 +25,12 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
     <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
 </p>
 
+## Swinject
+
+The main version of DeallocTests uses Swinject dependency injection framework as the only dependency. Swinject is often considered to be the leading dependency injection framework for Swift and it is part of almost every STRV iOS app. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use Swinject in your app:
+* For installation using SPM: Library `DeallocTestsSwinjectFree`
+* For installation using Cocoapods use `pod 'DeallocTests/DeallocTestsSwinjectFree` in Podfile
+
 ##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
 - [Requirements](#requirements)
