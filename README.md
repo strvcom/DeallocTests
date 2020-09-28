@@ -29,7 +29,7 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
 
 The main version of DeallocTests uses Swinject dependency injection framework as the only dependency. Swinject is often considered to be the leading dependency injection framework for Swift and it is part of almost every STRV iOS app. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use Swinject in your app, please use DeallocTestsSwinjectFree library:
 * For installation using SPM: Library `DeallocTestsSwinjectFree`
-* For installation using Cocoapods use `pod 'DeallocTests/DeallocTestsSwinjectFree` in Podfile
+* For installation using Cocoapods use `pod 'DeallocTests/SwinjectBased` in Podfile
 
 ##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
@@ -61,7 +61,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'DeallocTests', '~> 0.0.1'
+pod 'DeallocTests/SwinjectBased', '~> 1.0.0'
 ```
 
 Then, run the following command:
@@ -85,7 +85,7 @@ import PackageDescription
 let package = Package(
     name: "HelloDeallocTests",
     dependencies: [
-        .package(url: "https://github.com/DanielCech/DeallocTests.git", .upToNextMajor(from: "0.0.1"))
+        .package(url: "https://github.com/DanielCech/DeallocTests.git", .upToNextMajor(from: "1.0.0"))
     ],
     targets: [
         .target(name: "HelloDeallocTests", dependencies: ["DeallocTests"])
@@ -154,7 +154,7 @@ The Podfile adds DeallocTests support to the app's test target.
 
 ```ruby
 target 'DeallocTestsAppCocoapodsTests' do
-  pod 'DeallocTests', :path=>'../../'
+  pod 'DeallocTests/SwinjectBased', :path=>'../../'
 end
 ```
 

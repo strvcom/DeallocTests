@@ -5,7 +5,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'DeallocTestsAppCocoapodsTests' do
-  pod 'DeallocTests', :path=>'../../'
+  pod 'DeallocTests/SwinjectBased', :path=>'../../'
 end
 
 post_install do |installer|

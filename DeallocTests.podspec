@@ -22,13 +22,13 @@ Pod::Spec.new do |s|
 
  s.default_subspec = "DeallocTests"
 
- s.subspec "DeallocTests" do |ss|
+ s.subspec "SwinjectBased" do |ss|
      ss.source_files  = "Sources/**/*.swift"
      ss.framework  = "Foundation"
      ss.dependency "Swinject", "~> 2.7.0"
  end
 
- s.subspec "DeallocTestsSwinjectFree" do |ss|
+ s.subspec "SwinjectFree" do |ss|
      ss.source_files  = "Sources/**/*.swift"
      ss.framework  = "Foundation"
  end

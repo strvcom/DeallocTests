@@ -11,7 +11,6 @@ import Foundation
 #if canImport(Swinject)
     import Swinject
 
-
     class PostInitBehavior: Behavior {
         func container<Type, Service>(
             _: Container,
