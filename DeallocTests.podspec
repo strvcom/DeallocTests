@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
  }
 
- s.default_subspec = "DeallocTests"
+ s.default_subspec = "SwinjectBased"
 
  s.subspec "SwinjectBased" do |ss|
      ss.source_files  = "Sources/**/*.swift"
