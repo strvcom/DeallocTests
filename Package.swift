@@ -12,7 +12,7 @@ import PackageDescription
 let package = Package(
     name: "DeallocTests",
     platforms: [
-        .iOS(.v8),
+        .iOS(.v10),
     ],
     products: [
         .library(
