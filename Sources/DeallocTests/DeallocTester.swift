@@ -7,7 +7,11 @@
 //
 
 import Foundation
-import Swinject
+
+#if canImport(Swinject)
+    import Swinject
+#endif
+
 import XCTest
 
 #if canImport(UIKit)
@@ -15,7 +19,12 @@ import XCTest
 #endif
 
 public struct DeallocTest {
+#if canImport(Swinject)
     public typealias ObjectCreationClosure = (Container) -> AnyObject?
+#else
+    public typealias ObjectCreationClosure = () -> AnyObject?
+#endif
+    
     public typealias SimpleClosure = (() -> Void)
 
     public var objectCreation: ObjectCreationClosure
@@ -74,6 +83,7 @@ open class DeallocTester: XCTestCase {
     }
 #endif
 
+#if canImport(Swinject)
     /// Dependency Injection assembler
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var assembler: Assembler!
@@ -81,17 +91,20 @@ open class DeallocTester: XCTestCase {
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
     var container: Container!
+#endif
 
     public override func setUp() {
         super.setUp()
 
-        container = Container(behaviors: [PostInitBehavior()])
-        assembler = Assembler(container: container)
+        #if canImport(Swinject)
+            container = Container(behaviors: [PostInitBehavior()])
+            assembler = Assembler(container: container)
+            container.resetObjectScope(.container)
+        #endif
 
         allocatedClasses = []
         deallocatedClasses = []
-
-        container.resetObjectScope(.container)
+        
         applyAssembliesToContainer()
     }
 
@@ -123,9 +136,11 @@ open class DeallocTester: XCTestCase {
         allocatedClasses = []
         deallocatedClasses = []
 
-        container.removeAll()
-        container.resetObjectScope(.container)
-        applyAssembliesToContainer()
+        #if canImport(Swinject)
+            container.removeAll()
+            container.resetObjectScope(.container)
+            applyAssembliesToContainer()
+        #endif
 
         delay(1) { [weak self] in
             guard let self = self else {
@@ -135,7 +150,12 @@ open class DeallocTester: XCTestCase {
             print("\nChecking:")
 
             let dependencyDeallocTest = deallocTests[index]
-            var instance: AnyObject? = dependencyDeallocTest.objectCreation(self.container)
+            
+            #if canImport(Swinject)
+                var instance: AnyObject? = dependencyDeallocTest.objectCreation(self.container)
+            #else
+                var instance: AnyObject? = dependencyDeallocTest.objectCreation()
+            #endif
 
             guard instance is DeallocTestable else {
                 // swiftlint:disable:next force_unwrapping
@@ -146,33 +166,39 @@ open class DeallocTester: XCTestCase {
 
             (instance as? DeallocTestable)?.initializeDeallocTestSupport()
 
-#if canImport(UIKit)
-            delay(1) { [weak self] in
-                if let controller = instance as? UIViewController {
-                    controller.modalPresentationStyle = .fullScreen
-                    self?.presentingController.present(controller, animated: true) {
-                        delay(1) {
-                            self?.presentingController.dismiss(animated: true, completion: {
-                                delay(1) {
-                                    instance = nil
-                                    self?.container.resetObjectScope(.container)
-                                    self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
-                                }
-                            })
+            #if canImport(UIKit)
+                delay(1) { [weak self] in
+                    if let controller = instance as? UIViewController {
+                        controller.modalPresentationStyle = .fullScreen
+                        self?.presentingController.present(controller, animated: true) {
+                            delay(1) {
+                                self?.presentingController.dismiss(animated: true, completion: {
+                                    delay(1) {
+                                        instance = nil
+                                        
+                                        #if canImport(Swinject)
+                                            self?.container.resetObjectScope(.container)
+                                        #endif
+                                        
+                                        self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
+                                    }
+                                })
+                            }
                         }
+                    } else {
+                        instance = nil
+                        self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                     }
-                } else {
-                    instance = nil
-                    self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                 }
-            }
-#endif
+            #endif
         }
     }
 
     /// Start testing of next item
     private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) {
-        container.resetObjectScope(.container)
+        #if canImport(Swinject)
+            container.resetObjectScope(.container)
+        #endif
 
         let dependencyDeallocTest = deallocTests[index]
         dependencyDeallocTest.actionBeforeCheck?()
