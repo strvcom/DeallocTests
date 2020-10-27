@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "DeallocTests",
-        "repositoryURL": "https://github.com/strvcom/ios-research-dealloc-tests.git",
+        "repositoryURL": "https://github.com/strvcom/DeallocTests.git",
         "state": {
-          "branch": "feature/two-targets",
-          "revision": "f6ec7d5be37e9d389b1319497ae76c8b2df084ea",
+          "branch": "master",
+          "revision": "5e8e73c1e19e21e8f9f6846a6329adbfbadf8137",
           "version": null
         }
       },

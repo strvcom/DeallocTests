@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		271B0ED225125E0100CC7F0E /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* DeallocTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		271B0EDC2512614A00CC7F0E /* DeallocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271B0EDB2512614A00CC7F0E /* DeallocTests.swift */; };
-		271B0EDF2512615400CC7F0E /* DeallocTestsSwinjectFree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */; };
 		2736569F245B7F1200C8FECB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B1EF91245B717500123E5E /* Swinject.framework */; platformFilter = ios; };
 		27FCBFBF251359A60005A0DB /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFB5251359A60005A0DB /* DefaultValue.swift */; };
 		27FCBFC0251359A60005A0DB /* DeallocTestable+Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFB6251359A60005A0DB /* DeallocTestable+Internals.swift */; };
@@ -20,7 +19,6 @@
 		27FCBFC5251359A60005A0DB /* Container+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFBB251359A60005A0DB /* Container+Convenience.swift */; };
 		27FCBFC6251359A60005A0DB /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFBC251359A60005A0DB /* TestHelper.swift */; };
 		27FCBFC7251359A60005A0DB /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FCBFBD251359A60005A0DB /* DeallocTests.h */; };
-		27FCBFC8251359A60005A0DB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27FCBFBE251359A60005A0DB /* Info.plist */; };
 		27FCBFC9251359B10005A0DB /* Container+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA8251359900005A0DB /* Container+Convenience.swift */; };
 		27FCBFCA251359B10005A0DB /* DeallocTestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA3251359900005A0DB /* DeallocTestable.swift */; };
 		27FCBFCB251359B10005A0DB /* DeallocTestable+Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA5251359900005A0DB /* DeallocTestable+Internals.swift */; };
@@ -28,7 +26,6 @@
 		27FCBFCD251359B10005A0DB /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 27FCBFA9251359900005A0DB /* DeallocTests.h */; };
 		27FCBFCE251359B10005A0DB /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA2251359900005A0DB /* DefaultValue.swift */; };
 		27FCBFCF251359B10005A0DB /* DeinitializationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA4251359900005A0DB /* DeinitializationObserver.swift */; };
-		27FCBFD0251359B10005A0DB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27FCBFA6251359900005A0DB /* Info.plist */; };
 		27FCBFD1251359B10005A0DB /* PostInitBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFAA251359900005A0DB /* PostInitBehavior.swift */; };
 		27FCBFD2251359B10005A0DB /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FCBFA1251359900005A0DB /* TestHelper.swift */; };
 		3549BB501DA38A2000C63030 /* DeallocTests.h in Headers */ = {isa = PBXBuildFile; fileRef = 3549BB181DA3890B00C63030 /* DeallocTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,7 +65,6 @@
 /* Begin PBXFileReference section */
 		271B0ED825125E0100CC7F0E /* DeallocTestsSwinjectFree-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "DeallocTestsSwinjectFree-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		271B0EDB2512614A00CC7F0E /* DeallocTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTests.swift; sourceTree = "<group>"; };
-		271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeallocTestsSwinjectFree.swift; sourceTree = "<group>"; };
 		271B0EE22512622B00CC7F0E /* DeallocTestsSwinjectFree-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeallocTestsSwinjectFree-Info.plist"; sourceTree = "<group>"; };
 		271B0EE32512622B00CC7F0E /* DeallocTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeallocTests-Info.plist"; sourceTree = "<group>"; };
 		27B1EF91245B717500123E5E /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
@@ -162,7 +158,6 @@
 				27FCBFA6251359900005A0DB /* Info.plist */,
 				27FCBFAA251359900005A0DB /* PostInitBehavior.swift */,
 				27FCBFA1251359900005A0DB /* TestHelper.swift */,
-				271B0EDE2512615400CC7F0E /* DeallocTestsSwinjectFree.swift */,
 			);
 			path = DeallocTestsSwinjectFree;
 			sourceTree = "<group>";
@@ -362,7 +357,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27FCBFD0251359B10005A0DB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27FCBFC8251359A60005A0DB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +404,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				271B0EDF2512615400CC7F0E /* DeallocTestsSwinjectFree.swift in Sources */,
 				27FCBFCE251359B10005A0DB /* DefaultValue.swift in Sources */,
 				27FCBFCB251359B10005A0DB /* DeallocTestable+Internals.swift in Sources */,
 				27FCBFD1251359B10005A0DB /* PostInitBehavior.swift in Sources */,
