@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
  s.homepage = 'http://strv.com'
  s.social_media_url = 'https://twitter.com/DanielCech'
  s.authors = { "Daniel Cech" => "daniel.cech@strv.com", "Jan Kaltoun" => "jan.kaltoun@strv.com" }
- s.source = { :git => "git@github.com:strvcom/ios-research-dealloc-tests.git", :tag => "v"+s.version.to_s }
+ s.source = { :git => "https://github.com/strvcom/DeallocTests.git", :tag => "v"+s.version.to_s }
  s.platforms = { :ios => "12.0" }
  s.requires_arc = true
  s.swift_versions = ['5.0']
