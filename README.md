@@ -92,7 +92,7 @@ let package = Package(
     ]
 )
 ```
-__WARNING__: When you install DeallocTests with SPM and you use Xcode 12.5+ you must set `ENABLE_TESTING_SEARCH_PATHS` to `YES` in your testing target build settings.
+__WARNING__: When you install DeallocTests with SPM and you use Xcode 12.5+ you must set `ENABLE_TESTING_SEARCH_PATHS` to `YES` in your app target build settings.
 
 </details>
 
