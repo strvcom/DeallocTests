@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name = 'DeallocTests'
- s.version = '1.0.1'
+ s.version = '1.0.2'
  s.license = { :type => "MIT", :file => "LICENSE" }
  s.summary = 'Easy-to-use framework for custom deallocation tests.'
  s.homepage = 'http://strv.com'
@@ -15,9 +15,10 @@ Pod::Spec.new do |s|
    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
    'DEFINES_MODULE' => 'YES',
    'ENABLE_BITCODE' => 'NO',
-   'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest -Xlinker -no_application_extension',
+   'OTHER_LDFLAGS' => '$(inherited) -weak-lXCTestSwiftSupport -Xlinker -no_application_extension',
    'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
+   "ENABLE_TESTING_SEARCH_PATHS" => "YES", # Required for Xcode 12.5
  }
 
  s.default_subspec = "SwinjectBased"
