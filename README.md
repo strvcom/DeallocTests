@@ -85,13 +85,15 @@ import PackageDescription
 let package = Package(
     name: "HelloDeallocTests",
     dependencies: [
-        .package(url: "https://github.com/DanielCech/DeallocTests.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "1.0.0"))
     ],
     targets: [
         .target(name: "HelloDeallocTests", dependencies: ["DeallocTests"])
     ]
 )
 ```
+__WARNING__: When you install DeallocTests with SPM and you use Xcode 12.5+ you must set `ENABLE_TESTING_SEARCH_PATHS` to `YES` in your testing target build settings.
+
 </details>
 
 ### Manually
