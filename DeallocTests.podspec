@@ -25,13 +25,15 @@ Pod::Spec.new do |s|
 
  s.subspec "SwinjectBased" do |ss|
      ss.source_files  = "Sources/**/*.swift"
-     ss.framework  = "Foundation"
+     ss.frameworks  = "Foundation", "XCTest"
      ss.dependency "Swinject", "~> 2.7.0"
+     ss.pod_target_xcconfig = { "ENABLE_TESTING_SEARCH_PATHS" => "YES" }
  end
 
  s.subspec "SwinjectFree" do |ss|
      ss.source_files  = "Sources/**/*.swift"
-     ss.framework  = "Foundation"
+     ss.frameworks  = "Foundation", "XCTest"
+     ss.pod_target_xcconfig = { "ENABLE_TESTING_SEARCH_PATHS" => "YES" }
  end
 
 end
