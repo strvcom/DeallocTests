@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name = 'DeallocTests'
- s.version = '1.0.3'
+ s.version = '1.0.4'
  s.license = { :type => "MIT", :file => "LICENSE" }
  s.summary = 'Easy-to-use framework for custom deallocation tests.'
  s.homepage = 'http://strv.com'
