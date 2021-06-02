@@ -508,7 +508,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2385675838769753F8969123 /* Pods-DeallocTestsAppCocoapodsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;
@@ -530,7 +529,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAE92493CA0F312540C2E21A /* Pods-DeallocTestsAppCocoapodsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DeallocTestsAppCocoapodsTests/Info.plist;

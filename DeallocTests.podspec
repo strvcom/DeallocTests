@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
  s.name = 'DeallocTests'
- s.version = '1.0.2'
+ s.version = '1.0.3'
  s.license = { :type => "MIT", :file => "LICENSE" }
  s.summary = 'Easy-to-use framework for custom deallocation tests.'
  s.homepage = 'http://strv.com'
@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
  s.platforms = { :ios => "12.0" }
  s.requires_arc = true
  s.swift_versions = ['5.0']
+ s.frameworks  = "Foundation", "XCTest"
 
  s.pod_target_xcconfig = {
    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
@@ -18,22 +19,18 @@ Pod::Spec.new do |s|
    'OTHER_LDFLAGS' => '$(inherited) -weak-lXCTestSwiftSupport -Xlinker -no_application_extension',
    'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
-   "ENABLE_TESTING_SEARCH_PATHS" => "YES", # Required for Xcode 12.5
+   'ENABLE_TESTING_SEARCH_PATHS' => 'YES', # Required for Xcode 12.5
  }
 
  s.default_subspec = "SwinjectBased"
 
  s.subspec "SwinjectBased" do |ss|
      ss.source_files  = "Sources/**/*.swift"
-     ss.frameworks  = "Foundation", "XCTest"
      ss.dependency "Swinject", "~> 2.7.0"
-     ss.pod_target_xcconfig = { "ENABLE_TESTING_SEARCH_PATHS" => "YES" }
  end
 
  s.subspec "SwinjectFree" do |ss|
      ss.source_files  = "Sources/**/*.swift"
-     ss.frameworks  = "Foundation", "XCTest"
-     ss.pod_target_xcconfig = { "ENABLE_TESTING_SEARCH_PATHS" => "YES" }
  end
 
 end
