@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import DeallocTests
+import DeallocTestsDIFree
 @testable import DeallocTestsAppSPM
 
 extension MainCoordinator: DeallocTestable {}
 extension FirstViewController: DeallocTestable {}
 extension SecondViewController: DeallocTestable {}
 extension ThirdViewController: DeallocTestable {}
-extension APIManager: DeallocTestable {}

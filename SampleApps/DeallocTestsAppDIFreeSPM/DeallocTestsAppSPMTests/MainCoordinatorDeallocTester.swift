@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import DeallocTests
+import DeallocTestsDIFree
 @testable import DeallocTestsAppSPM
 
 
@@ -23,22 +23,22 @@ class MainCoordinatorDeallocTester: DeallocTester {
         
         deallocTests = [
             DeallocTest(
-                objectCreation: { [weak self] _ in
+                objectCreation: { [weak self] in
                     return self?.mainCoordinator?.createFirstViewController()
                 }
             ),
             DeallocTest(
-                objectCreation: { [weak self] _ in
+                objectCreation: { [weak self] in
                     return self?.mainCoordinator?.createSecondViewController()
                 }
             ),
             DeallocTest(
-                objectCreation: { [weak self] _ in
+                objectCreation: { [weak self] in
                     return self?.mainCoordinator?.createThirdViewController()
                 }
             ),
             DeallocTest(
-                objectCreation: { _ in
+                objectCreation: {
                     return MainCoordinator()
                 }
             )

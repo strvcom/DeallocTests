@@ -11,7 +11,7 @@ It is very easy to create a memory leak by mistake. Memory leaks have various fo
 
 ## When can I use DeallocTests?
 
-DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with Swinject, the dependency injection framework. And best of all—DeallocTests don’t need any modifications of the main target of your app.
+DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection). And best of all—DeallocTests don’t need any modifications of the main target of your app.
 
 ####  Does it sound too good to be true :-)? Hold on…
 
@@ -25,11 +25,10 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
     <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
 </p>
 
-## Swinject
+## STRV Dependency Injection library
 
-The main version of DeallocTests uses Swinject dependency injection framework as the only dependency. Swinject is often considered to be the leading dependency injection framework for Swift and it is part of almost every STRV iOS app. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use Swinject in your app, please use DeallocTestsSwinjectFree library:
-* For installation using SPM: Library `DeallocTestsSwinjectFree`
-* For installation using Cocoapods use `pod 'DeallocTests/SwinjectFree` in Podfile
+The main version of DeallocTests uses [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection) as the only dependency. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use STRV Dependency Injection in your app, please use DeallocTestsDIFree library:
+* For installation using SPM: Library `DeallocTestsDIFree`
 
 ##  DeallocTests. Easy-to-use framework for custom deallocation tests.
 
@@ -39,46 +38,19 @@ The main version of DeallocTests uses Swinject dependency injection framework as
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 10.0+
+- iOS 13.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 12.0+
 
 ## Installation
 
 ### Dependency Managers
-<details>
-  <summary><strong>CocoaPods</strong></summary>
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-To integrate DeallocTests into your Xcode project using CocoaPods, specify it in your `Podfile`:
-
-```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
-
-pod 'DeallocTests', '~> 1.0.0'
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
-```
-
-</details>
-
 <details>
   <summary><strong>Swift Package Manager</strong></summary>
 
 To use DeallocTests as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
 
 ``` swift
-// swift-tools-version:4.2
+// swift-tools-version:5.5
 
 import PackageDescription
 
@@ -181,7 +153,7 @@ var mainCoordinator: MainCoordinator? {
 }
 ```
 
-This will initialize a Swinject dependency container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
+This will initialize a dependency injection container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
 
 ```swift
 func test_mainCoordinatorDealloc() {

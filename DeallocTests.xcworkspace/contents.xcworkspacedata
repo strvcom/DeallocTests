@@ -23,15 +23,6 @@
       location = "group:Readme.md">
    </FileRef>
    <FileRef
-      location = "group:Cartfile">
-   </FileRef>
-   <FileRef
-      location = "group:Cartfile.private">
-   </FileRef>
-   <FileRef
-      location = "group:Cartfile.resolved">
-   </FileRef>
-   <FileRef
       location = "group:Package.swift">
    </FileRef>
    <FileRef
