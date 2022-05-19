@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.5
 //
 //  DeallocTests.swift
 //  DeallocTests
@@ -12,7 +12,7 @@ import PackageDescription
 let package = Package(
     name: "DeallocTests",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v13)
     ],
     products: [
         .library(
@@ -20,23 +20,23 @@ let package = Package(
             targets: ["DeallocTests"]
         ),
         .library(
-            name: "DeallocTestsSwinjectFree",
-            targets: ["DeallocTestsSwinjectFree"]
+            name: "DeallocTestsDIFree",
+            targets: ["DeallocTestsDIFree"]
         ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.7.0"),
+        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", from: "1.0.2")
     ],
     targets: [
         .target(
             name: "DeallocTests",
-            dependencies: ["Swinject"],
+            dependencies: [.product(name: "DependencyInjection", package: "ios-dependency-injection")],
             path: "Sources/DeallocTests"
         ),
         .target(
-            name: "DeallocTestsSwinjectFree",
-            path: "Sources/DeallocTestsSwinjectFree"
+            name: "DeallocTestsDIFree",
+            path: "Sources/DeallocTestsDIFree"
         ),
         .testTarget(
             name: "DeallocTestsTests",

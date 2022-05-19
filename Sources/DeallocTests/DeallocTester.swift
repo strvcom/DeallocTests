@@ -8,8 +8,8 @@
 
 import Foundation
 
-#if canImport(Swinject)
-    import Swinject
+#if canImport(DependencyInjection)
+    import DependencyInjection
 #endif
 
 import XCTest
@@ -19,7 +19,7 @@ import XCTest
 #endif
 
 public struct DeallocTest {
-#if canImport(Swinject)
+#if canImport(DependencyInjection)
     public typealias ObjectCreationClosure = (Container) -> AnyObject?
 #else
     public typealias ObjectCreationClosure = () -> AnyObject?
@@ -83,23 +83,17 @@ open class DeallocTester: XCTestCase {
     }
 #endif
 
-#if canImport(Swinject)
-    /// Dependency Injection assembler
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    public var assembler: Assembler!
-
+#if canImport(DependencyInjection)
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
-    var container: Container!
+    public var container: Container!
 #endif
 
     public override func setUp() {
         super.setUp()
 
-        #if canImport(Swinject)
-            container = Container(behaviors: [PostInitBehavior()])
-            assembler = Assembler(container: container)
-            container.resetObjectScope(.container)
+        #if canImport(DependencyInjection)
+            container = Container()
         #endif
 
         allocatedClasses = []
@@ -136,9 +130,8 @@ open class DeallocTester: XCTestCase {
         allocatedClasses = []
         deallocatedClasses = []
 
-        #if canImport(Swinject)
-            container.removeAll()
-            container.resetObjectScope(.container)
+        #if canImport(DependencyInjection)
+            container.clean()
             applyAssembliesToContainer()
         #endif
 
@@ -151,7 +144,7 @@ open class DeallocTester: XCTestCase {
 
             let dependencyDeallocTest = deallocTests[index]
             
-            #if canImport(Swinject)
+            #if canImport(DependencyInjection)
                 var instance: AnyObject? = dependencyDeallocTest.objectCreation(self.container)
             #else
                 var instance: AnyObject? = dependencyDeallocTest.objectCreation()
@@ -176,8 +169,8 @@ open class DeallocTester: XCTestCase {
                                     delay(1) {
                                         instance = nil
                                         
-                                        #if canImport(Swinject)
-                                            self?.container.resetObjectScope(.container)
+                                        #if canImport(DependencyInjection)
+                                            self?.container.releaseSharedInstances()
                                         #endif
                                         
                                         self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
@@ -196,8 +189,8 @@ open class DeallocTester: XCTestCase {
 
     /// Start testing of next item
     private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) {
-        #if canImport(Swinject)
-            container.resetObjectScope(.container)
+        #if canImport(DependencyInjection)
+            container.releaseSharedInstances()
         #endif
 
         let dependencyDeallocTest = deallocTests[index]
