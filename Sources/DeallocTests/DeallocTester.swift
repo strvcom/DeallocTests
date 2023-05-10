@@ -8,6 +8,9 @@
 
 import Foundation
 
+let delayTime: Double = 0.1
+let presentationAnimated = false
+
 #if canImport(DependencyInjection)
     import DependencyInjection
 #endif
@@ -135,7 +138,7 @@ open class DeallocTester: XCTestCase {
             applyAssembliesToContainer()
         #endif
 
-        delay(1) { [weak self] in
+        delay(delayTime) { [weak self] in
             guard let self = self else {
                 return
             }
@@ -160,13 +163,13 @@ open class DeallocTester: XCTestCase {
             (instance as? DeallocTestable)?.initializeDeallocTestSupport()
 
             #if canImport(UIKit)
-                delay(1) { [weak self] in
+                delay(delayTime) { [weak self] in
                     if let controller = instance as? UIViewController {
                         controller.modalPresentationStyle = .fullScreen
-                        self?.presentingController.present(controller, animated: true) {
-                            delay(1) {
-                                self?.presentingController.dismiss(animated: true, completion: {
-                                    delay(1) {
+                        self?.presentingController.present(controller, animated: presentationAnimated) {
+                            delay(delayTime) {
+                                self?.presentingController.dismiss(animated: presentationAnimated, completion: {
+                                    delay(delayTime) {
                                         instance = nil
                                         
                                         #if canImport(DependencyInjection)
@@ -196,7 +199,7 @@ open class DeallocTester: XCTestCase {
         let dependencyDeallocTest = deallocTests[index]
         dependencyDeallocTest.actionBeforeCheck?()
 
-        delay(1) { [weak self] in
+        delay(delayTime) { [weak self] in
             let dependencyDeallocTest = deallocTests[index]
             self?.checkTestResult(checkedClasses: dependencyDeallocTest.checkClasses ?? allocatedClasses)
             self?.performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
