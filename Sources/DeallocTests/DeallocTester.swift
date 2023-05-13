@@ -41,6 +41,7 @@ public struct DeallocTest {
     }
 }
 
+@MainActor
 open class DeallocTester: XCTestCase {
     // MARK: - Properties
 
