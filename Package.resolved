@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DependencyInjection",
+        "repositoryURL": "git@github.com:strvcom/ios-dependency-injection.git",
+        "state": {
+          "branch": "feat/rob-async-init",
+          "revision": "5da88e2ad586a785a82cd9a5e65f22ae0a6e829f",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
