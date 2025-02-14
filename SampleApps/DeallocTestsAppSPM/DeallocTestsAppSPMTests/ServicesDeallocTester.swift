@@ -14,7 +14,7 @@ import DeallocTests
 import XCTest
 
 class DependencyGraphDeallocTester: DeallocTester {
-    func test_dependencyGraphDealloc() {
+    func test_dependencyGraphDealloc() async {
         presentingController = showPresentingController()
 
         deallocTests = [
@@ -25,7 +25,7 @@ class DependencyGraphDeallocTester: DeallocTester {
 
         let expectation = self.expectation(description: "deallocTest test_todayCoordinatorDealloc")
 
-        performDeallocTest(
+        await performDeallocTest(
             deallocTests: deallocTests,
             expectation: expectation
         )

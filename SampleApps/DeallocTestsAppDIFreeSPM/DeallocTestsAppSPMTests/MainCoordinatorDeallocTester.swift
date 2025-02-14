@@ -46,7 +46,7 @@ class MainCoordinatorDeallocTester: DeallocTester {
 
         let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
 
-        performDeallocTest(
+        await performDeallocTest(
             deallocTests: deallocTests,
             expectation: expectation
         )

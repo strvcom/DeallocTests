@@ -151,7 +151,7 @@ open class DeallocTester: XCTestCase {
             #if canImport(DependencyInjection)
                 var instance: AnyObject? = await dependencyDeallocTest.objectCreation(self.container)
             #else
-                var instance: AnyObject? = dependencyDeallocTest.objectCreation()
+                var instance: AnyObject? = await dependencyDeallocTest.objectCreation()
             #endif
 
             guard instance is DeallocTestable else {
