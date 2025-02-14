@@ -25,7 +25,7 @@ public struct DeallocTest {
 #if canImport(DependencyInjection)
     public typealias ObjectCreationClosure = (AsyncContainer) async -> AnyObject?
 #else
-    public typealias ObjectCreationClosure = () -> AnyObject?
+    public typealias ObjectCreationClosure = () async -> AnyObject?
 #endif
     
     public typealias SimpleClosure = (() -> Void)
