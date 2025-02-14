@@ -23,7 +23,7 @@ import XCTest
 
 public struct DeallocTest {
 #if canImport(DependencyInjection)
-    public typealias ObjectCreationClosure = (Container) -> AnyObject?
+    public typealias ObjectCreationClosure = (AsyncContainer) -> AnyObject?
 #else
     public typealias ObjectCreationClosure = () -> AnyObject?
 #endif
@@ -90,14 +90,14 @@ open class DeallocTester: XCTestCase {
 #if canImport(DependencyInjection)
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
-    public var container: Container!
+    public var container: AsyncContainer!
 #endif
 
     public override func setUp() {
         super.setUp()
 
         #if canImport(DependencyInjection)
-            container = Container()
+            container = AsyncContainer()
         #endif
 
         allocatedClasses = []
@@ -114,8 +114,8 @@ open class DeallocTester: XCTestCase {
     public func performDeallocTest(
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
-    ) {
-        performDeallocTest(index: 0, deallocTests: deallocTests, expectation: expectation)
+    ) async {
+        await performDeallocTest(index: 0, deallocTests: deallocTests, expectation: expectation)
     }
     
     /// Instantiate and release tested item
@@ -123,7 +123,7 @@ open class DeallocTester: XCTestCase {
         index: Int,
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
-    ) {
+    ) async {
         // Last item in sequence
         if index == deallocTests.count {
             print("")
@@ -135,7 +135,7 @@ open class DeallocTester: XCTestCase {
         deallocatedClasses = []
 
         #if canImport(DependencyInjection)
-            container.clean()
+            await container.clean()
             applyAssembliesToContainer()
         #endif
 
@@ -174,17 +174,17 @@ open class DeallocTester: XCTestCase {
                                         instance = nil
                                         
                                         #if canImport(DependencyInjection)
-                                            self?.container.releaseSharedInstances()
+                                            await self?.container.releaseSharedInstances()
                                         #endif
                                         
-                                        self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
+                                        await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                                     }
                                 })
                             }
                         }
                     } else {
                         instance = nil
-                        self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
+                        await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                     }
                 }
             #endif
@@ -192,9 +192,9 @@ open class DeallocTester: XCTestCase {
     }
 
     /// Start testing of next item
-    private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) {
+    private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) async {
         #if canImport(DependencyInjection)
-            container.releaseSharedInstances()
+            await container.releaseSharedInstances()
         #endif
 
         let dependencyDeallocTest = deallocTests[index]
@@ -203,7 +203,7 @@ open class DeallocTester: XCTestCase {
         delay(delayTime) { [weak self] in
             let dependencyDeallocTest = deallocTests[index]
             self?.checkTestResult(checkedClasses: dependencyDeallocTest.checkClasses ?? allocatedClasses)
-            self?.performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
+            await self?.performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
         }
     }
 
