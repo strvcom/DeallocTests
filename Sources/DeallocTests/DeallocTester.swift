@@ -23,7 +23,7 @@ import XCTest
 
 public struct DeallocTest {
 #if canImport(DependencyInjection)
-    public typealias ObjectCreationClosure = (AsyncContainer) -> AnyObject?
+    public typealias ObjectCreationClosure = (AsyncContainer) async -> AnyObject?
 #else
     public typealias ObjectCreationClosure = () -> AnyObject?
 #endif
@@ -149,7 +149,7 @@ open class DeallocTester: XCTestCase {
             let dependencyDeallocTest = deallocTests[index]
             
             #if canImport(DependencyInjection)
-                var instance: AnyObject? = dependencyDeallocTest.objectCreation(self.container)
+                var instance: AnyObject? = await dependencyDeallocTest.objectCreation(self.container)
             #else
                 var instance: AnyObject? = dependencyDeallocTest.objectCreation()
             #endif
