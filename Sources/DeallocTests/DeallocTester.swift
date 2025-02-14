@@ -52,7 +52,7 @@ open class DeallocTester: XCTestCase {
     public var presentingController: UIViewController!
 #endif
 
-    open func applyAssembliesToContainer() {
+    open func applyAssembliesToContainer() async {
         // TODO: Initialize assembler from main project
         
 //        assembler.apply(
@@ -93,8 +93,8 @@ open class DeallocTester: XCTestCase {
     public var container: AsyncContainer!
 #endif
 
-    public override func setUp() {
-        super.setUp()
+    public override func setUp() async throws {
+        try await super.setUp()
 
         #if canImport(DependencyInjection)
             container = AsyncContainer()
@@ -103,7 +103,7 @@ open class DeallocTester: XCTestCase {
         allocatedClasses = []
         deallocatedClasses = []
         
-        applyAssembliesToContainer()
+        await applyAssembliesToContainer()
     }
 
     public override func tearDown() {
@@ -136,7 +136,7 @@ open class DeallocTester: XCTestCase {
 
         #if canImport(DependencyInjection)
             await container.clean()
-            applyAssembliesToContainer()
+            await applyAssembliesToContainer()
         #endif
 
         delay(delayTime) { [weak self] in

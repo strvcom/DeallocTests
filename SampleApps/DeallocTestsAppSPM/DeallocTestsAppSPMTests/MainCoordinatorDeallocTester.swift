@@ -13,7 +13,7 @@ import DeallocTests
 
 class MainCoordinatorDeallocTester: DeallocTester {
     var mainCoordinator: MainCoordinator? {
-        applyAssembliesToContainer()
+        await applyAssembliesToContainer()
 
         return MainCoordinator()
     }
