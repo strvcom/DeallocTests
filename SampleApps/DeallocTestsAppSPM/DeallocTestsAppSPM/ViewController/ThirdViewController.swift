@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ThirdViewControllerDelegate: class {
+protocol ThirdViewControllerDelegate: AnyObject {
     func thirdControllerWillContinue()
 }
 

@@ -1,0 +1,15 @@
+{
+  "originHash" : "1b5305c3b3faa3bab03d71f240bdee5581c85eaa7aed90c714370affb964575b",
+  "pins" : [
+    {
+      "identity" : "ios-dependency-injection",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:strvcom/ios-dependency-injection.git",
+      "state" : {
+        "branch" : "feat/rob-async-init",
+        "revision" : "5da88e2ad586a785a82cd9a5e65f22ae0a6e829f"
+      }
+    }
+  ],
+  "version" : 3
+}

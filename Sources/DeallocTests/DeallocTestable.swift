@@ -17,6 +17,6 @@ enum AssociatedKeys {
 }
 
 /// Protocol for any object that implements this logic
-public protocol DeallocTestable: ClassNameIdentifiable {
+public protocol DeallocTestable: ClassNameIdentifiable, Sendable {
     func initializeDeallocTestSupport()
 }

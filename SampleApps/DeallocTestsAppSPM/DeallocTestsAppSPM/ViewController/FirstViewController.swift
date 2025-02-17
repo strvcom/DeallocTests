@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FirstViewControllerDelegate: class {
+protocol FirstViewControllerDelegate: AnyObject {
     func firstControllerWillContinue()
 }
 

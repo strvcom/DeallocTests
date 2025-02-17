@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 class MainCoordinator {
     private var navigationController: UINavigationController!
     
@@ -44,21 +45,25 @@ internal extension MainCoordinator {
 
 
 extension MainCoordinator: FirstViewControllerDelegate {
-    func firstControllerWillContinue() {
-        let controller = createSecondViewController()
-        navigationController.pushViewController(controller, animated: true)
+    nonisolated func firstControllerWillContinue() {
+        Task {
+            let controller = await createSecondViewController()
+            await navigationController.pushViewController(controller, animated: true)
+        }
     }
 }
 
 extension MainCoordinator: SecondViewControllerDelegate {
-    func secondControllerWillContinue() {
-        let controller = createThirdViewController()
-        navigationController.pushViewController(controller, animated: true)
+    nonisolated func secondControllerWillContinue() {
+        Task {
+            let controller = await createThirdViewController()
+            await navigationController.pushViewController(controller, animated: true)
+        }
     }
 }
 
 extension MainCoordinator: ThirdViewControllerDelegate {
-    func thirdControllerWillContinue() {
-        
+    nonisolated func thirdControllerWillContinue() {
+
     }
 }
