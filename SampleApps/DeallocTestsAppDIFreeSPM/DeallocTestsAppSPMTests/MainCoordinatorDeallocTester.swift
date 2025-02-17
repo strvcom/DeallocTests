@@ -13,12 +13,10 @@ import DeallocTestsDIFree
 
 class MainCoordinatorDeallocTester: DeallocTester {
     var mainCoordinator: MainCoordinator? {
-        await applyAssembliesToContainer()
-
         return MainCoordinator()
     }
 
-    func test_mainCoordinatorDealloc() {
+    func test_mainCoordinatorDealloc() async {
         presentingController = showPresentingController()
         
         deallocTests = [
@@ -51,6 +49,6 @@ class MainCoordinatorDeallocTester: DeallocTester {
             expectation: expectation
         )
 
-        waitForExpectations(timeout: 200, handler: nil)
+        await fulfillment(of: [expectation], timeout: 200)
     }
 }

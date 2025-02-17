@@ -19,7 +19,7 @@ class DependencyGraphDeallocTester: DeallocTester {
 
         deallocTests = [
             DeallocTest(
-                objectCreation: { $0.resolve(type: APIManaging.self) as AnyObject }
+                objectCreation: { await $0.resolve(type: APIManaging.self) as AnyObject }
             ),
         ]
 
@@ -30,10 +30,10 @@ class DependencyGraphDeallocTester: DeallocTester {
             expectation: expectation
         )
 
-        waitForExpectations(timeout: 200, handler: nil)
+        await fulfillment(of: [expectation], timeout: 200)
     }
     
-    override func applyAssembliesToContainer() {
-        container.autoregister(type: APIManaging.self, in: .shared, initializer: APIManager.init)
+    override func applyAssembliesToContainer() async {
+        await container.register(type: APIManaging.self, in: .shared, factory: { _ in APIManager()})
     }
 }
