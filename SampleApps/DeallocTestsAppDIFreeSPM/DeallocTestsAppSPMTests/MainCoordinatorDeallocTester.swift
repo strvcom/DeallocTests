@@ -18,7 +18,9 @@ class MainCoordinatorDeallocTester: DeallocTester {
 
     func test_mainCoordinatorDealloc() async {
         presentingController = showPresentingController()
-        
+
+        try? await Task.sleep(for: .milliseconds(200))
+
         deallocTests = [
             DeallocTest(
                 objectCreation: { [weak self] in

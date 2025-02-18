@@ -8,12 +8,12 @@
 
 import Foundation
 
-public func delay(_ delay: Double, closure: @escaping () async -> Void) {
-    DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-    ) {
-        Task { @MainActor in
-            await closure()
-        }
-    }
-}
+//public func delay(_ delay: Double, closure: @escaping @Sendable () async -> Void) {
+//    DispatchQueue.main.asyncAfter(
+//        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+//    ) {
+//        Task { @MainActor in
+//            await closure()
+//        }
+//    }
+//}

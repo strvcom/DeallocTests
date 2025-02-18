@@ -15,8 +15,7 @@ import XCTest
 
 class DependencyGraphDeallocTester: DeallocTester {
     func test_dependencyGraphDealloc() async {
-        presentingController = showPresentingController()
-
+        
         deallocTests = [
             DeallocTest(
                 objectCreation: { await $0.resolve(type: APIManaging.self) as AnyObject }

@@ -23,9 +23,9 @@ import XCTest
 
 public struct DeallocTest {
 #if canImport(DependencyInjection)
-    public typealias ObjectCreationClosure = (AsyncContainer) async -> AnyObject?
+    public typealias ObjectCreationClosure = @MainActor (AsyncContainer) async -> AnyObject?
 #else
-    public typealias ObjectCreationClosure = () async -> AnyObject?
+    public typealias ObjectCreationClosure = @MainActor () async -> AnyObject?
 #endif
     
     public typealias SimpleClosure = (() -> Void)
@@ -66,7 +66,7 @@ open class DeallocTester: XCTestCase {
 
 #if canImport(UIKit)
     /// Controller for presenting tested controllers
-    public func showPresentingController() -> UIViewController {
+    public func showPresentingController() async -> UIViewController {
         let window: UIWindow
         if #available(iOS 13.0, *),
             let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
@@ -77,7 +77,7 @@ open class DeallocTester: XCTestCase {
         }
 
         let viewController = UIViewController()
-        viewController.view.backgroundColor = .clear
+        viewController.view.backgroundColor = .green
 
         window.rootViewController = viewController
         window.windowLevel = UIWindow.Level.alert + 1
@@ -94,7 +94,7 @@ open class DeallocTester: XCTestCase {
 #endif
 
     public override func setUp() async throws {
-        try await super.setUp()
+        // try await super.setUp() // TODO: fix this
 
         #if canImport(DependencyInjection)
             container = AsyncContainer()
@@ -139,10 +139,7 @@ open class DeallocTester: XCTestCase {
             await applyAssembliesToContainer()
         #endif
 
-        delay(delayTime) { [weak self] in
-            guard let self = self else {
-                return
-            }
+        try? await Task.sleep(for: .seconds(delayTime))
 
             print("\nChecking:")
 
@@ -164,19 +161,22 @@ open class DeallocTester: XCTestCase {
             (instance as? DeallocTestable)?.initializeDeallocTestSupport()
 
             #if canImport(UIKit)
-                delay(delayTime) { [weak self] in
+                try? await Task.sleep(for: .seconds(delayTime))
+
                     if let controller = instance as? UIViewController {
                         controller.modalPresentationStyle = .fullScreen
-                        self?.presentingController.present(controller, animated: presentationAnimated) {
-                            delay(delayTime) {
-                                self?.presentingController.dismiss(animated: presentationAnimated, completion: {
-                                    delay(delayTime) {
+                        presentingController.present(controller, animated: presentationAnimated) { [weak self] in
+                            Task {
+                                try? await Task.sleep(for: .seconds(delayTime))
+                                self?.presentingController.dismiss(animated: presentationAnimated, completion: { [weak self] in
+                                    Task {
+                                        try? await Task.sleep(for: .seconds(delayTime))
                                         instance = nil
-                                        
-                                        #if canImport(DependencyInjection)
-                                            await self?.container.releaseSharedInstances()
-                                        #endif
-                                        
+
+#if canImport(DependencyInjection)
+                                        await self?.container.releaseSharedInstances()
+#endif
+
                                         await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                                     }
                                 })
@@ -184,11 +184,11 @@ open class DeallocTester: XCTestCase {
                         }
                     } else {
                         instance = nil
-                        await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
+                        await continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                     }
-                }
+
             #endif
-        }
+
     }
 
     /// Start testing of next item
@@ -200,11 +200,9 @@ open class DeallocTester: XCTestCase {
         let dependencyDeallocTest = deallocTests[index]
         dependencyDeallocTest.actionBeforeCheck?()
 
-        delay(delayTime) { [weak self] in
-            let dependencyDeallocTest = deallocTests[index]
-            self?.checkTestResult(checkedClasses: dependencyDeallocTest.checkClasses ?? allocatedClasses)
-            await self?.performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
-        }
+        try? await Task.sleep(for: .seconds(delayTime))
+            checkTestResult(checkedClasses: dependencyDeallocTest.checkClasses ?? allocatedClasses)
+            await performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
     }
 
     /// Check proper deallocation

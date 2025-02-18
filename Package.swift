@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0.0
 //
 //  DeallocTests.swift
 //  DeallocTests
@@ -44,5 +44,5 @@ let package = Package(
             path: "Tests"
         ),
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )

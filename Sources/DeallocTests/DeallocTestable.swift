@@ -12,11 +12,12 @@ import Foundation
 /// stored inside the protocol extension
 
 enum AssociatedKeys {
-    static var DeinitializationObserver = "DeinitializationObserver"
-    static var DeallocTestSupportInstalled = "DeallocTestSupportInstalled"
+    @MainActor static var DeinitializationObserver = "DeinitializationObserver"
+    @MainActor static var DeallocTestSupportInstalled = "DeallocTestSupportInstalled"
 }
 
 /// Protocol for any object that implements this logic
+@MainActor
 public protocol DeallocTestable: ClassNameIdentifiable, Sendable {
     func initializeDeallocTestSupport()
 }

@@ -10,8 +10,8 @@ import Foundation
 
 typealias ClassClosureType = (AnyClass) -> Void
 
-var allocatedClasses = [AnyClass]()
-var deallocatedClasses = [AnyClass]()
+@MainActor var allocatedClasses = [AnyClass]()
+@MainActor var deallocatedClasses = [AnyClass]()
 
 public protocol ClassNameIdentifiable: AnyObject {
     var myClass: AnyClass { get }

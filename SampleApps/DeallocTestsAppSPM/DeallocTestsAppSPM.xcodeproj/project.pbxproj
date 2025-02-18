@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,7 +21,6 @@
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
 		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
-		27BB162C2D638F8B0037803B /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = 27BB162B2D638F8B0037803B /* DeallocTests */; };
 		ADCB58DF27FD7CC9009E0DEB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */; };
 		ADCB58E127FD7CF3009E0DEB /* ServicesDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58E027FD7CF3009E0DEB /* ServicesDeallocTester.swift */; };
 		ADCB58E727FD8756009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E627FD8756009E0DEB /* DeallocTests */; };
@@ -56,6 +55,8 @@
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
+		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADCB58D827FD7B01009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
 		ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		ADCB58E027FD7CF3009E0DEB /* ServicesDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesDeallocTester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27BB162C2D638F8B0037803B /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +83,7 @@
 		06E1F9A1168AA9DFAC7A7F7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,6 +91,7 @@
 		27A0801A245C859C0037F1DB = {
 			isa = PBXGroup;
 			children = (
+				ADCB58D727FD7B01009E0DEB /* Packages */,
 				27A08025245C859C0037F1DB /* DeallocTestsAppSPM */,
 				27A0803C245C859E0037F1DB /* DeallocTestsAppSPMTests */,
 				27A08024245C859C0037F1DB /* Products */,
@@ -154,6 +156,14 @@
 			path = ViewCoordinator;
 			sourceTree = "<group>";
 		};
+		ADCB58D727FD7B01009E0DEB /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				ADCB58D827FD7B01009E0DEB /* DeallocTests */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		ADCB58DD27FD7CBA009E0DEB /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,7 +189,6 @@
 			);
 			name = DeallocTestsAppSPM;
 			packageProductDependencies = (
-				27BB162B2D638F8B0037803B /* DeallocTests */,
 			);
 			productName = DeallocTestsAppCocoapods;
 			productReference = 27A08023245C859C0037F1DB /* DeallocTestsAppSPM.app */;
@@ -235,7 +244,6 @@
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
 			packageReferences = (
-				27BB162A2D638F8B0037803B /* XCLocalSwiftPackageReference "../../../DeallocTests" */,
 			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
@@ -549,18 +557,7 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		27BB162A2D638F8B0037803B /* XCLocalSwiftPackageReference "../../../DeallocTests" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../DeallocTests;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		27BB162B2D638F8B0037803B /* DeallocTests */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DeallocTests;
-		};
 		ADCB58E627FD8756009E0DEB /* DeallocTests */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DeallocTests;
