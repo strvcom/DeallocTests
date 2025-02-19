@@ -26,7 +26,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", branch: "feat/rob-async-init"),
+        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", from: "1.0.4")
     ],
     targets: [
         .target(

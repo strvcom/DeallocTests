@@ -1,16 +1,15 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "DependencyInjection",
-        "repositoryURL": "git@github.com:strvcom/ios-dependency-injection.git",
-        "state": {
-          "branch": "feat/rob-async-init",
-          "revision": "5da88e2ad586a785a82cd9a5e65f22ae0a6e829f",
-          "version": null
-        }
+  "originHash" : "a18c4b7114ff0f0479a1e187d0862ade86edc39728573cbc81913ea0a640229d",
+  "pins" : [
+    {
+      "identity" : "ios-dependency-injection",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/strvcom/ios-dependency-injection.git",
+      "state" : {
+        "revision" : "aa5e4da9a4a3dc0076d870776972a701b7eb0949",
+        "version" : "1.0.4"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 3
 }
