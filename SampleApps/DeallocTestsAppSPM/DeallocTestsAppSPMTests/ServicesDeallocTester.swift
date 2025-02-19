@@ -14,8 +14,8 @@ import DeallocTests
 import XCTest
 
 class DependencyGraphDeallocTester: DeallocTester {
+    @MainActor
     func test_dependencyGraphDealloc() async {
-        
         deallocTests = [
             DeallocTest(
                 objectCreation: { await $0.resolve(type: APIManaging.self) as AnyObject }

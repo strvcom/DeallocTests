@@ -14,6 +14,7 @@ import DeallocTests
 class MainCoordinatorDeallocTester: DeallocTester {
     var mainCoordinator: MainCoordinator?
 
+    @MainActor
     func test_mainCoordinatorDealloc() async {
         presentingController = await showPresentingController()
 
