@@ -32,7 +32,7 @@ class DependencyGraphDeallocTester: DeallocTester {
         await fulfillment(of: [expectation], timeout: 200)
     }
     
-    override func registerSharedDependencies() async {
+    override func registerDependencies() async {
         await container.register(type: APIManaging.self, in: .new, factory: { _ in APIManager()})
     }
 }

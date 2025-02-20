@@ -56,14 +56,7 @@ open class DeallocTester: XCTestCase {
 
     /// Initialize DI container with shared dependency registrations
     @MainActor
-    open func registerSharedDependencies() async {
-        // TODO: Override in descendants. Initialize assembler from main project
-
-    }
-
-    /// Initialize DI container with non-shared dependency registrations
-    @MainActor
-    open func registerNonSharedDependencies() async {
+    open func registerDependencies() async {
         // TODO: Override in descendants. Initialize assembler from main project
 
     }
@@ -108,9 +101,6 @@ open class DeallocTester: XCTestCase {
             allocatedClasses = []
             deallocatedClasses = []
         }
-
-//        await registerSharedDependencies()
-//        await registerNonSharedDependencies()
     }
 
     public override func tearDown() {
@@ -145,8 +135,7 @@ open class DeallocTester: XCTestCase {
 
         #if canImport(DependencyInjection)
             await container.clean()
-            await registerSharedDependencies()
-            await registerNonSharedDependencies()
+            await registerDependencies()
         #endif
 
         try? await Task.sleep(for: .seconds(delayTime))
