@@ -48,27 +48,30 @@ open class DeallocTester: XCTestCase {
 
 #if canImport(UIKit)
     // swiftlint:disable:next implicitly_unwrapped_optional
+    var window: UIWindow!
+
+    // swiftlint:disable:next implicitly_unwrapped_optional
     public var presentingController: UIViewController!
 #endif
 
+    /// Initialize DI container with shared dependency registrations
     @MainActor
-    open func applyAssembliesToContainer() async {
-        // TODO: Initialize assembler from main project
-        
-//        assembler.apply(
-//            assemblies: [
-//                ManagerAssembly(),
-//                ServiceAssembly(),
-//                ViewModelAssembly()
-//            ]
-//        )
+    open func registerSharedDependencies() async {
+        // TODO: Override in descendants. Initialize assembler from main project
+
+    }
+
+    /// Initialize DI container with non-shared dependency registrations
+    @MainActor
+    open func registerNonSharedDependencies() async {
+        // TODO: Override in descendants. Initialize assembler from main project
+
     }
 
 #if canImport(UIKit)
     /// Controller for presenting tested controllers
     @MainActor
     public func showPresentingController() async -> UIViewController {
-        let window: UIWindow
         if #available(iOS 13.0, *),
             let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
             let windowScene = application.connectedScenes.first as? UIWindowScene {
@@ -78,7 +81,7 @@ open class DeallocTester: XCTestCase {
         }
 
         let viewController = UIViewController()
-        viewController.view.backgroundColor = .green
+        viewController.view.backgroundColor = .clear
 
         window.rootViewController = viewController
         window.windowLevel = UIWindow.Level.alert + 1
@@ -95,7 +98,7 @@ open class DeallocTester: XCTestCase {
 #endif
 
     public override func setUp() async throws {
-        try await super.setUp() // TODO: fix this
+        try await super.setUp()
 
         #if canImport(DependencyInjection)
             container = AsyncContainer()
@@ -106,7 +109,8 @@ open class DeallocTester: XCTestCase {
             deallocatedClasses = []
         }
 
-        await applyAssembliesToContainer()
+//        await registerSharedDependencies()
+//        await registerNonSharedDependencies()
     }
 
     public override func tearDown() {
@@ -136,14 +140,13 @@ open class DeallocTester: XCTestCase {
             return
         }
 
-        await MainActor.run {
-            allocatedClasses = []
-            deallocatedClasses = []
-        }
+        allocatedClasses = []
+        deallocatedClasses = []
 
         #if canImport(DependencyInjection)
             await container.clean()
-            await applyAssembliesToContainer()
+            await registerSharedDependencies()
+            await registerNonSharedDependencies()
         #endif
 
         try? await Task.sleep(for: .seconds(delayTime))
@@ -178,11 +181,12 @@ open class DeallocTester: XCTestCase {
                     self?.presentingController.dismiss(animated: presentationAnimated, completion: { [weak self] in
                         Task {
                             try? await Task.sleep(for: .seconds(delayTime))
+                            
                             instance = nil
 
-                            #if canImport(DependencyInjection)
-                            await self?.container.releaseSharedInstances()
-                            #endif
+//                            #if canImport(DependencyInjection)
+//                            await self?.container.releaseSharedInstances()
+//                            #endif
 
                             await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                         }
@@ -202,6 +206,8 @@ open class DeallocTester: XCTestCase {
         #if canImport(DependencyInjection)
             await container.releaseSharedInstances()
         #endif
+
+        try? await Task.sleep(for: .seconds(delayTime))
 
         let dependencyDeallocTest = deallocTests[index]
         dependencyDeallocTest.actionBeforeCheck?()

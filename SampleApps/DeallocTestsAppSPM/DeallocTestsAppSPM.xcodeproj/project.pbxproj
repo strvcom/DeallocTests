@@ -22,7 +22,7 @@
 		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
 		ADCB58DF27FD7CC9009E0DEB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */; };
-		ADCB58E127FD7CF3009E0DEB /* ServicesDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58E027FD7CF3009E0DEB /* ServicesDeallocTester.swift */; };
+		ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */; };
 		ADCB58E727FD8756009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E627FD8756009E0DEB /* DeallocTests */; };
 /* End PBXBuildFile section */
 
@@ -55,10 +55,9 @@
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
-		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB58D827FD7B01009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
 		ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		ADCB58E027FD7CF3009E0DEB /* ServicesDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesDeallocTester.swift; sourceTree = "<group>"; };
+		ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyGraphDeallocTester.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +82,6 @@
 		06E1F9A1168AA9DFAC7A7F7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,7 +131,7 @@
 				27A0803F245C859E0037F1DB /* Info.plist */,
 				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
 				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
-				ADCB58E027FD7CF3009E0DEB /* ServicesDeallocTester.swift */,
+				ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */,
 			);
 			path = DeallocTestsAppSPMTests;
 			sourceTree = "<group>";
@@ -297,7 +295,7 @@
 			files = (
 				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
 				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
-				ADCB58E127FD7CF3009E0DEB /* ServicesDeallocTester.swift in Sources */,
+				ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */,
 				275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */,
 				275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */,
 			);

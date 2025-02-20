@@ -40,6 +40,7 @@ class DeinitializationObserver {
     }
 
     deinit {
+        print("DeinitializationObserver: deinit: \(myClass)")
         execute(myClass)
     }
 }

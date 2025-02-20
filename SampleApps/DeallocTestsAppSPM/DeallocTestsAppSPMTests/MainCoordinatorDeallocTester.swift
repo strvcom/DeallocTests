@@ -18,7 +18,6 @@ class MainCoordinatorDeallocTester: DeallocTester {
     func test_mainCoordinatorDealloc() async {
         presentingController = await showPresentingController()
 
-        await applyAssembliesToContainer()
         mainCoordinator = MainCoordinator()
 
         deallocTests = [

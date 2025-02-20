@@ -10,7 +10,6 @@ import Foundation
 import DeallocTests
 @testable import DeallocTestsAppSPM
 
-extension MainCoordinator: @retroactive ClassNameIdentifiable {}
 extension MainCoordinator: @retroactive DeallocTestable {}
 extension FirstViewController: @retroactive DeallocTestable {}
 extension SecondViewController: @retroactive DeallocTestable {}

@@ -1,5 +1,5 @@
 //
-//  ServicesDeallocTester.swift
+//  DependencyGraphDeallocTester.swift
 //  DeallocTestsAppSPMTests
 //
 //  Created by Jan Schwarz on 06.04.2022.
@@ -32,7 +32,7 @@ class DependencyGraphDeallocTester: DeallocTester {
         await fulfillment(of: [expectation], timeout: 200)
     }
     
-    override func applyAssembliesToContainer() async {
-        await container.register(type: APIManaging.self, in: .shared, factory: { _ in APIManager()})
+    override func registerSharedDependencies() async {
+        await container.register(type: APIManaging.self, in: .new, factory: { _ in APIManager()})
     }
 }

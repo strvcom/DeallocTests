@@ -51,9 +51,7 @@ extension DeallocTestable {
         deinitializationObserver = DeinitializationObserver(
             execute: { className in
                 print("Dealloc \(className)")
-                DispatchQueue.main.async {
-                    deallocatedClasses.append(className)
-                }
+                deallocatedClasses.append(className)
             },
             myClass: myClass
         )
