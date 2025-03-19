@@ -173,10 +173,6 @@ open class DeallocTester: XCTestCase {
                             
                             instance = nil
 
-//                            #if canImport(DependencyInjection)
-//                            await self?.container.releaseSharedInstances()
-//                            #endif
-
                             await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
                         }
                     })
