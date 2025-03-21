@@ -1,5 +1,5 @@
 //
-//  ServicesDeallocTester.swift
+//  DependencyGraphDeallocTester.swift
 //  DeallocTestsAppSPMTests
 //
 //  Created by Jan Schwarz on 06.04.2022.
@@ -14,26 +14,25 @@ import DeallocTests
 import XCTest
 
 class DependencyGraphDeallocTester: DeallocTester {
-    func test_dependencyGraphDealloc() {
-        presentingController = showPresentingController()
-
+    @MainActor
+    func test_dependencyGraphDealloc() async {
         deallocTests = [
             DeallocTest(
-                objectCreation: { $0.resolve(type: APIManaging.self) as AnyObject }
+                objectCreation: { await $0.resolve(type: APIManaging.self) as AnyObject }
             ),
         ]
 
         let expectation = self.expectation(description: "deallocTest test_todayCoordinatorDealloc")
 
-        performDeallocTest(
+        await performDeallocTest(
             deallocTests: deallocTests,
             expectation: expectation
         )
 
-        waitForExpectations(timeout: 200, handler: nil)
+        await fulfillment(of: [expectation], timeout: 200)
     }
     
-    override func applyAssembliesToContainer() {
-        container.autoregister(type: APIManaging.self, in: .shared, initializer: APIManager.init)
+    override func registerDependencies() async {
+        await container.register(type: APIManaging.self, in: .new, factory: { _ in APIManager()})
     }
 }

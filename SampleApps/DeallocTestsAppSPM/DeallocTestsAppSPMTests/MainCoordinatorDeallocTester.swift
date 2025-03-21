@@ -12,15 +12,14 @@ import DeallocTests
 
 
 class MainCoordinatorDeallocTester: DeallocTester {
-    var mainCoordinator: MainCoordinator? {
-        applyAssembliesToContainer()
+    var mainCoordinator: MainCoordinator?
 
-        return MainCoordinator()
-    }
+    @MainActor
+    func test_mainCoordinatorDealloc() async {
+        presentingController = await showPresentingController()
 
-    func test_mainCoordinatorDealloc() {
-        presentingController = showPresentingController()
-        
+        mainCoordinator = MainCoordinator()
+
         deallocTests = [
             DeallocTest(
                 objectCreation: { [weak self] _ in
@@ -46,11 +45,11 @@ class MainCoordinatorDeallocTester: DeallocTester {
 
         let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
 
-        performDeallocTest(
+        await performDeallocTest(
             deallocTests: deallocTests,
             expectation: expectation
         )
 
-        waitForExpectations(timeout: 200, handler: nil)
+        await fulfillment(of: [expectation], timeout: 200)
     }
 }

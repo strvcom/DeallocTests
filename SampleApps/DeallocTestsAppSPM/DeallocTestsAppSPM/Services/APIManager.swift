@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol APIManaging {}
+protocol APIManaging: Sendable {}
 
-class APIManager: APIManaging {}
+final class APIManager: APIManaging {}

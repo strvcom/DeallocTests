@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:6.0.0
 //
 //  DeallocTests.swift
 //  DeallocTests
@@ -12,7 +12,7 @@ import PackageDescription
 let package = Package(
     name: "DeallocTests",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v17)
     ],
     products: [
         .library(
@@ -26,7 +26,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", from: "1.0.2")
+        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", from: "1.0.4")
     ],
     targets: [
         .target(
@@ -44,5 +44,5 @@ let package = Package(
             path: "Tests"
         ),
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )
