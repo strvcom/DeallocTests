@@ -12,7 +12,8 @@ import PackageDescription
 let package = Package(
     name: "DeallocTests",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v17),
+        .macOS(.v13)
     ],
     products: [
         .library(
@@ -26,7 +27,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", from: "1.0.4")
+        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))
     ],
     targets: [
         .target(
