@@ -1,13 +1,13 @@
 {
-  "originHash" : "26db6cc2187e81ee3ee44afac5efbee76c0544e3c27ff02265d716bfe6d8eb5f",
+  "originHash" : "1ecfde1ad21f8a051770df0d5ded503e30660f902976d02be63c6740811b36fd",
   "pins" : [
     {
       "identity" : "ios-dependency-injection",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:strvcom/ios-dependency-injection.git",
       "state" : {
-        "revision" : "aa5e4da9a4a3dc0076d870776972a701b7eb0949",
-        "version" : "1.0.4"
+        "revision" : "e70e77a882f66888cb664ea53014f0bef7c04f95",
+        "version" : "2.0.0"
       }
     }
   ],
