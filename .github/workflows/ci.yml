@@ -18,6 +18,21 @@ jobs:
       - name: Run tests
         run: swift test
 
+  package-ios:
+    name: Package tests (iOS Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          # Use whichever iPhone simulator the runner's Xcode provides
+          UDID=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
+          echo "Simulator: $UDID"
+          xcodebuild test \
+            -scheme DeallocTests-Package \
+            -destination "id=$UDID"
+
   sample-apps:
     name: Sample apps (iOS)
     runs-on: macos-15

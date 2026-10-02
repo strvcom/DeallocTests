@@ -23,6 +23,7 @@
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
 		ADCB58DF27FD7CC9009E0DEB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */; };
 		ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */; };
+		AD0E0E0E2F00000100000001 /* ExpectDeallocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */; };
 		ADCB58E727FD8756009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E627FD8756009E0DEB /* DeallocTests */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		ADCB58D827FD7B01009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
 		ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyGraphDeallocTester.swift; sourceTree = "<group>"; };
+		AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectDeallocationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
 				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
 				ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */,
+				AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */,
 			);
 			path = DeallocTestsAppSPMTests;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
 				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
 				ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */,
+				AD0E0E0E2F00000100000001 /* ExpectDeallocationTests.swift in Sources */,
 				275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */,
 				275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */,
 			);
