@@ -9,7 +9,8 @@ import Foundation
 
 /// Creates an object, runs its lifecycle, releases it and checks that it deallocates.
 ///
-/// Works in Swift Testing and XCTest. A leak is reported at the line that calls this function.
+/// Works in Swift Testing and XCTest. A leak is reported at the line that calls this function,
+/// with hints about properties that commonly cause leaks.
 ///
 /// ```swift
 /// @Test func secondScreenDoesNotLeak() async {
@@ -24,6 +25,7 @@ import Foundation
 ///   - timeout: How long to wait for the object to deallocate
 ///   - afterRelease: Runs after the object is released and before the check, e.g. to release cached instances
 ///   - makeObject: Creates the tested object. Don't keep any other reference to it.
+///     Objects passed to `trackForDeallocation(_:)` inside it are checked too.
 @MainActor
 public func expectDeallocation<Object: AnyObject>(
     _ lifecycle: Lifecycle<Object> = .none,
@@ -55,7 +57,10 @@ private func createAndRun<Object: AnyObject>(
     tracker: DeallocationTracker,
     location: TestSourceLocation
 ) async rethrows -> Bool {
-    let object = try await makeObject()
-    tracker.track(object, at: location)
-    return await lifecycle.run(object, location)
+    // `trackForDeallocation(_:)` called from the factory or the lifecycle adds objects to this check
+    try await DeallocationTracker.$current.withValue(tracker) {
+        let object = try await makeObject()
+        tracker.track(object, at: location)
+        return await lifecycle.run(object, location)
+    }
 }

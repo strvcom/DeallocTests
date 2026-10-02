@@ -17,7 +17,8 @@ final class DeallocationTracker {
         let location: TestSourceLocation
     }
 
-    /// Tracker installed by the `.checksDeallocation` Swift Testing trait
+    /// Tracker that `trackForDeallocation(_:)` adds objects to.
+    /// Installed by `expectDeallocation` and the `.checksDeallocation` Swift Testing trait.
     @TaskLocal static var current: DeallocationTracker?
 
     private var trackedObjects = [TrackedObject]()
@@ -46,9 +47,13 @@ final class DeallocationTracker {
             }
         }
 
-        for trackedObject in trackedObjects where trackedObject.object != nil {
+        for trackedObject in trackedObjects {
+            guard let object = trackedObject.object else {
+                continue
+            }
+
             reportIssue(
-                Self.leakMessage(typeName: trackedObject.typeName, timeout: timeout),
+                Self.leakMessage(typeName: trackedObject.typeName, timeout: timeout, hints: LeakHints.hints(for: object)),
                 at: trackedObject.location
             )
         }
@@ -56,9 +61,14 @@ final class DeallocationTracker {
         trackedObjects.removeAll()
     }
 
-    static func leakMessage(typeName: String, timeout: Duration) -> String {
-        "\(typeName) was not deallocated within \(timeout.formatted(.units(allowed: [.seconds, .milliseconds]))). "
-            + "Something still holds a strong reference to it: look for closures capturing self, "
-            + "delegates that aren't weak, timers, notification observers and long-running tasks or subscriptions."
+    static func leakMessage(typeName: String, timeout: Duration, hints: [String] = []) -> String {
+        let summary = "\(typeName) was not deallocated within \(timeout.formatted(.units(allowed: [.seconds, .milliseconds])))."
+
+        guard !hints.isEmpty else {
+            return summary + " Something still holds a strong reference to it: look for closures capturing self, "
+                + "delegates that aren't weak, timers, notification observers and long-running tasks or subscriptions."
+        }
+
+        return summary + " Possible causes:\n" + hints.map { "  • \($0)" }.joined(separator: "\n")
     }
 }

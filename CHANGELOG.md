@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.0
+
+### Added
+- Leak messages list likely causes found in the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers and reference cycles through properties.
+- `.hosting { … }` lifecycle that shows a SwiftUI view built from the object in a test window (UIKit and AppKit), so `onAppear` and `.task` run.
+- `trackForDeallocation(_:)` inside an `expectDeallocation` closure checks the object together with the tested one, in Swift Testing and XCTest.
+
 ## 3.2.0
 
 ### Added
