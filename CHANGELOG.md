@@ -10,7 +10,7 @@ See "Migrating to 4.0" in the README.
 - Leak messages list likely causes found in the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers and reference cycles through properties.
 - Leak messages show readable names for private and local types, without Swift's `(unknown context at $…)`.
 - `trackForDeallocation(_:)`: an `XCTestCase` method and the `.checksDeallocation` Swift Testing trait for checking objects at the end of ordinary unit tests. Inside an `expectDeallocation` closure, it checks the object together with the tested one.
-- `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`.
+- `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`. A dependency that turns out to be a value type is reported with its concrete type, since it can't leak.
 - Swift Testing and XCTest tests of the library on macOS and the iOS simulator, and GitHub Actions CI.
 
 ### Breaking

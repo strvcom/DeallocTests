@@ -190,7 +190,7 @@ struct ExpectDeallocationDependencyInjectionTests {
         await withKnownIssue {
             await expectDeallocation(of: AnyService.self, resolvedFrom: container)
         } matching: { issue in
-            issue.comments.contains { $0.rawValue.contains("is not a class instance") }
+            issue.comments.contains { $0.rawValue.hasPrefix("ValueService resolved for AnyService is a value type") }
         }
     }
 }
