@@ -30,7 +30,9 @@ let package = Package(
         .default(enabledTraits: ["DependencyInjection"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))
+        // DeallocTests only uses AsyncContainer's init, clean(), releaseSharedInstances() and
+        // resolve(type:), which DI 1.x and 2.x both have.
+        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", "1.0.4" ..< "3.0.0")
     ],
     targets: [
         .target(

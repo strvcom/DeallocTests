@@ -18,6 +18,7 @@ See "Migrating to 4.0" in the README.
 
 ### Breaking
 - STRV Dependency Injection support is the `DependencyInjection` package trait. It's on by default; with `traits: []` the dependency isn't downloaded.
+- Works with STRV Dependency Injection 1.0.4 up to 2.x.
 - The `DeallocTestsDIFree` product is removed. Use the `DeallocTests` product and `import DeallocTests`.
 - Swift 6.1 (Xcode 16.3) is required. Turning the trait off from an Xcode project needs Xcode 26.4.
 - `DefaultInitializable` is removed.
