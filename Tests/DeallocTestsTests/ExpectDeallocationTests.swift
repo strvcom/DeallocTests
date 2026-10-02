@@ -6,8 +6,11 @@
 //
 
 import DeallocTests
-import DependencyInjection
 import Testing
+
+#if DependencyInjection
+    import DependencyInjection
+#endif
 
 #if canImport(AppKit)
     import AppKit
@@ -143,19 +146,21 @@ struct ExpectDeallocationTests {
 
 // MARK: - Dependency Injection
 
+#if DependencyInjection
+
 @Suite("expectDeallocation with AsyncContainer")
 @MainActor
 struct ExpectDeallocationDependencyInjectionTests {
     let container = AsyncContainer()
 
     @Test func sharedInstanceIsReleasedWithContainer() async {
-        await container.register(type: Service.self, in: .shared) { _ in SharedService() }
+        await container.register(type: Service.self, in: .shared) { _ in ContainerService() }
 
         await expectDeallocation(of: Service.self, resolvedFrom: container)
     }
 
     @Test func newInstanceIsChecked() async {
-        await container.register(type: Service.self, in: .new) { _ in SharedService() }
+        await container.register(type: Service.self, in: .new) { _ in ContainerService() }
 
         await expectDeallocation(of: Service.self, resolvedFrom: container)
     }
@@ -170,6 +175,8 @@ struct ExpectDeallocationDependencyInjectionTests {
         }
     }
 }
+
+#endif
 
 // MARK: - trackForDeallocation
 

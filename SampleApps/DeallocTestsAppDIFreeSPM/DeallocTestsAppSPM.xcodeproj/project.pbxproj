@@ -19,9 +19,8 @@
 		27A0804E245C879C0037F1DB /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0804D245C879C0037F1DB /* ThirdViewController.swift */; };
 		27A08051245C87C40037F1DB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08050245C87C40037F1DB /* MainCoordinator.swift */; };
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
-		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
-		ADCB58E527FD840C009E0DEB /* DeallocTestsDIFree in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */; };
+		ADCB58E527FD840C009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E427FD840C009E0DEB /* DeallocTests */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		27A0804D245C879C0037F1DB /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		27A08050245C87C40037F1DB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
 		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCB58E327FD82B4009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
@@ -69,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADCB58E527FD840C009E0DEB /* DeallocTestsDIFree in Frameworks */,
+				ADCB58E527FD840C009E0DEB /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				27A0803F245C859E0037F1DB /* Info.plist */,
-				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
 				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
 			);
 			path = DeallocTestsAppSPMTests;
@@ -195,7 +192,7 @@
 			);
 			name = DeallocTestsAppSPMTests;
 			packageProductDependencies = (
-				ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */,
+				ADCB58E427FD840C009E0DEB /* DeallocTests */,
 			);
 			productName = DeallocTestsAppCocoapodsTests;
 			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
@@ -280,7 +277,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
 				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
 				275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */,
 				275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */,
@@ -544,9 +540,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */ = {
+		ADCB58E427FD840C009E0DEB /* DeallocTests */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DeallocTestsDIFree;
+			productName = DeallocTests;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

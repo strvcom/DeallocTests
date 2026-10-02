@@ -56,7 +56,6 @@
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
-		ADCB58D827FD7B01009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
 		ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyGraphDeallocTester.swift; sourceTree = "<group>"; };
 		AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectDeallocationTests.swift; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		ADCB58D727FD7B01009E0DEB /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				ADCB58D827FD7B01009E0DEB /* DeallocTests */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -245,6 +243,7 @@
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
 			packageReferences = (
+				AD0E0E0E2F00000100000010 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
@@ -559,9 +558,20 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		AD0E0E0E2F00000100000010 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+			traits = (
+				DependencyInjection,
+			);
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		ADCB58E627FD8756009E0DEB /* DeallocTests */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = AD0E0E0E2F00000100000010 /* XCLocalSwiftPackageReference "../.." */;
 			productName = DeallocTests;
 		};
 /* End XCSwiftPackageProductDependency section */

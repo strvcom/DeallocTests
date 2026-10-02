@@ -1,6 +1,6 @@
-// swift-tools-version:6.0.0
+// swift-tools-version:6.1
 //
-//  DeallocTests.swift
+//  Package.swift
 //  DeallocTests
 //
 //  Created by Daniel Cech on 01/04/19.
@@ -20,9 +20,11 @@ let package = Package(
             name: "DeallocTests",
             targets: ["DeallocTests"]
         ),
-        .library(
-            name: "DeallocTestsDIFree",
-            targets: ["DeallocTestsDIFree"]
+    ],
+    traits: [
+        .trait(
+            name: "DependencyInjection",
+            description: "Integration with STRV Dependency Injection: expectDeallocation(of:resolvedFrom:) and the AsyncContainer in DeallocTester"
         ),
     ],
     dependencies: [
@@ -31,23 +33,24 @@ let package = Package(
     targets: [
         .target(
             name: "DeallocTests",
-            dependencies: [.product(name: "DependencyInjection", package: "ios-dependency-injection")],
-            path: "Sources/DeallocTests",
-            swiftSettings: [.define("DEALLOC_TESTS_DI")]
-        ),
-        .target(
-            name: "DeallocTestsDIFree",
-            path: "Sources/DeallocTestsDIFree"
+            dependencies: [
+                .product(
+                    name: "DependencyInjection",
+                    package: "ios-dependency-injection",
+                    condition: .when(traits: ["DependencyInjection"])
+                )
+            ]
         ),
         .testTarget(
             name: "DeallocTestsTests",
-            dependencies: ["DeallocTests"],
-            path: "Tests/DeallocTestsTests"
-        ),
-        .testTarget(
-            name: "DeallocTestsDIFreeTests",
-            dependencies: ["DeallocTestsDIFree"],
-            path: "Tests/DeallocTestsDIFreeTests"
+            dependencies: [
+                "DeallocTests",
+                .product(
+                    name: "DependencyInjection",
+                    package: "ios-dependency-injection",
+                    condition: .when(traits: ["DependencyInjection"])
+                )
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

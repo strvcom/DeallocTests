@@ -5,7 +5,7 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-#if DEALLOC_TESTS_DI
+#if DependencyInjection
 
 import DependencyInjection
 import Foundation

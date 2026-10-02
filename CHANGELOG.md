@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.0.0
+
+See "Migrating to 4.0" in the README.
+
+### Breaking
+- STRV Dependency Injection support is now the `DependencyInjection` package trait, off by default. Without it, the dependency isn't downloaded.
+- The `DeallocTestsDIFree` product is removed. Use the `DeallocTests` product and `import DeallocTests`.
+- Swift 6.1 (Xcode 16.3) is required. Enabling the trait from an Xcode project needs Xcode 26.4.
+- `DefaultInitializable` is removed.
+
+### Deprecated
+- `DeallocTester`, `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable`. Use `expectDeallocation`. They will be removed in 5.0.
+
+### Changed
+- The sample apps use `expectDeallocation`: `DeallocTestsAppDIFreeSPM` with XCTest, `DeallocTestsAppSPM` with Swift Testing and the `DependencyInjection` trait.
+- CI tests both trait configurations.
+
 ## 3.3.0
 
 ### Added

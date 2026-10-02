@@ -13,6 +13,7 @@ import DependencyInjection
 import DeallocTests
 import XCTest
 
+@available(*, deprecated, message: "Shows the deprecated DeallocTester API. See ExpectDeallocationTests for the current API.")
 class DependencyGraphDeallocTester: DeallocTester {
     @MainActor
     func test_dependencyGraphDealloc() async {

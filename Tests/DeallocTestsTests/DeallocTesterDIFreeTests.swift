@@ -5,19 +5,13 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import DeallocTestsDIFree
+#if !DependencyInjection
+
+import DeallocTests
 import XCTest
 
-final class CleanObject: DeallocTestable {}
-
-final class LeakingObject: DeallocTestable {
-    var closure: (() -> Void)?
-
-    init() {
-        closure = { _ = self }
-    }
-}
-
+/// `DeallocTester` without the DependencyInjection trait: `objectCreation` takes no container
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 final class DeallocTesterDIFreeTests: DeallocTester {
     @MainActor
     func test_cleanObject_passes() async {
@@ -36,6 +30,7 @@ final class DeallocTesterDIFreeTests: DeallocTester {
     }
 }
 
+@available(*, deprecated)
 private extension DeallocTesterDIFreeTests {
     @MainActor
     func run(_ deallocTests: [DeallocTest]) async {
@@ -46,3 +41,5 @@ private extension DeallocTesterDIFreeTests {
         await fulfillment(of: [expectation], timeout: 10)
     }
 }
+
+#endif

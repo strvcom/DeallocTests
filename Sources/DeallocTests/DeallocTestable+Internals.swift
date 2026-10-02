@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(*, deprecated)
 extension DeallocTestable {
     /// This stores the `DeinitializationObserver`. It's private so you
     /// cannot interfere with this outside. Also we're using a strong retain
