@@ -34,8 +34,16 @@ public extension XCTestCase {
         line: UInt = #line,
         column: UInt = #column
     ) -> Object {
+        let location = TestSourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
+
+        // Inside `expectDeallocation`, the object joins its check
+        if let tracker = DeallocationTracker.current {
+            tracker.track(object, at: location)
+            return object
+        }
+
         let tracker = DeallocationTracker()
-        tracker.track(object, at: TestSourceLocation(fileID: fileID, filePath: filePath, line: line, column: column))
+        tracker.track(object, at: location)
 
         addTeardownBlock { @MainActor in
             await tracker.verifyDeallocation(timeout: timeout)
@@ -47,7 +55,8 @@ public extension XCTestCase {
 
 // MARK: - Swift Testing
 
-/// Checks that the object deallocates when the test ends. Requires the `.checksDeallocation` trait.
+/// Checks that the object deallocates when the test ends. Requires the `.checksDeallocation` trait,
+/// or a call inside `expectDeallocation`, which then checks the object together with the tested one.
 ///
 /// ```swift
 /// @Test(.checksDeallocation) func viewModel() async {
@@ -68,8 +77,8 @@ public func trackForDeallocation<Object: AnyObject>(
 
     guard let tracker = DeallocationTracker.current else {
         reportIssue(
-            "trackForDeallocation(_:) needs the .checksDeallocation trait on the test or its suite. "
-                + "In XCTest, call it on the test case.",
+            "trackForDeallocation(_:) needs the .checksDeallocation trait on the test or its suite, "
+                + "or a call inside expectDeallocation. In XCTest, call it on the test case.",
             at: location
         )
         return object

@@ -33,4 +33,16 @@ final class TrackForDeallocationXCTests: XCTestCase {
 
         await expectDeallocation(timeout: .milliseconds(100)) { RetainCycleObject() }
     }
+
+    @MainActor
+    func test_trackedChildInsideExpectDeallocation_isCheckedWithIt() async {
+        XCTExpectFailure("The child is kept alive by the cache")
+        let cache = Cache()
+
+        await expectDeallocation(timeout: .milliseconds(100)) {
+            let child = trackForDeallocation(PlainObject())
+            cache.objects.append(child)
+            return OwnerObject(viewModel: child)
+        }
+    }
 }

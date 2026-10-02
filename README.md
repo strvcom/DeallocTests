@@ -47,7 +47,7 @@ import PackageDescription
 let package = Package(
     name: "HelloDeallocTests",
     dependencies: [
-        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "3.2.0"))
+        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "3.3.0"))
     ],
     targets: [
         .testTarget(
@@ -93,11 +93,15 @@ struct LeakTests {
 }
 ```
 
-The same calls work inside an `XCTestCase`. A leak fails with:
+The same calls work inside an `XCTestCase`. A leak fails at the line of the test, and the message points at the likely cause:
 
 ```
-LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec. Something still holds a strong reference to it: look for closures capturing self, delegates that aren't weak, timers, notification observers and long-running tasks or subscriptions.
+LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec. Possible causes:
+  • `onUpdate` is a closure. Make sure it captures self weakly
+  • `self.viewModel.owner` refers back to the object. That's a retain cycle unless one of the references is weak
 ```
+
+The hints come from the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers, and reference cycles through properties. Reflection can't tell weak properties from strong ones or look inside closures, so treat them as suggestions.
 
 Many leaks only appear once a screen loads or appears, so pick the lifecycle that exercises the object:
 
@@ -107,6 +111,7 @@ Many leaks only appear once a screen loads or appears, so pick the lifecycle tha
 | `.loadView` | The view controller loads its view (`viewDidLoad`). UIKit and AppKit. |
 | `.present`, `.present(style:interaction:)` | The view controller is presented in a test window, then dismissed |
 | `.push`, `.push(interaction:)` | The view controller is pushed onto a navigation controller in a test window, then popped |
+| `.hosting { object in SomeView(model: object) }` | A SwiftUI view built from the object is shown in a test window, then removed. `onAppear` and `.task` run. |
 | `.custom { object in … }` | Your code runs with the object, e.g. calls the methods you suspect of leaking |
 
 `interaction` runs while the controller is on screen:
@@ -117,6 +122,23 @@ await expectDeallocation(.present(interaction: { controller in
     await controller.search()
 })) {
     coordinator.createSearchViewController()
+}
+```
+
+SwiftUI views are values, so check the object behind them, typically the view model:
+
+```swift
+await expectDeallocation(.hosting { ProfileView(viewModel: $0) }) {
+    ProfileViewModel(api: MockAPI())
+}
+```
+
+To also check objects the tested one owns, wrap them in `trackForDeallocation` inside the closure. They must deallocate together with it:
+
+```swift
+await expectDeallocation(.present) {
+    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
+    return ProfileViewController(viewModel: viewModel)
 }
 ```
 
