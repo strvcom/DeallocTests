@@ -29,7 +29,7 @@ final class DeallocationTracker {
 
     func track(_ object: AnyObject, at location: TestSourceLocation) {
         trackedObjects.append(
-            TrackedObject(object: object, typeName: String(reflecting: type(of: object)), location: location)
+            TrackedObject(object: object, typeName: Self.readableTypeName(of: object), location: location)
         )
     }
 
@@ -59,6 +59,13 @@ final class DeallocationTracker {
         }
 
         trackedObjects.removeAll()
+    }
+
+    /// Module-qualified type name without the `(unknown context at $…)` part
+    /// that Swift adds for private and local types
+    static func readableTypeName(of object: AnyObject) -> String {
+        String(reflecting: type(of: object))
+            .replacingOccurrences(of: #"\(unknown context at \$[0-9a-fA-F]+\)\."#, with: "", options: .regularExpression)
     }
 
     static func leakMessage(typeName: String, timeout: Duration, hints: [String] = []) -> String {

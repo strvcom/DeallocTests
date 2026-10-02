@@ -8,6 +8,7 @@ See "Migrating to 4.0" in the README.
 - `expectDeallocation(_:timeout:afterRelease:of:)`: creates an object, runs its lifecycle, releases it and checks that it deallocates. Works in Swift Testing and XCTest, needs no `DeallocTestable` conformance and reports leaks at the line of the test.
 - Lifecycles: `.none`, `.loadView`, `.present`, `.push` (with an optional interaction while on screen), `.hosting` for SwiftUI views (UIKit and AppKit) and `.custom`.
 - Leak messages list likely causes found in the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers and reference cycles through properties.
+- Leak messages show readable names for private and local types, without Swift's `(unknown context at $…)`.
 - `trackForDeallocation(_:)`: an `XCTestCase` method and the `.checksDeallocation` Swift Testing trait for checking objects at the end of ordinary unit tests. Inside an `expectDeallocation` closure, it checks the object together with the tested one.
 - `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`.
 - Swift Testing and XCTest tests of the library on macOS and the iOS simulator, and GitHub Actions CI.

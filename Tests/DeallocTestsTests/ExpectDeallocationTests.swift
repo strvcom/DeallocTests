@@ -41,6 +41,15 @@ final class Cache {
 
 struct LifecycleError: Error {}
 
+/// Swift names private types `Module.(unknown context at $…).Name`
+private final class PrivateRetainCycle {
+    var closure: (() -> Void)?
+
+    init() {
+        closure = { _ = self }
+    }
+}
+
 /// Matches leak reports attributed to this file
 func isLeakReport(of typeName: String) -> (Issue) -> Bool {
     { issue in
@@ -63,6 +72,16 @@ struct ExpectDeallocationTests {
             await expectDeallocation(timeout: .milliseconds(100)) { RetainCycleObject() }
         } matching: { issue in
             isLeakReport(of: "RetainCycleObject")(issue) && issue.sourceLocation?.line == #line - 2
+        }
+    }
+
+    @Test func privateTypeNameIsReadable() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { PrivateRetainCycle() }
+        } matching: { issue in
+            issue.comments.contains { comment in
+                comment.rawValue.hasPrefix("DeallocTestsTests.PrivateRetainCycle was not deallocated")
+            }
         }
     }
 
