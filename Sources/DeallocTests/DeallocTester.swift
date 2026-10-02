@@ -8,10 +8,7 @@
 
 import Foundation
 
-let delayTime: Double = 0.1
-let presentationAnimated = false
-
-#if canImport(DependencyInjection)
+#if DEALLOC_TESTS_DI
     import DependencyInjection
 #endif
 
@@ -22,12 +19,12 @@ import XCTest
 #endif
 
 public struct DeallocTest {
-#if canImport(DependencyInjection)
+#if DEALLOC_TESTS_DI
     public typealias ObjectCreationClosure = @MainActor (AsyncContainer) async -> AnyObject?
 #else
     public typealias ObjectCreationClosure = @MainActor () async -> AnyObject?
 #endif
-    
+
     public typealias SimpleClosure = (() -> Void)
 
     public var objectCreation: ObjectCreationClosure
@@ -46,28 +43,44 @@ open class DeallocTester: XCTestCase {
 
     public var deallocTests = [DeallocTest]()
 
+    /// How long to wait for tracked objects to deallocate before the step fails
+    open var deallocationTimeout: Duration = .seconds(2)
+
+    /// Prints `Alloc`/`Dealloc` messages for every tracked object. Off by default.
+    public static var isLoggingEnabled: Bool {
+        get { DeallocRegistry.shared.isLoggingEnabled }
+        set { DeallocRegistry.shared.isLoggingEnabled = newValue }
+    }
+
 #if canImport(UIKit)
     // swiftlint:disable:next implicitly_unwrapped_optional
     var window: UIWindow!
 
+    /// Controller used for presenting tested view controllers.
+    /// It's created automatically when a tested object is a `UIViewController`.
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var presentingController: UIViewController!
+#endif
+
+#if DEALLOC_TESTS_DI
+    /// Dependency Injection container
+    // swiftlint:disable:next implicitly_unwrapped_optional
+    public var container: AsyncContainer!
 #endif
 
     /// Initialize DI container with shared dependency registrations
     @MainActor
     open func registerDependencies() async {
-        // TODO: Override in descendants. Initialize assembler from main project
-
+        // Override in descendants. Initialize assembler from main project
     }
 
 #if canImport(UIKit)
     /// Controller for presenting tested controllers
     @MainActor
     public func showPresentingController() async -> UIViewController {
-        if #available(iOS 13.0, *),
-            let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
-            let windowScene = application.connectedScenes.first as? UIWindowScene {
+        // `UIApplication.shared` is accessed via KVC so the library stays app-extension safe
+        if let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
+           let windowScene = application.connectedScenes.first as? UIWindowScene {
             window = UIWindow(windowScene: windowScene)
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
@@ -84,133 +97,177 @@ open class DeallocTester: XCTestCase {
     }
 #endif
 
-#if canImport(DependencyInjection)
-    /// Dependency Injection container
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    public var container: AsyncContainer!
-#endif
-
-    public override func setUp() async throws {
+    override open func setUp() async throws {
         try await super.setUp()
 
-        #if canImport(DependencyInjection)
+        #if DEALLOC_TESTS_DI
             container = AsyncContainer()
         #endif
 
-        await MainActor.run {
-            allocatedClasses = []
-            deallocatedClasses = []
-        }
+        DeallocRegistry.shared.reset()
     }
 
-    public override func tearDown() {
+    override open func tearDown() {
+        #if canImport(UIKit)
+            let window = window
+            self.window = nil
+            presentingController = nil
+
+            // XCTest calls the synchronous tearDown on the main thread
+            MainActor.assumeIsolated {
+                window?.isHidden = true
+            }
+        #endif
+
         super.tearDown()
     }
 
-    /// Instantiate and release tested item
+    /// Instantiate and release tested items one by one.
+    /// The expectation is always fulfilled, failures are reported via `XCTFail`.
     @MainActor
     public func performDeallocTest(
         deallocTests: [DeallocTest],
         expectation: XCTestExpectation
     ) async {
-        await performDeallocTest(index: 0, deallocTests: deallocTests, expectation: expectation)
-    }
-    
-    /// Instantiate and release tested item
-    @MainActor
-    private func performDeallocTest(
-        index: Int,
-        deallocTests: [DeallocTest],
-        expectation: XCTestExpectation
-    ) async {
-        // Last item in sequence
-        if index == deallocTests.count {
-            print("")
-            expectation.fulfill()
-            return
+        for (index, deallocTest) in deallocTests.enumerated() {
+            await performDeallocTest(deallocTest, index: index)
         }
 
-        allocatedClasses = []
-        deallocatedClasses = []
+        expectation.fulfill()
+    }
+}
 
-        #if canImport(DependencyInjection)
+// MARK: - Private
+
+private extension DeallocTester {
+    var registry: DeallocRegistry {
+        DeallocRegistry.shared
+    }
+
+    @MainActor
+    func performDeallocTest(_ deallocTest: DeallocTest, index: Int) async {
+        registry.reset()
+
+        #if DEALLOC_TESTS_DI
             await container.clean()
             await registerDependencies()
         #endif
 
-        try? await Task.sleep(for: .seconds(delayTime))
+        registry.log("\nChecking:")
 
-        print("\nChecking:")
-
-        let dependencyDeallocTest = deallocTests[index]
-
-        #if canImport(DependencyInjection)
-            var instance: AnyObject? = await dependencyDeallocTest.objectCreation(self.container)
-        #else
-            var instance: AnyObject? = await dependencyDeallocTest.objectCreation()
-        #endif
-
-        guard instance is DeallocTestable else {
-            // swiftlint:disable:next force_unwrapping
-            let className = NSStringFromClass(type(of: instance!))
-            XCTFail("Failed: class \(className) is not DeallocTestable")
+        // The tested instance lives only inside this call
+        guard await createAndExercise(deallocTest, index: index) else {
             return
         }
 
-        (instance as? DeallocTestable)?.initializeDeallocTestSupport()
-
-        #if canImport(UIKit)
-        try? await Task.sleep(for: .seconds(delayTime))
-
-        if let controller = instance as? UIViewController {
-            controller.modalPresentationStyle = .fullScreen
-            presentingController.present(controller, animated: presentationAnimated) { [weak self] in
-                Task {
-                    try? await Task.sleep(for: .seconds(delayTime))
-                    self?.presentingController.dismiss(animated: presentationAnimated, completion: { [weak self] in
-                        Task {
-                            try? await Task.sleep(for: .seconds(delayTime))
-                            
-                            instance = nil
-
-                            await self?.continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
-                        }
-                    })
-                }
-            }
-        } else {
-            instance = nil
-            await continueWithNextStep(deallocTests: deallocTests, index: index, expectation: expectation)
-        }
-        #endif
-    }
-
-    /// Start testing of next item
-    @MainActor
-    private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) async {
-        #if canImport(DependencyInjection)
+        #if DEALLOC_TESTS_DI
             await container.releaseSharedInstances()
         #endif
 
-        try? await Task.sleep(for: .seconds(delayTime))
+        deallocTest.actionBeforeCheck?()
 
-        let dependencyDeallocTest = deallocTests[index]
-        dependencyDeallocTest.actionBeforeCheck?()
-
-        try? await Task.sleep(for: .seconds(delayTime))
-
-        await checkTestResult(checkedClasses: dependencyDeallocTest.checkClasses ?? allocatedClasses)
-
-        await performDeallocTest(index: index + 1, deallocTests: deallocTests, expectation: expectation)
+        await waitForDeallocation()
+        checkResult(checkedClasses: deallocTest.checkClasses, index: index)
     }
 
-    /// Check proper deallocation
+    /// Returns `false` when the step cannot be checked
     @MainActor
-    private func checkTestResult(checkedClasses: [AnyClass]) async {
-        let notFoundClassNames = checkedClasses.filter { testedClass in deallocatedClasses.first(where: { $0 == testedClass }) == nil }
+    func createAndExercise(_ deallocTest: DeallocTest, index: Int) async -> Bool {
+        #if DEALLOC_TESTS_DI
+            let instance = await deallocTest.objectCreation(container)
+        #else
+            let instance = await deallocTest.objectCreation()
+        #endif
 
-        if !notFoundClassNames.isEmpty {
-            XCTFail("Failed: dealloc test failed on classes: \(notFoundClassNames)")
+        guard let instance else {
+            XCTFail("Failed: objectCreation of dealloc test #\(index) returned nil")
+            return false
+        }
+
+        guard let testable = instance as? DeallocTestable else {
+            XCTFail("Failed: class \(NSStringFromClass(type(of: instance))) is not DeallocTestable")
+            return false
+        }
+
+        testable.initializeDeallocTestSupport()
+
+        #if canImport(UIKit)
+            if let controller = instance as? UIViewController {
+                return await presentAndDismiss(controller)
+            }
+        #endif
+
+        return true
+    }
+
+    /// Polls until every tracked instance is gone or the timeout elapses
+    @MainActor
+    func waitForDeallocation() async {
+        let deadline = ContinuousClock.now + deallocationTimeout
+
+        while registry.hasLiveInstances, ContinuousClock.now < deadline {
+            try? await Task.sleep(for: .milliseconds(10))
+        }
+    }
+
+    @MainActor
+    func checkResult(checkedClasses: [AnyClass]?, index: Int) {
+        let entries = registry.entries
+        var failedClasses = [AnyClass]()
+
+        if let checkedClasses {
+            for checkedClass in checkedClasses {
+                let matching = entries.filter { $0.objectClass == checkedClass }
+                if matching.isEmpty || matching.contains(where: { !$0.isDeallocated }) {
+                    failedClasses.append(checkedClass)
+                }
+            }
+        } else {
+            for entry in entries where !entry.isDeallocated && !failedClasses.contains(where: { $0 == entry.objectClass }) {
+                failedClasses.append(entry.objectClass)
+            }
+        }
+
+        if !failedClasses.isEmpty {
+            let liveCount = entries.filter { !$0.isDeallocated }.count
+            XCTFail("Failed: dealloc test #\(index) failed on classes: \(failedClasses) (\(liveCount) tracked instance(s) still alive)")
         }
     }
 }
+
+#if canImport(UIKit)
+private extension DeallocTester {
+    /// Presents and dismisses the controller to run its lifecycle
+    @MainActor
+    func presentAndDismiss(_ controller: UIViewController) async -> Bool {
+        if presentingController == nil {
+            presentingController = await showPresentingController()
+        }
+
+        guard let presentingController, presentingController.view.window != nil else {
+            XCTFail("Failed: presentingController is not in a window hierarchy")
+            return false
+        }
+
+        if presentingController.presentedViewController != nil {
+            await withCheckedContinuation { continuation in
+                presentingController.dismiss(animated: false) { continuation.resume() }
+            }
+        }
+
+        controller.modalPresentationStyle = .fullScreen
+
+        await withCheckedContinuation { continuation in
+            presentingController.present(controller, animated: false) { continuation.resume() }
+        }
+
+        await Task.yield()
+
+        await withCheckedContinuation { continuation in
+            presentingController.dismiss(animated: false) { continuation.resume() }
+        }
+
+        return true
+    }
+}
+#endif

@@ -27,195 +27,135 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
 
 ## STRV Dependency Injection library
 
-The main version of DeallocTests uses [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection) as the only dependency. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use STRV Dependency Injection in your app, please use DeallocTestsDIFree library:
-* For installation using SPM: Library `DeallocTestsDIFree`
-
-##  DeallocTests. Easy-to-use framework for custom deallocation tests.
-
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [License](#license)
+The main version of DeallocTests uses [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection) as the only dependency. The support of dependency injection is a great benefit, but DeallocTests also work without it. If you don't use STRV Dependency Injection in your app, use the `DeallocTestsDIFree` product instead.
 
 ## Requirements
 
-- iOS 13.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 12.0+
+- iOS 17.0+ / macOS 13.0+
+- Swift 6.0+ / Xcode 16.0+
+- XCTest
 
 ## Installation
 
-### Dependency Managers
-<details>
-  <summary><strong>Swift Package Manager</strong></summary>
-
-To use DeallocTests as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
+DeallocTests is distributed via [Swift Package Manager](https://swift.org/package-manager/). Add it to the **test target** of your app:
 
 ``` swift
-// swift-tools-version:5.5
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
     name: "HelloDeallocTests",
     dependencies: [
-        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "3.1.0"))
     ],
     targets: [
-        .target(name: "HelloDeallocTests", dependencies: ["DeallocTests"])
+        .testTarget(
+            name: "HelloDeallocTestsTests",
+            dependencies: [
+                "HelloDeallocTests",
+                // or "DeallocTestsDIFree" if you don't use STRV Dependency Injection
+                .product(name: "DeallocTests", package: "DeallocTests")
+            ]
+        )
     ]
 )
 ```
-__WARNING__: When you install DeallocTests with SPM and you use Xcode 12.5+ you must set `ENABLE_TESTING_SEARCH_PATHS` to `YES` in your app target build settings.
 
-</details>
+In Xcode, add the package via *File › Add Package Dependencies…* and link the `DeallocTests` (or `DeallocTestsDIFree`) product to your test target only.
 
-### Manually
+## Usage
 
-If you prefer not to use either of the aforementioned dependency managers, you can integrate DeallocTests into your project manually.
-
-<details>
-  <summary><strong>Git Submodules</strong></summary><p>
-
-- Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
-
-```bash
-$ git init
-```
-
-- Add DeallocTests as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
-
-```bash
-$ git submodule add https://github.com/DanielCech/DeallocTests.git
-$ git submodule update --init --recursive
-```
-
-- Open the new `DeallocTests` folder, and drag the `DeallocTests.xcodeproj` into the Project Navigator of your application's Xcode project.
-
-    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
-
-- Select the `DeallocTests.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
-- In the tab bar at the top of that window, open the "General" panel.
-- Click on the `+` button under the "Embedded Binaries" section.
-- You will see two different `DeallocTests.xcodeproj` folders each with two different versions of the `DeallocTests.framework` nested inside a `Products` folder.
-
-    > It does not matter which `Products` folder you choose from.
-
-- Select the `DeallocTests.framework`.
-
-- And that's it!
-
-> The `DeallocTests.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
-
-</p></details>
-
-<details>
-  <summary><strong>Embedded Binaries</strong></summary><p>
-
-- Download the latest release from https://github.com/DanielCech/DeallocTests/releases
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
-- In the tab bar at the top of that window, open the "General" panel.
-- Click on the `+` button under the "Embedded Binaries" section.
-- Add the downloaded `DeallocTests.framework`.
-- And that's it!
-
-</p></details>
-
-## Sample App
-
-The folder SampleApps contains a demo project that demonstrates at least some features. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
-
-The Podfile adds DeallocTests support to the app's test target.
-
-```ruby
-target 'DeallocTestsAppCocoapodsTests' do
-  pod 'DeallocTests', :path=>'../../'
-end
-```
-
-The file `DeallocTestsConformances.swift` contains the DeallocTestable protocol conformances to all tested classes.
+1. Conform the tested classes to `DeallocTestable` in your test target. No changes to the main target are needed:
 
 ```swift
 import DeallocTests
-@testable import DeallocTestsAppCocoapods
+@testable import MyApp
 
-extension MainCoordinator: DeallocTestable {}
-extension FirstViewController: DeallocTestable {}
-extension SecondViewController: DeallocTestable {}
-extension ThirdViewController: DeallocTestable {}
+extension MainCoordinator: @retroactive DeallocTestable {}
+extension FirstViewController: @retroactive DeallocTestable {}
 ```
 
-The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator.
+2. Subclass `DeallocTester` and describe the scenario:
 
 ```swift
-var mainCoordinator: MainCoordinator? {
-    applyAssembliesToContainer()
-    return MainCoordinator()
-}
-```
+import DeallocTests
+@testable import MyApp
 
-This will initialize a dependency injection container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
+final class MainCoordinatorDeallocTester: DeallocTester {
+    @MainActor
+    func test_mainCoordinatorDealloc() async {
+        let mainCoordinator = MainCoordinator()
+        let expectation = expectation(description: "dealloc test")
 
-```swift
-func test_mainCoordinatorDealloc() {
-    presentingController = showPresentingController()
-
-    deallocTests = [
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createFirstViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createSecondViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createThirdViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { _ in
-                return MainCoordinator()
-            }
+        await performDeallocTest(
+            deallocTests: [
+                DeallocTest(objectCreation: { [mainCoordinator] _ in mainCoordinator.createFirstViewController() }),
+                DeallocTest(objectCreation: { [mainCoordinator] _ in mainCoordinator.createSecondViewController() }),
+                DeallocTest(objectCreation: { _ in MainCoordinator() })
+            ],
+            expectation: expectation
         )
-    ]
 
-    let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
-
-    performDeallocTest(
-        deallocTests: deallocTests,
-        expectation: expectation
-    )
-
-    waitForExpectations(timeout: 200, handler: nil)
+        await fulfillment(of: [expectation], timeout: 60)
+    }
 }
 ```
 
-The variable `presentingController` is just simple empty controller on top of everything - it is handled by DeallocTests framework. The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
+Each `DeallocTest` creates an object, releases it and checks that it was deallocated:
 
-The sample app intentionally contains a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`. The DeallocTests console output looks like this:
+- A `UIViewController` is presented full screen and dismissed first, so its whole lifecycle runs. The presenting controller is created automatically. You can still call `showPresentingController()` and assign `presentingController` yourself.
+- Any other object is released right away.
+- After release, DeallocTests waits up to `deallocationTimeout` (2 seconds by default) for every tracked instance to deallocate. Leaks are detected per instance, so a second leaked instance of the same class is caught.
+- `checkClasses` restricts the check to the listed classes. Each listed class must have been tracked (it is `DeallocTestable` and `initializeDeallocTestSupport()` was called on it).
+- `actionBeforeCheck` runs after the object is released and before the check.
+- A failing step is reported with `XCTFail` and the scenario continues with the next step. The expectation is always fulfilled.
+
+Set `DeallocTester.isLoggingEnabled = true` to print `Alloc`/`Dealloc` messages for every tracked object.
+
+### STRV Dependency Injection
+
+With the `DeallocTests` product, `objectCreation` receives an `AsyncContainer`. Before every step the container is cleaned and `registerDependencies()` is called. Shared instances are released before the check:
+
+```swift
+final class DependencyGraphDeallocTester: DeallocTester {
+    override func registerDependencies() async {
+        await container.register(type: APIManaging.self, in: .shared) { _ in APIManager() }
+    }
+
+    @MainActor
+    func test_dependencyGraphDealloc() async {
+        let expectation = expectation(description: "dealloc test")
+
+        await performDeallocTest(
+            deallocTests: [
+                DeallocTest(objectCreation: { await $0.resolve(type: APIManaging.self) as AnyObject })
+            ],
+            expectation: expectation
+        )
+
+        await fulfillment(of: [expectation], timeout: 60)
+    }
+}
+```
+
+With `DeallocTestsDIFree`, `objectCreation` takes no parameter: `DeallocTest(objectCreation: { MyObject() })`.
+
+## Sample Apps
+
+The folder `SampleApps` contains two demo projects, `DeallocTestsAppSPM` (with STRV Dependency Injection) and `DeallocTestsAppDIFreeSPM`. The application itself is very simple: there are just three screens in the navigation stack, all handled by `MainCoordinator`.
+
+- `DeallocTestConformances.swift` adds the `DeallocTestable` conformances to all tested classes.
+- `MainCoordinatorDeallocTester.swift` defines the testing scenario for `MainCoordinator`: the three view controllers one by one, then the coordinator itself.
+- `DependencyGraphDeallocTester.swift` (DI sample only) checks a service resolved from the container.
+
+The sample app intentionally contains a memory leak in `SecondViewController.swift`. This class contains a closure with a strong reference to `self`. The test fails with:
 
 ```
-Checking:
-Alloc FirstViewController
-Dealloc FirstViewController
-
-Checking:
-Alloc SecondViewController
-/Users/danielcech/Documents/[Development]/[Projects]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift:175: error: -[DeallocTestsAppCocoapodsTests.MainCoordinatorDeallocTester test_mainCoordinatorDealloc] : failed - Failed: dealloc test failed on classes: [DeallocTestsAppCocoapods.SecondViewController]
-
-Checking:
-Alloc ThirdViewController
-Dealloc ThirdViewController
-
-Checking:
-Alloc MainCoordinator
-Dealloc MainCoordinator
+DeallocTester.swift:233: error: -[DeallocTestsAppSPMTests.MainCoordinatorDeallocTester test_mainCoordinatorDealloc] : failed - Failed: dealloc test #1 failed on classes: [DeallocTestsAppSPM.SecondViewController] (1 tracked instance(s) still alive)
 ```
 
-If you comment out the first line and uncomment the second one, you will see that the retain cycle disappears and the test will succeed.
+If you comment out the first line and uncomment the second one, the retain cycle disappears and the test will succeed.
 
 ```swift
     someClosure = { number in self.view(number) }
@@ -233,4 +173,4 @@ Issues and pull requests are welcome!
 
 ## License
 
-DeallocTests is released under the MIT license. See [LICENSE](https://github.com/DanielCech/DeallocTests/blob/master/LICENSE) for details.
+DeallocTests is released under the MIT license. See [LICENSE](https://github.com/strvcom/DeallocTests/blob/master/LICENSE) for details.

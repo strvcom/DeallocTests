@@ -10,7 +10,7 @@ import Foundation
 import DeallocTestsDIFree
 @testable import DeallocTestsAppSPM
 
-extension MainCoordinator: DeallocTestable {}
-extension FirstViewController: DeallocTestable {}
-extension SecondViewController: DeallocTestable {}
-extension ThirdViewController: DeallocTestable {}
+extension MainCoordinator: @retroactive DeallocTestable {}
+extension FirstViewController: @retroactive DeallocTestable {}
+extension SecondViewController: @retroactive DeallocTestable {}
+extension ThirdViewController: @retroactive DeallocTestable {}
