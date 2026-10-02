@@ -76,6 +76,8 @@ final class DeallocationTracker {
                 + "delegates that aren't weak, timers, notification observers and long-running tasks or subscriptions."
         }
 
-        return summary + " Possible causes:\n" + hints.map { "  • \($0)" }.joined(separator: "\n")
+        // Hints only see the object's own properties; the reference can also come from outside
+        let causes = hints + ["Or something outside still holds it: a parent's list of children, a cache or a singleton"]
+        return summary + " Possible causes:\n" + causes.map { "  • \($0)" }.joined(separator: "\n")
     }
 }

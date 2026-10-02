@@ -138,6 +138,14 @@ struct LeakHintsTests {
         }
     }
 
+    @Test func hintsMentionExternalOwners() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ClosureLeak", mentioning: "something outside still holds it")(issue)
+        }
+    }
+
     @Test func leakWithoutSuspectsGetsGenericMessage() async {
         let cache = Cache()
 

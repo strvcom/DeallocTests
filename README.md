@@ -110,6 +110,7 @@ The same calls work inside an `XCTestCase`. A leak fails at the line of the test
 LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec. Possible causes:
   • `onUpdate` is a closure. Make sure it captures self weakly
   • `self.viewModel.owner` refers back to the object. That's a retain cycle unless one of the references is weak
+  • Or something outside still holds it: a parent's list of children, a cache or a singleton
 ```
 
 The hints come from the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers, and reference cycles through properties. Reflection can't tell weak properties from strong ones or look inside closures, so treat them as suggestions.
@@ -349,6 +350,7 @@ The sample app intentionally contains a memory leak in `SecondViewController.swi
 ```
 MainCoordinatorDeallocTester.swift:25: error: -[DeallocTestsAppSPMTests.MainCoordinatorDeallocTester test_secondScreen] : failed - DeallocTestsAppSPM.SecondViewController was not deallocated within 2 sec. Possible causes:
   • `someClosure` is a closure. Make sure it captures self weakly
+  • Or something outside still holds it: a parent's list of children, a cache or a singleton
 ```
 
 If you comment out the first line and uncomment the second one, the retain cycle disappears and the test will succeed.
