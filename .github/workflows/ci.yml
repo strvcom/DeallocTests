@@ -18,6 +18,17 @@ jobs:
       - name: Run tests
         run: swift test
 
+  package-ios:
+    name: Package tests (iOS Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          xcodebuild test \
+            -scheme DeallocTests-Package \
+            -destination 'platform=iOS Simulator,name=iPhone 16'
+
   sample-apps:
     name: Sample apps (iOS)
     runs-on: macos-15
