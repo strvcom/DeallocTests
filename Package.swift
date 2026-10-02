@@ -26,14 +26,14 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))
+        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))
     ],
     targets: [
         .target(
             name: "DeallocTests",
             dependencies: [.product(name: "DependencyInjection", package: "ios-dependency-injection")],
-            path: "Sources/DeallocTests"
+            path: "Sources/DeallocTests",
+            swiftSettings: [.define("DEALLOC_TESTS_DI")]
         ),
         .target(
             name: "DeallocTestsDIFree",
@@ -42,7 +42,12 @@ let package = Package(
         .testTarget(
             name: "DeallocTestsTests",
             dependencies: ["DeallocTests"],
-            path: "Tests"
+            path: "Tests/DeallocTestsTests"
+        ),
+        .testTarget(
+            name: "DeallocTestsDIFreeTests",
+            dependencies: ["DeallocTestsDIFree"],
+            path: "Tests/DeallocTestsDIFreeTests"
         ),
     ],
     swiftLanguageModes: [.v6]

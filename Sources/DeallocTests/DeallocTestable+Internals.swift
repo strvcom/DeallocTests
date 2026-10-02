@@ -9,19 +9,18 @@
 import Foundation
 
 extension DeallocTestable {
-    /// This stores the `DeinitializationObserver`. It's fileprivate so you
+    /// This stores the `DeinitializationObserver`. It's private so you
     /// cannot interfere with this outside. Also we're using a strong retain
     /// which will ensure that the `DeinitializationObserver` is deinitialized
     /// at the same time as your object.
-    private var deinitializationObserver: DeinitializationObserver {
+    private var deinitializationObserver: DeinitializationObserver? {
         get {
-            // swiftlint:disable:next force_cast
-            return objc_getAssociatedObject(self, &AssociatedKeys.DeinitializationObserver) as! DeinitializationObserver
+            return objc_getAssociatedObject(self, &AssociatedKeys.deinitializationObserver) as? DeinitializationObserver
         }
         set {
             objc_setAssociatedObject(
                 self,
-                &AssociatedKeys.DeinitializationObserver,
+                &AssociatedKeys.deinitializationObserver,
                 newValue,
                 objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
@@ -30,32 +29,25 @@ extension DeallocTestable {
 
     public var deallocTestSupportInstalled: Bool? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.DeallocTestSupportInstalled) as? Bool
+            return objc_getAssociatedObject(self, &AssociatedKeys.deallocTestSupportInstalled) as? Bool
         }
         set {
             objc_setAssociatedObject(
                 self,
-                &AssociatedKeys.DeallocTestSupportInstalled,
+                &AssociatedKeys.deallocTestSupportInstalled,
                 newValue,
                 objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
         }
     }
 
-    /// This is what you call to add a block that should execute on `deinit`
+    /// Starts tracking this instance. Calling it repeatedly has no effect.
     public func initializeDeallocTestSupport() {
         if deallocTestSupportInstalled != nil {
             return
         }
-        
-        deinitializationObserver = DeinitializationObserver(
-            execute: { className in
-                print("Dealloc \(className)")
-                deallocatedClasses.append(className)
-            },
-            myClass: myClass
-        )
 
+        deinitializationObserver = DeinitializationObserver(myClass: myClass)
         deallocTestSupportInstalled = true
     }
 }

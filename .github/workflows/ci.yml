@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Package tests (macOS)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: swift test
+
+  sample-apps:
+    name: Sample apps (iOS)
+    runs-on: macos-15
+    strategy:
+      matrix:
+        sample: [DeallocTestsAppSPM, DeallocTestsAppDIFreeSPM]
+    steps:
+      - uses: actions/checkout@v4
+      # The samples contain an intentional leak, so their tests are expected to fail.
+      # CI only verifies that they compile.
+      - name: Build for testing
+        working-directory: SampleApps/${{ matrix.sample }}
+        run: |
+          xcodebuild build-for-testing \
+            -scheme DeallocTestsAppSPM \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
