@@ -6,8 +6,11 @@
 //
 
 import DeallocTests
-import DependencyInjection
 import Testing
+
+#if DependencyInjection
+    import DependencyInjection
+#endif
 
 #if canImport(AppKit)
     import AppKit
@@ -38,6 +41,15 @@ final class Cache {
 
 struct LifecycleError: Error {}
 
+/// Swift names private types `Module.(unknown context at $…).Name`
+private final class PrivateRetainCycle {
+    var closure: (() -> Void)?
+
+    init() {
+        closure = { _ = self }
+    }
+}
+
 /// Matches leak reports attributed to this file
 func isLeakReport(of typeName: String) -> (Issue) -> Bool {
     { issue in
@@ -60,6 +72,16 @@ struct ExpectDeallocationTests {
             await expectDeallocation(timeout: .milliseconds(100)) { RetainCycleObject() }
         } matching: { issue in
             isLeakReport(of: "RetainCycleObject")(issue) && issue.sourceLocation?.line == #line - 2
+        }
+    }
+
+    @Test func privateTypeNameIsReadable() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { PrivateRetainCycle() }
+        } matching: { issue in
+            issue.comments.contains { comment in
+                comment.rawValue.hasPrefix("DeallocTestsTests.PrivateRetainCycle was not deallocated")
+            }
         }
     }
 
@@ -143,19 +165,21 @@ struct ExpectDeallocationTests {
 
 // MARK: - Dependency Injection
 
+#if DependencyInjection
+
 @Suite("expectDeallocation with AsyncContainer")
 @MainActor
 struct ExpectDeallocationDependencyInjectionTests {
     let container = AsyncContainer()
 
     @Test func sharedInstanceIsReleasedWithContainer() async {
-        await container.register(type: Service.self, in: .shared) { _ in SharedService() }
+        await container.register(type: Service.self, in: .shared) { _ in ContainerService() }
 
         await expectDeallocation(of: Service.self, resolvedFrom: container)
     }
 
     @Test func newInstanceIsChecked() async {
-        await container.register(type: Service.self, in: .new) { _ in SharedService() }
+        await container.register(type: Service.self, in: .new) { _ in ContainerService() }
 
         await expectDeallocation(of: Service.self, resolvedFrom: container)
     }
@@ -166,10 +190,12 @@ struct ExpectDeallocationDependencyInjectionTests {
         await withKnownIssue {
             await expectDeallocation(of: AnyService.self, resolvedFrom: container)
         } matching: { issue in
-            issue.comments.contains { $0.rawValue.contains("is not a class instance") }
+            issue.comments.contains { $0.rawValue.hasPrefix("ValueService resolved for AnyService is a value type") }
         }
     }
 }
+
+#endif
 
 // MARK: - trackForDeallocation
 

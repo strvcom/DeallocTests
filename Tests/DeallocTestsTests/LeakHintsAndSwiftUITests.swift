@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Observation
 import DeallocTests
 import SwiftUI
 import Testing
@@ -13,6 +14,17 @@ import Testing
 // MARK: - Fixtures
 
 final class ClosureLeak {
+    var onUpdate: (() -> Void)?
+
+    init() {
+        onUpdate = { _ = self }
+    }
+}
+
+/// `@Observable` stores the closure as `_onUpdate`
+@available(macOS 14, iOS 17, *)
+@Observable
+final class ObservableClosureLeak {
     var onUpdate: (() -> Void)?
 
     init() {
@@ -122,6 +134,16 @@ struct LeakHintsTests {
         }
     }
 
+    @Test @available(macOS 14, iOS 17, *)
+    func observablePropertyNamesAreReadable() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ObservableClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ObservableClosureLeak", mentioning: "• `onUpdate` is a closure")(issue)
+                && !issue.comments.contains { $0.rawValue.contains("observationRegistrar") }
+        }
+    }
+
     @Test func propertyCycleIsShown() async {
         await withKnownIssue {
             await expectDeallocation(timeout: .milliseconds(100)) { CycleParent() }
@@ -135,6 +157,14 @@ struct LeakHintsTests {
             await expectDeallocation(timeout: .milliseconds(100)) { SubscriptionLeak() }
         } matching: { issue in
             isLeakReport(of: "SubscriptionLeak", mentioning: "`cancellables` is a Combine subscription")(issue)
+        }
+    }
+
+    @Test func hintsMentionExternalOwners() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ClosureLeak", mentioning: "something outside still holds it")(issue)
         }
     }
 

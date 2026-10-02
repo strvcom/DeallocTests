@@ -16,6 +16,7 @@ enum AssociatedKeys {
 }
 
 /// Protocol for any object that implements this logic
+@available(*, deprecated, message: "Use expectDeallocation(_:timeout:afterRelease:of:), which needs no DeallocTestable conformance. See \"Migrating to 4.0\" in the README.")
 @MainActor
 public protocol DeallocTestable: ClassNameIdentifiable {
     func initializeDeallocTestSupport()

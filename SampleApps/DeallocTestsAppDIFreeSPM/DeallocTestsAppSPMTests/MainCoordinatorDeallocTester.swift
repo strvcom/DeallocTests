@@ -6,48 +6,37 @@
 //  Copyright © 2020 STRV. All rights reserved.
 //
 
-import Foundation
-import DeallocTestsDIFree
+import DeallocTests
+import XCTest
 @testable import DeallocTestsAppSPM
 
+/// Dealloc tests with XCTest. No `DeallocTestable` conformances are needed.
+final class MainCoordinatorDeallocTester: XCTestCase {
+    @MainActor
+    func test_firstScreen() async {
+        let coordinator = MainCoordinator()
+        await expectDeallocation(.present) { coordinator.createFirstViewController() }
+    }
 
-class MainCoordinatorDeallocTester: DeallocTester {
-    var mainCoordinator: MainCoordinator? {
-        return MainCoordinator()
+    /// Fails on purpose: `SecondViewController` captures `self` strongly in `viewDidLoad`
+    @MainActor
+    func test_secondScreen() async {
+        let coordinator = MainCoordinator()
+        await expectDeallocation(.present) { coordinator.createSecondViewController() }
     }
 
     @MainActor
-    func test_mainCoordinatorDealloc() async {
-        deallocTests = [
-            DeallocTest(
-                objectCreation: { [weak self] in
-                    return self?.mainCoordinator?.createFirstViewController()
-                }
-            ),
-            DeallocTest(
-                objectCreation: { [weak self] in
-                    return self?.mainCoordinator?.createSecondViewController()
-                }
-            ),
-            DeallocTest(
-                objectCreation: { [weak self] in
-                    return self?.mainCoordinator?.createThirdViewController()
-                }
-            ),
-            DeallocTest(
-                objectCreation: {
-                    return MainCoordinator()
-                }
-            )
-        ]
+    func test_thirdScreen() async {
+        let coordinator = MainCoordinator()
+        await expectDeallocation(.push) { coordinator.createThirdViewController() }
+    }
 
-        let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
-
-        await performDeallocTest(
-            deallocTests: deallocTests,
-            expectation: expectation
-        )
-
-        await fulfillment(of: [expectation], timeout: 200)
+    @MainActor
+    func test_coordinator() async {
+        await expectDeallocation {
+            let coordinator = MainCoordinator()
+            _ = coordinator.initialViewController()
+            return coordinator
+        }
     }
 }

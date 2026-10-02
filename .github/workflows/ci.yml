@@ -11,12 +11,17 @@ concurrency:
 
 jobs:
   package:
-    name: Package tests (macOS)
+    name: Package tests (macOS, ${{ matrix.traits.name }})
     runs-on: macos-15
+    strategy:
+      matrix:
+        traits:
+          - { name: "DependencyInjection (default)", flags: "" }
+          - { name: "without DependencyInjection", flags: "--disable-default-traits" }
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
-        run: swift test
+        run: swift test ${{ matrix.traits.flags }}
 
   package-ios:
     name: Package tests (iOS Simulator)
@@ -30,12 +35,13 @@ jobs:
             | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
           echo "Simulator: $UDID"
           xcodebuild test \
-            -scheme DeallocTests-Package \
+            -scheme DeallocTests \
             -destination "id=$UDID"
 
   sample-apps:
     name: Sample apps (iOS)
-    runs-on: macos-15
+    # Package traits in an Xcode project need Xcode 26.4 or later
+    runs-on: macos-26
     strategy:
       matrix:
         sample: [DeallocTestsAppSPM, DeallocTestsAppDIFreeSPM]

@@ -9,10 +9,12 @@
 import Foundation
 import os
 
+@available(*, deprecated, message: "Use expectDeallocation(_:timeout:afterRelease:of:), which needs no DeallocTestable conformance. See \"Migrating to 4.0\" in the README.")
 public protocol ClassNameIdentifiable: AnyObject {
     var myClass: AnyClass { get }
 }
 
+@available(*, deprecated)
 public extension ClassNameIdentifiable {
     var myClass: AnyClass {
         return type(of: self)

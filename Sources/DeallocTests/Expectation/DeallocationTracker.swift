@@ -29,7 +29,7 @@ final class DeallocationTracker {
 
     func track(_ object: AnyObject, at location: TestSourceLocation) {
         trackedObjects.append(
-            TrackedObject(object: object, typeName: String(reflecting: type(of: object)), location: location)
+            TrackedObject(object: object, typeName: Self.readableTypeName(of: object), location: location)
         )
     }
 
@@ -61,6 +61,13 @@ final class DeallocationTracker {
         trackedObjects.removeAll()
     }
 
+    /// Module-qualified type name without the `(unknown context at $…)` part
+    /// that Swift adds for private and local types
+    static func readableTypeName(of object: AnyObject) -> String {
+        String(reflecting: type(of: object))
+            .replacingOccurrences(of: #"\(unknown context at \$[0-9a-fA-F]+\)\."#, with: "", options: .regularExpression)
+    }
+
     static func leakMessage(typeName: String, timeout: Duration, hints: [String] = []) -> String {
         let summary = "\(typeName) was not deallocated within \(timeout.formatted(.units(allowed: [.seconds, .milliseconds])))."
 
@@ -69,6 +76,8 @@ final class DeallocationTracker {
                 + "delegates that aren't weak, timers, notification observers and long-running tasks or subscriptions."
         }
 
-        return summary + " Possible causes:\n" + hints.map { "  • \($0)" }.joined(separator: "\n")
+        // Hints only see the object's own properties; the reference can also come from outside
+        let causes = hints + ["Or something outside still holds it: a parent's list of children, a cache or a singleton"]
+        return summary + " Possible causes:\n" + causes.map { "  • \($0)" }.joined(separator: "\n")
     }
 }

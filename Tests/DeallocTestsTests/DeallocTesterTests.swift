@@ -5,14 +5,18 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import DependencyInjection
+#if DependencyInjection
+    import DependencyInjection
+#endif
 import XCTest
 @testable import DeallocTests
 
 // MARK: - Fixtures
 
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 final class CleanObject: DeallocTestable {}
 
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 final class LeakingObject: DeallocTestable {
     var closure: (() -> Void)?
 
@@ -26,8 +30,12 @@ final class NotTestableObject {}
 
 protocol Service: AnyObject, Sendable {}
 
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 final class SharedService: Service, DeallocTestable {}
 
+final class ContainerService: Service {}
+
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 @MainActor
 enum Leaks {
     static var retained = [AnyObject]()
@@ -35,6 +43,9 @@ enum Leaks {
 
 // MARK: - Tests
 
+#if DependencyInjection
+
+@available(*, deprecated, message: "Tests the deprecated DeallocTester API")
 final class DeallocTesterTests: DeallocTester {
     @MainActor
     func test_cleanObject_passes() async {
@@ -130,6 +141,7 @@ final class DeallocTesterTests: DeallocTester {
     }
 }
 
+@available(*, deprecated)
 private extension DeallocTesterTests {
     @MainActor
     func run(_ deallocTests: [DeallocTest]) async {
@@ -140,3 +152,5 @@ private extension DeallocTesterTests {
         await fulfillment(of: [expectation], timeout: 10)
     }
 }
+
+#endif

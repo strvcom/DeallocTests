@@ -57,9 +57,11 @@ extension Lifecycle {
     }
 }
 
-/// Polls the condition until it holds or the timeout elapses
+/// Polls the condition until it holds or the timeout elapses. Returns as soon as the
+/// condition holds, so the generous default only costs time when UIKit really is stuck,
+/// e.g. on a simulator loaded by many tests running in parallel.
 @MainActor
-func waitUntil(timeout: Duration = .seconds(2), _ condition: @MainActor () -> Bool) async -> Bool {
+func waitUntil(timeout: Duration = .seconds(10), _ condition: @MainActor () -> Bool) async -> Bool {
     let clock = ContinuousClock()
     let deadline = clock.now + timeout
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if DEALLOC_TESTS_DI
+#if DependencyInjection
     import DependencyInjection
 #endif
 
@@ -18,8 +18,9 @@ import XCTest
     import UIKit
 #endif
 
+@available(*, deprecated, message: "Use expectDeallocation(_:timeout:afterRelease:of:), which needs no DeallocTestable conformance. See \"Migrating to 4.0\" in the README.")
 public struct DeallocTest {
-#if DEALLOC_TESTS_DI
+#if DependencyInjection
     public typealias ObjectCreationClosure = @MainActor (AsyncContainer) async -> AnyObject?
 #else
     public typealias ObjectCreationClosure = @MainActor () async -> AnyObject?
@@ -38,6 +39,7 @@ public struct DeallocTest {
     }
 }
 
+@available(*, deprecated, message: "Use expectDeallocation(_:timeout:afterRelease:of:), which needs no DeallocTestable conformance. See \"Migrating to 4.0\" in the README.")
 open class DeallocTester: XCTestCase {
     // MARK: - Properties
 
@@ -62,7 +64,7 @@ open class DeallocTester: XCTestCase {
     public var presentingController: UIViewController!
 #endif
 
-#if DEALLOC_TESTS_DI
+#if DependencyInjection
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var container: AsyncContainer!
@@ -100,7 +102,7 @@ open class DeallocTester: XCTestCase {
     override open func setUp() async throws {
         try await super.setUp()
 
-        #if DEALLOC_TESTS_DI
+        #if DependencyInjection
             container = AsyncContainer()
         #endif
 
@@ -139,6 +141,7 @@ open class DeallocTester: XCTestCase {
 
 // MARK: - Private
 
+@available(*, deprecated)
 private extension DeallocTester {
     var registry: DeallocRegistry {
         DeallocRegistry.shared
@@ -148,7 +151,7 @@ private extension DeallocTester {
     func performDeallocTest(_ deallocTest: DeallocTest, index: Int) async {
         registry.reset()
 
-        #if DEALLOC_TESTS_DI
+        #if DependencyInjection
             await container.clean()
             await registerDependencies()
         #endif
@@ -160,7 +163,7 @@ private extension DeallocTester {
             return
         }
 
-        #if DEALLOC_TESTS_DI
+        #if DependencyInjection
             await container.releaseSharedInstances()
         #endif
 
@@ -173,7 +176,7 @@ private extension DeallocTester {
     /// Returns `false` when the step cannot be checked
     @MainActor
     func createAndExercise(_ deallocTest: DeallocTest, index: Int) async -> Bool {
-        #if DEALLOC_TESTS_DI
+        #if DependencyInjection
             let instance = await deallocTest.objectCreation(container)
         #else
             let instance = await deallocTest.objectCreation()
@@ -236,6 +239,7 @@ private extension DeallocTester {
 }
 
 #if canImport(UIKit)
+@available(*, deprecated)
 private extension DeallocTester {
     /// Presents and dismisses the controller to run its lifecycle
     @MainActor

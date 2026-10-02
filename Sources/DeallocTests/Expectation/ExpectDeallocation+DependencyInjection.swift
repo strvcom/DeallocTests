@@ -5,7 +5,7 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-#if DEALLOC_TESTS_DI
+#if DependencyInjection
 
 import DependencyInjection
 import Foundation
@@ -59,7 +59,12 @@ private func resolveAndTrack<Dependency: Sendable>(
 
     // A value type would be boxed into a temporary object that deallocates immediately
     guard Mirror(reflecting: dependency).displayStyle == .class else {
-        reportIssue("\(Swift.type(of: dependency)) resolved for \(type) is not a class instance", at: location)
+        // `as Any` gives the concrete type instead of the protocol it was resolved as
+        let concreteType = Swift.type(of: dependency as Any)
+        reportIssue(
+            "\(concreteType) resolved for \(type) is a value type, so it can't leak. Check the class instances it holds instead.",
+            at: location
+        )
         return false
     }
 

@@ -11,6 +11,7 @@ import DeallocTests
 @testable import DeallocTestsAppSPM
 
 
+@available(*, deprecated, message: "Shows the deprecated DeallocTester API. See ExpectDeallocationTests for the current API.")
 class MainCoordinatorDeallocTester: DeallocTester {
     var mainCoordinator: MainCoordinator?
 

@@ -1,39 +1,41 @@
 # Changelog
 
-## 3.3.0
+## 4.0.0
 
-### Added
-- Leak messages list likely causes found in the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers and reference cycles through properties.
-- `.hosting { … }` lifecycle that shows a SwiftUI view built from the object in a test window (UIKit and AppKit), so `onAppear` and `.task` run.
-- `trackForDeallocation(_:)` inside an `expectDeallocation` closure checks the object together with the tested one, in Swift Testing and XCTest.
-
-## 3.2.0
+See "Migrating to 4.0" in the README.
 
 ### Added
 - `expectDeallocation(_:timeout:afterRelease:of:)`: creates an object, runs its lifecycle, releases it and checks that it deallocates. Works in Swift Testing and XCTest, needs no `DeallocTestable` conformance and reports leaks at the line of the test.
-- Lifecycles: `.none`, `.loadView`, `.present`, `.push` (with an optional interaction while on screen) and `.custom`.
-- `trackForDeallocation(_:)` for checking objects at the end of ordinary unit tests: an `XCTestCase` method, and the `.checksDeallocation` Swift Testing trait (Swift 6.1+).
-- `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer` (`DeallocTests` product only).
-- Swift Testing sample tests in `DeallocTestsAppSPM`.
+- Lifecycles: `.none`, `.loadView`, `.present`, `.push` (with an optional interaction while on screen), `.hosting` for SwiftUI views (UIKit and AppKit) and `.custom`.
+- Leak messages list likely causes found in the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers and reference cycles through properties.
+- Leak messages show readable names for private and local types, without Swift's `(unknown context at $…)`.
+- With hints, the leak message also reminds that the object may be held from outside (a parent's list of children, a cache, a singleton), which hints can't see.
+- Hints show `@Observable` properties by their declared names, without the macro's `_` prefix and registrar.
+- UIKit lifecycles wait up to 10 s for a screen to appear, be dismissed or popped, instead of 2 s, so they stay reliable on a loaded simulator.
+- `trackForDeallocation(_:)`: an `XCTestCase` method and the `.checksDeallocation` Swift Testing trait for checking objects at the end of ordinary unit tests. Inside an `expectDeallocation` closure, it checks the object together with the tested one.
+- `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`. A dependency that turns out to be a value type is reported with its concrete type, since it can't leak.
+- Swift Testing and XCTest tests of the library on macOS and the iOS simulator, and GitHub Actions CI.
 
-## 3.1.0
+### Breaking
+- STRV Dependency Injection support is the `DependencyInjection` package trait. It's on by default; with `traits: []` the dependency isn't downloaded.
+- Works with STRV Dependency Injection 1.0.4 up to 2.x.
+- The `DeallocTestsDIFree` product is removed. Use the `DeallocTests` product and `import DeallocTests`.
+- Swift 6.1 (Xcode 16.3) is required. Turning the trait off from an Xcode project needs Xcode 26.4.
+- `DefaultInitializable` is removed.
+- `DeallocTestable` no longer requires `Sendable`.
+- `Alloc`/`Dealloc` logging is off by default (`DeallocTester.isLoggingEnabled`).
 
-### Fixed
+### Deprecated
+- `DeallocTester`, `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable`. Use `expectDeallocation`. They will be removed in 5.0.
+
+### Fixed (`DeallocTester`)
 - Dealloc tests no longer hang on macOS.
 - A `nil` or non-`DeallocTestable` object no longer crashes or hangs the test.
 - Leaks are detected per instance instead of per class.
 - Thread-safe dealloc tracking; no more associated-object key warnings.
+- Polling with `deallocationTimeout` (2 s) replaces the fixed delays.
+- The presenting controller is created automatically; the test window is cleaned up in `tearDown`. `setUp()` is `open`.
 - The dependency URL uses https, so the package resolves without SSH access to GitHub.
 
-### Changed
-- Polling with `deallocationTimeout` (2 s) replaces the fixed delays.
-- The presenting controller is created automatically; the test window is cleaned up in `tearDown`.
-- `DeallocTestable` no longer requires `Sendable`.
-- `Alloc`/`Dealloc` logging is off by default (`DeallocTester.isLoggingEnabled`).
-- `setUp()` is `open`.
-
-### Deprecated
-- `DefaultInitializable`, to be removed in 4.0.
-
 ### Removed
-- Travis CI, Danger, Carthage, jazzy and unused headers. CI runs on GitHub Actions.
+- Travis CI, Danger, Carthage, jazzy and unused headers.
