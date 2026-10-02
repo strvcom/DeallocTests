@@ -27,14 +27,14 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
 
 ## STRV Dependency Injection library
 
-DeallocTests has no dependencies by default. The integration with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection) is behind the `DependencyInjection` [package trait](#installation): enable it and the library is pulled in, otherwise it's not even downloaded.
+DeallocTests integrates with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection). The integration is the `DependencyInjection` [package trait](#installation), which is on by default. Projects that don't use STRV Dependency Injection can turn it off, and the library is then not even downloaded.
 
 ## Requirements
 
 - iOS 17.0+ / macOS 13.0+
 - Swift 6.1+ / Xcode 16.3+
 - Swift Testing or XCTest
-- Enabling the `DependencyInjection` trait from an Xcode project needs Xcode 26.4 or later
+- Turning the `DependencyInjection` trait off from an Xcode project needs Xcode 26.4 or later
 
 ## Installation
 
@@ -62,17 +62,16 @@ let package = Package(
 )
 ```
 
-If you use STRV Dependency Injection, enable the `DependencyInjection` trait:
+This includes the STRV Dependency Injection integration. If your project doesn't use STRV Dependency Injection, turn off the default trait, so the library isn't downloaded:
 
 ``` swift
-.package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "4.0.0"), traits: ["DependencyInjection"])
+.package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "4.0.0"), traits: [])
 ```
 
-In Xcode, add the package via *File › Add Package Dependencies…* and link the `DeallocTests` product to your test target only. To use STRV Dependency Injection, enable the `DependencyInjection` trait for the package in Xcode 26.4 or later. The project file then lists it on the package reference:
+In Xcode, add the package via *File › Add Package Dependencies…* and link the `DeallocTests` product to your test target only. To turn the STRV Dependency Injection integration off, disable the package's default traits in Xcode 26.4 or later. The package reference in the project file then has an empty list:
 
 ```
 traits = (
-    DependencyInjection,
 );
 ```
 
@@ -287,8 +286,8 @@ Without the trait, `objectCreation` takes no parameter: `DeallocTest(objectCreat
 
 **Dependency Injection.** The `DeallocTestsDIFree` product is gone. Everyone uses the `DeallocTests` product and `import DeallocTests`:
 
-- If you used `DeallocTests` with STRV Dependency Injection, enable the `DependencyInjection` trait (see [Installation](#installation)).
-- If you used `DeallocTestsDIFree`, link the `DeallocTests` product instead and replace `import DeallocTestsDIFree` with `import DeallocTests`. No trait is needed.
+- If you used `DeallocTests` with STRV Dependency Injection, nothing changes. The `DependencyInjection` trait is on by default.
+- If you used `DeallocTestsDIFree`, link the `DeallocTests` product instead, replace `import DeallocTestsDIFree` with `import DeallocTests`, and turn the default trait off (see [Installation](#installation)) so STRV Dependency Injection isn't downloaded.
 
 **`DeallocTester`.** Existing tests keep working but produce deprecation warnings. Each `DeallocTest` becomes one `expectDeallocation` call, and the `DeallocTestable` conformances can be deleted:
 
@@ -342,7 +341,8 @@ final class MainCoordinatorDeallocTests: XCTestCase {
 The folder `SampleApps` contains two demo projects. The application itself is very simple: there are just three screens in the navigation stack, all handled by `MainCoordinator`.
 
 - `DeallocTestsAppDIFreeSPM` checks the screens and the coordinator with `expectDeallocation` in **XCTest** (`MainCoordinatorDeallocTester.swift`).
-- `DeallocTestsAppSPM` enables the `DependencyInjection` trait. `ExpectDeallocationTests.swift` does the checks with `expectDeallocation` in **Swift Testing**, including a service resolved from an `AsyncContainer`. The other test files show the deprecated `DeallocTester` API.
+- `DeallocTestsAppDIFreeSPM` turns the `DependencyInjection` trait off in its Xcode project, so STRV Dependency Injection isn't downloaded.
+- `DeallocTestsAppSPM` uses the default `DependencyInjection` trait. `ExpectDeallocationTests.swift` does the checks with `expectDeallocation` in **Swift Testing**, including a service resolved from an `AsyncContainer`. The other test files show the deprecated `DeallocTester` API.
 
 The sample app intentionally contains a memory leak in `SecondViewController.swift`. This class contains a closure with a strong reference to `self`. The test fails with:
 

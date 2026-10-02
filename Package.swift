@@ -26,6 +26,8 @@ let package = Package(
             name: "DependencyInjection",
             description: "Integration with STRV Dependency Injection: expectDeallocation(of:resolvedFrom:) and the AsyncContainer in DeallocTester"
         ),
+        // Most projects use STRV Dependency Injection. Projects that don't can opt out with `traits: []`.
+        .default(enabledTraits: ["DependencyInjection"]),
     ],
     dependencies: [
         .package(url: "https://github.com/strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))

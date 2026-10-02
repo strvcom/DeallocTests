@@ -562,9 +562,6 @@
 		AD0E0E0E2F00000100000010 /* XCLocalSwiftPackageReference "../.." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../..;
-			traits = (
-				DependencyInjection,
-			);
 		};
 /* End XCLocalSwiftPackageReference section */
 

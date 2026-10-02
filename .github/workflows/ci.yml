@@ -16,8 +16,8 @@ jobs:
     strategy:
       matrix:
         traits:
-          - { name: "default traits", flags: "" }
-          - { name: "DependencyInjection", flags: "--traits DependencyInjection" }
+          - { name: "DependencyInjection (default)", flags: "" }
+          - { name: "without DependencyInjection", flags: "--disable-default-traits" }
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
@@ -40,7 +40,7 @@ jobs:
 
   sample-apps:
     name: Sample apps (iOS)
-    # Enabling a package trait from an Xcode project needs Xcode 26.4 or later
+    # Package traits in an Xcode project need Xcode 26.4 or later
     runs-on: macos-26
     strategy:
       matrix:
