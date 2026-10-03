@@ -20,6 +20,11 @@ jobs:
           - { name: "without DependencyInjection", flags: "--disable-default-traits" }
     steps:
       - uses: actions/checkout@v4
+      - name: Check DeallocTestsCore rules
+        # Core is shared with DeallocWatcher, which apps link: no test frameworks, no classes or actors
+        run: |
+          ! grep -rnE "^\s*(@testable )?import (XCTest|Testing)\b" Sources/DeallocTestsCore
+          ! grep -rnE "^\s*(public |package |internal |private |fileprivate |final |open )*(class|actor) [A-Z]" Sources/DeallocTestsCore
       - name: Run tests
         run: swift test ${{ matrix.traits.flags }}
 

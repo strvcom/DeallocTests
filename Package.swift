@@ -35,15 +35,25 @@ let package = Package(
         .package(url: "https://github.com/strvcom/ios-dependency-injection.git", "1.0.4" ..< "3.0.0")
     ],
     targets: [
+        // Shared by DeallocTests and the upcoming DeallocWatcher: no XCTest, no Swift Testing,
+        // no classes or actors (it may be linked into both an app and its test bundle)
+        .target(
+            name: "DeallocTestsCore"
+        ),
         .target(
             name: "DeallocTests",
             dependencies: [
+                "DeallocTestsCore",
                 .product(
                     name: "DependencyInjection",
                     package: "ios-dependency-injection",
                     condition: .when(traits: ["DependencyInjection"])
                 )
             ]
+        ),
+        .testTarget(
+            name: "DeallocTestsCoreTests",
+            dependencies: ["DeallocTestsCore"]
         ),
         .testTarget(
             name: "DeallocTestsTests",

@@ -1,6 +1,6 @@
 //
 //  LeakHints.swift
-//  DeallocTests
+//  DeallocTestsCore
 //
 //  Copyright © 2026 STRV. All rights reserved.
 //
@@ -11,13 +11,13 @@ import Foundation
 ///
 /// `Mirror` can't tell weak properties from strong ones and can't look inside closures,
 /// so the hints are suggestions, not proof.
-enum LeakHints {
+package enum LeakHints {
     /// How deep to look for reference cycles that go through properties
     static let maximumCycleDepth = 4
     /// Upper bound for visited objects, to keep huge object graphs fast
     static let maximumVisitedObjects = 300
 
-    static func hints(for object: AnyObject) -> [String] {
+    package static func hints(for object: AnyObject) -> [String] {
         var hints = [String]()
 
         for property in storedProperties(of: object) {
