@@ -38,6 +38,28 @@ struct LeakReportTests {
         """)
     }
 
+    @Test(arguments: [
+        (Duration.milliseconds(400), "400 ms"),
+        (.seconds(2), "2 sec"),
+        (.milliseconds(3250), "3.2 sec"),
+        (.milliseconds(1999), "1.9 sec"),
+    ])
+    func durationsReadTheSameInEveryLocale(duration: Duration, text: String) {
+        #expect(DurationText.describe(duration) == text)
+    }
+
+    @Test func lateReleaseMessageExplainsBoundedRetention() {
+        let message = LeakReport.lateReleaseMessage(typeName: "App.Store", releasedAfter: .milliseconds(3250), timeout: .seconds(2))
+
+        #expect(message.hasPrefix("App.Store was released after 3.2 sec, later than the 2 sec timeout. That's bounded retention, not a leak"))
+    }
+
+    @Test func messageMentionsTheGracePeriod() {
+        let report = LeakReport(typeName: "App.Screen", timeout: .seconds(2), gracePeriod: .seconds(3))
+
+        #expect(report.message.hasPrefix("App.Screen was not deallocated within 2 sec. It was watched for another 3 sec after that."))
+    }
+
     @Test func hintsNameClosureProperties() {
         let holder = ClosureHolder()
         holder.onUpdate = {}

@@ -35,22 +35,56 @@ final class DeallocationTracker {
     }
 
     /// Waits until all tracked objects deallocate and reports the ones that didn't within the timeout.
+    ///
+    /// Objects still alive at the timeout are watched for the configured grace period. Those
+    /// released in that time are reported as warnings (bounded retention); the rest are leaks.
     /// - Parameter timeout: Overrides the timeout of the current `DeallocationConfiguration`
     func verifyDeallocation(timeout: Duration?) async {
         let configuration = DeallocationConfiguration.current
         let timeout = timeout ?? configuration.timeout
+        let clock = ContinuousClock()
+        let start = clock.now
 
         _ = await Polling.waitUntil(timeout: timeout) { [trackedObjects] in
             !trackedObjects.contains { $0.object != nil }
         }
 
-        for trackedObject in trackedObjects {
+        var lateReleases = [(TrackedObject, Duration)]()
+        var pending = trackedObjects.filter { $0.object != nil }
+
+        if !pending.isEmpty, configuration.gracePeriod > .zero {
+            _ = await Polling.waitUntil(timeout: configuration.gracePeriod) {
+                pending.removeAll { trackedObject in
+                    guard trackedObject.object == nil else {
+                        return false
+                    }
+                    lateReleases.append((trackedObject, clock.now - start))
+                    return true
+                }
+                return pending.isEmpty
+            }
+        }
+
+        for (trackedObject, releasedAfter) in lateReleases {
+            reportIssue(
+                LeakReport.lateReleaseMessage(typeName: trackedObject.typeName, releasedAfter: releasedAfter, timeout: timeout),
+                at: trackedObject.location,
+                severity: .warning
+            )
+        }
+
+        for trackedObject in pending {
             guard let object = trackedObject.object else {
                 continue
             }
 
             reportIssue(
-                LeakReport(typeName: trackedObject.typeName, timeout: timeout, hints: LeakHints.hints(for: object)).message,
+                LeakReport(
+                    typeName: trackedObject.typeName,
+                    timeout: timeout,
+                    gracePeriod: configuration.gracePeriod,
+                    hints: LeakHints.hints(for: object)
+                ).message,
                 at: trackedObject.location,
                 severity: configuration.severity
             )

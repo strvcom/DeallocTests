@@ -157,6 +157,7 @@ await expectDeallocation(.present) {
 Other parameters:
 
 - `timeout` sets how long to wait for the deallocation (2 seconds by default). The check passes as soon as the object is gone.
+- An object still alive at the timeout is watched for a **grace period** (3 seconds by default). If it goes away then, the check reports a warning, "released after 3.2 sec … bounded retention, not a leak", instead of failing. Only real leaks fail, and they take the timeout plus the grace period to report.
 
 #### Configuring a suite
 

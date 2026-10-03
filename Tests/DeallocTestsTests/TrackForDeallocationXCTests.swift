@@ -67,4 +67,16 @@ final class TrackForDeallocationXCTests: XCTestCase {
             await expectDeallocation { RetainCycleObject() }
         }
     }
+
+    /// Released after the timeout but within the grace period: reported as a non-strict
+    /// expected failure, so the test passes
+    @MainActor
+    func test_lateRelease_isAWarning() async {
+        await withDeallocationConfiguration({
+            $0.timeout = .milliseconds(100)
+            $0.gracePeriod = .seconds(2)
+        }) {
+            await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+        }
+    }
 }
