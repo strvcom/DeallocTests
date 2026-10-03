@@ -13,6 +13,7 @@ See "Migrating to 4.0" in the README.
 - Hints show `@Observable` properties by their declared names, without the macro's `_` prefix and registrar.
 - UIKit lifecycles wait up to 10 s for a screen to appear, be dismissed or popped, instead of 2 s, so they stay reliable on a loaded simulator.
 - `trackForDeallocation(_:)`: an `XCTestCase` method and the `.checksDeallocation` Swift Testing trait for checking objects at the end of ordinary unit tests. Inside an `expectDeallocation` closure, it checks the object together with the tested one.
+- `DeallocationConfiguration` with the `.deallocationTimeout(_:)` and `.deallocationIssues(_:)` Swift Testing traits for a test or a whole suite, and `withDeallocationConfiguration(_:operation:)` for XCTest. Leaks can be reported as warnings that don't fail the test.
 - `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`. A dependency that turns out to be a value type is reported with its concrete type, since it can't leak.
 - Swift Testing and XCTest tests of the library on macOS and the iOS simulator, and GitHub Actions CI.
 

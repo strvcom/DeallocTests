@@ -25,12 +25,12 @@ import Foundation
 /// - Parameters:
 ///   - type: Registered type to resolve. The resolved instance must be a class instance.
 ///   - container: Container with the registration
-///   - timeout: How long to wait for the object to deallocate
+///   - timeout: How long to wait for the object to deallocate. Defaults to `DeallocationConfiguration.current.timeout`
 @MainActor
 public func expectDeallocation<Dependency: Sendable>(
     of type: Dependency.Type,
     resolvedFrom container: AsyncContainer,
-    timeout: Duration = .seconds(2),
+    timeout: Duration? = nil,
     fileID: StaticString = #fileID,
     filePath: StaticString = #filePath,
     line: UInt = #line,

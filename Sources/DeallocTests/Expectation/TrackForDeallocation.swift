@@ -28,7 +28,7 @@ public extension XCTestCase {
     @discardableResult
     func trackForDeallocation<Object: AnyObject>(
         _ object: Object,
-        timeout: Duration = .seconds(2),
+        timeout: Duration? = nil,
         fileID: StaticString = #fileID,
         filePath: StaticString = #filePath,
         line: UInt = #line,
@@ -92,7 +92,7 @@ public func trackForDeallocation<Object: AnyObject>(
 
 /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
 public struct DeallocationCheckTrait: TestTrait, SuiteTrait, TestScoping {
-    let timeout: Duration
+    let timeout: Duration?
 
     public var isRecursive: Bool {
         true
@@ -121,12 +121,13 @@ public struct DeallocationCheckTrait: TestTrait, SuiteTrait, TestScoping {
 public extension Trait where Self == DeallocationCheckTrait {
     /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
     static var checksDeallocation: Self {
-        checksDeallocation(timeout: .seconds(2))
+        checksDeallocation(timeout: nil)
     }
 
     /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
-    /// - Parameter timeout: How long to wait for the objects to deallocate
-    static func checksDeallocation(timeout: Duration) -> Self {
+    /// - Parameter timeout: How long to wait for the objects to deallocate.
+    ///   `nil` uses `DeallocationConfiguration.current.timeout`.
+    static func checksDeallocation(timeout: Duration?) -> Self {
         Self(timeout: timeout)
     }
 }
