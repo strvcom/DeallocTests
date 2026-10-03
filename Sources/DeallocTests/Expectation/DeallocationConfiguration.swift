@@ -19,6 +19,10 @@ import Foundation
 public struct DeallocationConfiguration: Sendable {
     /// How long a check waits for the objects to deallocate
     public var timeout: Duration = .seconds(2)
+    /// How much longer to keep watching objects that are still alive after the timeout.
+    /// An object released in that time is reported as a warning (bounded retention, not a
+    /// leak) instead of a failure. `.zero` turns it off.
+    public var gracePeriod: Duration = .seconds(3)
     /// Whether a leak fails the test or is reported as a warning
     public var severity: DeallocationIssueSeverity = .error
 
@@ -94,6 +98,11 @@ public extension Trait where Self == DeallocationConfigurationTrait {
     /// ```
     static func deallocationTimeout(_ timeout: Duration) -> Self {
         Self { $0.timeout = timeout }
+    }
+
+    /// How much longer to watch objects still alive after the timeout before calling them leaked
+    static func deallocationGracePeriod(_ gracePeriod: Duration) -> Self {
+        Self { $0.gracePeriod = gracePeriod }
     }
 
     /// Whether leaks fail the test (`.error`, the default) or are reported as warnings

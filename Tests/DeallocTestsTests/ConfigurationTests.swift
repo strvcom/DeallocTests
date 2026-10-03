@@ -17,7 +17,7 @@ func isLeakReport(within timeout: String) -> (Issue) -> Bool {
     }
 }
 
-@Suite("Deallocation configuration", .deallocationTimeout(.milliseconds(100)))
+@Suite("Deallocation configuration", .deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.zero))
 @MainActor
 struct ConfigurationTests {
     @Test func suiteTimeoutApplies() async {
