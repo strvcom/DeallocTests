@@ -45,4 +45,26 @@ final class TrackForDeallocationXCTests: XCTestCase {
             return OwnerObject(viewModel: child)
         }
     }
+
+    @MainActor
+    func test_withDeallocationConfiguration_changesTheTimeout() async {
+        let options = XCTExpectedFailure.Options()
+        options.issueMatcher = { $0.compactDescription.contains("within 120 ms") }
+        XCTExpectFailure("RetainCycleObject has a retain cycle", options: options)
+
+        await withDeallocationConfiguration({ $0.timeout = .milliseconds(120) }) {
+            await expectDeallocation { RetainCycleObject() }
+        }
+    }
+
+    /// Reported as a non-strict expected failure, so the test passes
+    @MainActor
+    func test_warningSeverity_doesNotFailTheTest() async {
+        await withDeallocationConfiguration({
+            $0.timeout = .milliseconds(100)
+            $0.severity = .warning
+        }) {
+            await expectDeallocation { RetainCycleObject() }
+        }
+    }
 }

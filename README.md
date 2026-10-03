@@ -157,6 +157,27 @@ await expectDeallocation(.present) {
 Other parameters:
 
 - `timeout` sets how long to wait for the deallocation (2 seconds by default). The check passes as soon as the object is gone.
+
+#### Configuring a suite
+
+Instead of passing the same values to every call, configure a test or a whole suite with traits:
+
+```swift
+@Suite(.deallocationTimeout(.seconds(5)))
+struct ScreenDeallocTests { … }
+
+// Adopting dealloc tests in an existing project: report leaks as warnings for now
+@Suite(.deallocationIssues(.warning))
+struct LegacyDeallocTests { … }
+```
+
+A test's own trait wins over its suite's, and a value passed to the call wins over both. In XCTest, use `withDeallocationConfiguration`:
+
+```swift
+await withDeallocationConfiguration({ $0.timeout = .seconds(5) }) {
+    await expectDeallocation(.present) { makeProfileViewController() }
+}
+```
 - `afterRelease` runs after the object is released and before the check, e.g. to clear a cache that legitimately holds it.
 
 `.present` needs a test target with a host app, because modal presentation needs a window scene. The other lifecycles also work in package tests.

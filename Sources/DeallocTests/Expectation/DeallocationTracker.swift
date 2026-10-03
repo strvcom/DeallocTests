@@ -34,8 +34,12 @@ final class DeallocationTracker {
         )
     }
 
-    /// Waits until all tracked objects deallocate and reports the ones that didn't within the timeout
-    func verifyDeallocation(timeout: Duration) async {
+    /// Waits until all tracked objects deallocate and reports the ones that didn't within the timeout.
+    /// - Parameter timeout: Overrides the timeout of the current `DeallocationConfiguration`
+    func verifyDeallocation(timeout: Duration?) async {
+        let configuration = DeallocationConfiguration.current
+        let timeout = timeout ?? configuration.timeout
+
         _ = await Polling.waitUntil(timeout: timeout) { [trackedObjects] in
             !trackedObjects.contains { $0.object != nil }
         }
@@ -47,7 +51,8 @@ final class DeallocationTracker {
 
             reportIssue(
                 LeakReport(typeName: trackedObject.typeName, timeout: timeout, hints: LeakHints.hints(for: object)).message,
-                at: trackedObject.location
+                at: trackedObject.location,
+                severity: configuration.severity
             )
         }
 
