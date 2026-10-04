@@ -10,7 +10,6 @@ import DeallocTests
 import XCTest
 @testable import DeallocTestsAppSPM
 
-/// Dealloc tests with XCTest. No `DeallocTestable` conformances are needed.
 final class MainCoordinatorDeallocTester: XCTestCase {
     @MainActor
     func test_firstScreen() async {
@@ -18,7 +17,6 @@ final class MainCoordinatorDeallocTester: XCTestCase {
         await expectDeallocation(.present) { coordinator.createFirstViewController() }
     }
 
-    /// Fails on purpose: `SecondViewController` captures `self` strongly in `viewDidLoad`
     @MainActor
     func test_secondScreen() async {
         let coordinator = MainCoordinator()

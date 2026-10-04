@@ -8,9 +8,6 @@
 import DeallocTests
 import Testing
 
-#if compiler(>=6.1)
-
-/// Matches a leak report of `RetainCycleObject` that names the expected timeout
 func isLeakReport(within timeout: String) -> (Issue) -> Bool {
     { issue in
         issue.comments.contains { $0.rawValue.hasPrefix("DeallocTestsTests.RetainCycleObject was not deallocated within \(timeout).") }
@@ -60,7 +57,6 @@ struct ConfigurationTests {
         }
     }
 
-    /// A leak reported as a warning doesn't fail the test
     @Test(.deallocationIssues(.warning))
     func warningSeverityDoesNotFailTheTest() async {
         await expectDeallocation { RetainCycleObject() }
@@ -81,6 +77,28 @@ struct ConfigurationTests {
             isLeakReport(within: "100 ms")(issue)
         }
     }
-}
 
-#endif
+    @Test func trackedObjectsUseTheConfigurationOfANestedTrait() async throws {
+        let test = try #require(Test.current)
+
+        try await withKnownIssue {
+            try await DeallocationCheckTrait.checksDeallocation.provideScope(
+                for: test,
+                testCase: Test.Case.current,
+                performing: {
+                    try await DeallocationConfigurationTrait.deallocationTimeout(.milliseconds(130)).provideScope(
+                        for: test,
+                        testCase: Test.Case.current,
+                        performing: {
+                            await MainActor.run {
+                                _ = trackForDeallocation(RetainCycleObject())
+                            }
+                        }
+                    )
+                }
+            )
+        } matching: { issue in
+            isLeakReport(within: "130 ms")(issue)
+        }
+    }
+}

@@ -5,23 +5,23 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import Foundation
-
 #if canImport(Testing)
     import Testing
 #endif
 
 /// How deallocation checks behave by default.
 ///
-/// Every check uses the current configuration unless it passes its own values. Set it for a
-/// Swift Testing suite or test with traits such as `.deallocationTimeout(_:)`, or for a block
-/// of code with `withDeallocationConfiguration(_:operation:)`.
+/// An object is checked with the configuration in effect where it's tracked. Only the timeout
+/// can also be passed to `expectDeallocation`, because it describes the object. Set the
+/// configuration for a Swift Testing suite or test with traits such as `.deallocationTimeout(_:)`,
+/// or for a block of code with `withDeallocationConfiguration(_:operation:)`.
 public struct DeallocationConfiguration: Sendable {
     /// How long a check waits for the objects to deallocate
     public var timeout: Duration = .seconds(2)
     /// How much longer to keep watching objects that are still alive after the timeout.
     /// An object released in that time is reported as a warning (bounded retention, not a
-    /// leak) instead of a failure. `.zero` turns it off.
+    /// leak) instead of a failure. `.zero` turns it off. Not used when `severity` is `.warning`,
+    /// because a leak is then reported as a warning anyway.
     public var gracePeriod: Duration = .seconds(3)
     /// Whether a leak fails the test or is reported as a warning
     public var severity: DeallocationIssueSeverity = .error
@@ -65,7 +65,31 @@ public func withDeallocationConfiguration<Result>(
     }
 }
 
-#if canImport(Testing) && compiler(>=6.1)
+/// Runs the operation with a changed deallocation configuration.
+///
+/// The synchronous variant, e.g. for a whole XCTest test case class:
+///
+/// ```swift
+/// final class LegacyDeallocTests: XCTestCase {
+///     override func invokeTest() {
+///         withDeallocationConfiguration({ $0.severity = .warning }) {
+///             super.invokeTest()
+///         }
+///     }
+/// }
+/// ```
+public func withDeallocationConfiguration<Result>(
+    _ change: (inout DeallocationConfiguration) -> Void,
+    operation: () throws -> Result
+) rethrows -> Result {
+    var configuration = DeallocationConfiguration.current
+    change(&configuration)
+    return try DeallocationConfiguration.$current.withValue(configuration) {
+        try operation()
+    }
+}
+
+#if canImport(Testing)
 
 /// Changes the deallocation configuration for a test, or for every test in a suite.
 /// A test's own trait wins over its suite's.

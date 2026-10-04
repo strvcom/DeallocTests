@@ -17,6 +17,7 @@ public extension XCTestCase {
     /// Checks that the object deallocates when the test ends.
     ///
     /// Keep the object in a local variable. A property of the test case lives until the test case is released.
+    /// The check uses the `DeallocationConfiguration` in effect where this method is called.
     ///
     /// ```swift
     /// func test_viewModel() {
@@ -28,7 +29,6 @@ public extension XCTestCase {
     @discardableResult
     func trackForDeallocation<Object: AnyObject>(
         _ object: Object,
-        timeout: Duration? = nil,
         fileID: StaticString = #fileID,
         filePath: StaticString = #filePath,
         line: UInt = #line,
@@ -36,7 +36,6 @@ public extension XCTestCase {
     ) -> Object {
         let location = TestSourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
 
-        // Inside `expectDeallocation`, the object joins its check
         if let tracker = DeallocationTracker.current {
             tracker.track(object, at: location)
             return object
@@ -46,7 +45,7 @@ public extension XCTestCase {
         tracker.track(object, at: location)
 
         addTeardownBlock { @MainActor in
-            await tracker.verifyDeallocation(timeout: timeout)
+            await tracker.verifyDeallocation()
         }
 
         return object
@@ -88,12 +87,10 @@ public func trackForDeallocation<Object: AnyObject>(
     return object
 }
 
-#if canImport(Testing) && compiler(>=6.1)
+#if canImport(Testing)
 
 /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
 public struct DeallocationCheckTrait: TestTrait, SuiteTrait, TestScoping {
-    let timeout: Duration?
-
     public var isRecursive: Bool {
         true
     }
@@ -114,21 +111,14 @@ public struct DeallocationCheckTrait: TestTrait, SuiteTrait, TestScoping {
             try await function()
         }
 
-        await tracker.verifyDeallocation(timeout: timeout)
+        await tracker.verifyDeallocation()
     }
 }
 
 public extension Trait where Self == DeallocationCheckTrait {
     /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
     static var checksDeallocation: Self {
-        checksDeallocation(timeout: nil)
-    }
-
-    /// Checks that every object passed to `trackForDeallocation(_:)` deallocates when the test ends
-    /// - Parameter timeout: How long to wait for the objects to deallocate.
-    ///   `nil` uses `DeallocationConfiguration.current.timeout`.
-    static func checksDeallocation(timeout: Duration?) -> Self {
-        Self(timeout: timeout)
+        Self()
     }
 }
 

@@ -32,13 +32,11 @@ public extension Lifecycle {
                 return false
             }
 
-            // Lets SwiftUI call `onAppear` and start `.task` modifiers
             await settle()
             await perform(interaction, with: object, at: location)
 
             host.remove()
 
-            // Lets SwiftUI call `onDisappear` and cancel tasks
             await settle()
             return true
         }
@@ -52,7 +50,6 @@ private func settle() async {
 
 #if canImport(UIKit)
 
-/// Shows a hosting controller as a child of an empty controller in a test window
 @MainActor
 private final class SwiftUIHost<Content: View> {
     private let window: TestWindow
@@ -91,7 +88,6 @@ private final class SwiftUIHost<Content: View> {
 
 #elseif canImport(AppKit)
 
-/// Shows a hosting controller in a test window
 @MainActor
 private final class SwiftUIHost<Content: View> {
     private let window: NSWindow

@@ -1,18 +1,13 @@
 //
 //  Polling.swift
-//  DeallocTestsCore
+//  DeallocTests
 //
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import Foundation
-
-package enum Polling {
-    /// Polls the condition until it holds or the timeout elapses. Returns as soon as the
-    /// condition holds. Sleeping between checks lets the run loop drain autorelease pools
-    /// and finish UIKit transitions.
+enum Polling {
     @MainActor
-    package static func waitUntil(
+    static func waitUntil(
         timeout: Duration,
         interval: Duration = .milliseconds(10),
         _ condition: @MainActor () -> Bool

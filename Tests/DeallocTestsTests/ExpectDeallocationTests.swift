@@ -18,7 +18,6 @@ import Testing
 
 // MARK: - Fixtures
 
-/// No `DeallocTestable` conformance needed
 final class PlainObject {}
 
 final class RetainCycleObject {
@@ -31,9 +30,12 @@ final class RetainCycleObject {
 
 protocol AnyService: Sendable {}
 
+protocol Service: AnyObject, Sendable {}
+
+final class ContainerService: Service {}
+
 struct ValueService: AnyService {}
 
-/// Holds strong references. Each test uses its own instance because tests run in parallel.
 @MainActor
 final class Cache {
     var objects = [AnyObject]()
@@ -41,7 +43,6 @@ final class Cache {
 
 struct LifecycleError: Error {}
 
-/// Swift names private types `Module.(unknown context at $…).Name`
 private final class PrivateRetainCycle {
     var closure: (() -> Void)?
 
@@ -50,7 +51,6 @@ private final class PrivateRetainCycle {
     }
 }
 
-/// Matches leak reports attributed to this file
 func isLeakReport(of typeName: String) -> (Issue) -> Bool {
     { issue in
         issue.comments.contains { $0.rawValue.contains("\(typeName) was not deallocated") }
@@ -63,6 +63,16 @@ func isLeakReport(of typeName: String) -> (Issue) -> Bool {
 @Suite("expectDeallocation")
 @MainActor
 struct ExpectDeallocationTests {
+    @Test func cancelledCheckReportsNothing() async {
+        let check = Task { @MainActor in
+            await expectDeallocation(timeout: .seconds(5)) { RetainCycleObject() }
+        }
+
+        try? await Task.sleep(for: .milliseconds(100))
+        check.cancel()
+        await check.value
+    }
+
     @Test func cleanObjectPasses() async {
         await expectDeallocation { PlainObject() }
     }
@@ -199,8 +209,6 @@ struct ExpectDeallocationDependencyInjectionTests {
 
 // MARK: - trackForDeallocation
 
-#if compiler(>=6.1)
-
 @Suite("trackForDeallocation")
 @MainActor
 struct TrackForDeallocationTests {
@@ -211,12 +219,14 @@ struct TrackForDeallocationTests {
 
     @Test func trackedLeakIsReported() async throws {
         try await withKnownIssue {
-            try await DeallocationCheckTrait.checksDeallocation(timeout: .milliseconds(100)).provideScope(
+            try await DeallocationCheckTrait.checksDeallocation.provideScope(
                 for: #require(Test.current),
                 testCase: Test.Case.current,
                 performing: {
                     await MainActor.run {
-                        _ = trackForDeallocation(RetainCycleObject())
+                        withDeallocationConfiguration({ $0.timeout = .milliseconds(100) }) {
+                            _ = trackForDeallocation(RetainCycleObject())
+                        }
                     }
                 }
             )
@@ -237,7 +247,6 @@ struct TrackForDeallocationTests {
 @Suite("trackForDeallocation on a suite", .checksDeallocation)
 @MainActor
 struct TrackForDeallocationSuiteTests {
-    /// The suite instance is released before the check, so stored properties work too
     let object = trackForDeallocation(PlainObject())
 
     @Test func storedPropertyIsChecked() {
@@ -249,5 +258,3 @@ struct TrackForDeallocationSuiteTests {
         _ = trackForDeallocation(PlainObject())
     }
 }
-
-#endif

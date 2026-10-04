@@ -21,7 +21,6 @@ final class ClosureLeak {
     }
 }
 
-/// `@Observable` stores the closure as `_onUpdate`
 @available(macOS 14, iOS 17, *)
 @Observable
 final class ObservableClosureLeak {
@@ -54,7 +53,6 @@ final class SubscriptionLeak {
     var value = 0
 
     init() {
-        // The subscription stays alive and its sink captures self strongly
         updates.sink { self.value = $0 }.store(in: &cancellables)
     }
 }
@@ -67,7 +65,6 @@ final class OwnerObject {
     }
 }
 
-/// Starts an endless task on appear and never cancels it
 @MainActor
 final class TaskLeakModel {
     var task: Task<Void, Never>?
@@ -83,7 +80,6 @@ final class TaskLeakModel {
     }
 }
 
-/// Runs work in `.task`, which SwiftUI cancels when the view goes away
 @MainActor
 final class TaskModifierModel {
     var ticks = 0
@@ -121,6 +117,14 @@ func isLeakReport(of typeName: String, mentioning hint: String) -> (Issue) -> Bo
     }
 }
 
+final class SelfReference {
+    var me: SelfReference?
+
+    init() {
+        me = self
+    }
+}
+
 // MARK: - Leak hints
 
 @Suite("Leak hints")
@@ -149,6 +153,14 @@ struct LeakHintsTests {
             await expectDeallocation(timeout: .milliseconds(100)) { CycleParent() }
         } matching: { issue in
             isLeakReport(of: "CycleParent", mentioning: "`self.child.parent` refers back to the object")(issue)
+        }
+    }
+
+    @Test func directSelfReferenceIsShown() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { SelfReference() }
+        } matching: { issue in
+            isLeakReport(of: "SelfReference", mentioning: "`self.me` refers back to the object")(issue)
         }
     }
 

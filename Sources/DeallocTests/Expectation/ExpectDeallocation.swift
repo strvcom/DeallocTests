@@ -5,8 +5,6 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import Foundation
-
 /// Creates an object, runs its lifecycle, releases it and checks that it deallocates.
 ///
 /// Works in Swift Testing and XCTest. A leak is reported at the line that calls this function,
@@ -48,8 +46,6 @@ public func expectDeallocation<Object: AnyObject>(
     await tracker.verifyDeallocation(timeout: timeout)
 }
 
-/// The object only lives inside this call, so it's released when it returns.
-/// Returns `false` when the lifecycle couldn't run.
 @MainActor
 private func createAndRun<Object: AnyObject>(
     _ makeObject: @MainActor () async throws -> Object,
@@ -57,7 +53,6 @@ private func createAndRun<Object: AnyObject>(
     tracker: DeallocationTracker,
     location: TestSourceLocation
 ) async rethrows -> Bool {
-    // `trackForDeallocation(_:)` called from the factory or the lifecycle adds objects to this check
     try await DeallocationTracker.$current.withValue(tracker) {
         let object = try await makeObject()
         tracker.track(object, at: location)

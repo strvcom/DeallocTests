@@ -19,10 +19,7 @@
 		27A0804E245C879C0037F1DB /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0804D245C879C0037F1DB /* ThirdViewController.swift */; };
 		27A08051245C87C40037F1DB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08050245C87C40037F1DB /* MainCoordinator.swift */; };
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
-		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
-		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
 		ADCB58DF27FD7CC9009E0DEB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */; };
-		ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */; };
 		AD0E0E0E2F00000100000001 /* ExpectDeallocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */; };
 		ADCB58E727FD8756009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E627FD8756009E0DEB /* DeallocTests */; };
 /* End PBXBuildFile section */
@@ -54,10 +51,7 @@
 		27A0804D245C879C0037F1DB /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		27A08050245C87C40037F1DB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		27A08052245CBA790037F1DB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
-		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
 		ADCB58DE27FD7CC9009E0DEB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyGraphDeallocTester.swift; sourceTree = "<group>"; };
 		AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectDeallocationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,9 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				27A0803F245C859E0037F1DB /* Info.plist */,
-				27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */,
-				27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */,
-				ADCB58E027FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift */,
 				AD0E0E0E2F00000100000002 /* ExpectDeallocationTests.swift */,
 			);
 			path = DeallocTestsAppSPMTests;
@@ -295,9 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */,
-				27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */,
-				ADCB58E127FD7CF3009E0DEB /* DependencyGraphDeallocTester.swift in Sources */,
 				AD0E0E0E2F00000100000001 /* ExpectDeallocationTests.swift in Sources */,
 				275ACCAC246D4C2E00FEE52F /* TestAppDelegate.swift in Sources */,
 				275ACCAD246D4C2E00FEE52F /* TestSceneDelegate.swift in Sources */,

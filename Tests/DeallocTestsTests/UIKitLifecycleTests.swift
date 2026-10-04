@@ -13,7 +13,6 @@ import UIKit
 
 final class CleanController: UIViewController {}
 
-/// Leaks as soon as the view loads
 final class LoadLeakingController: UIViewController {
     var closure: (() -> Void)?
 
@@ -23,7 +22,6 @@ final class LoadLeakingController: UIViewController {
     }
 }
 
-/// Leaks only once it appears on screen, so `.loadView` doesn't catch it
 final class AppearLeakingController: UIViewController {
     var closure: (() -> Void)?
 
@@ -33,8 +31,6 @@ final class AppearLeakingController: UIViewController {
     }
 }
 
-/// Modal presentation needs a window scene, which only exists when the tests run in a host app.
-/// The sample apps cover `.present` in that setup.
 @MainActor
 func hasWindowScene() -> Bool {
     UIApplication.shared.connectedScenes.contains { $0 is UIWindowScene }

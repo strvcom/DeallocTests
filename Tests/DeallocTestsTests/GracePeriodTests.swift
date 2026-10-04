@@ -9,9 +9,6 @@ import DeallocTests
 import Foundation
 import Testing
 
-#if compiler(>=6.1)
-
-/// Keeps a new object alive for a while, like a task or animation finishing late
 @MainActor
 func makeObjectReleasedAfter(_ delay: Duration) -> PlainObject {
     let object = PlainObject()
@@ -25,7 +22,6 @@ func makeObjectReleasedAfter(_ delay: Duration) -> PlainObject {
 @Suite("Grace period")
 @MainActor
 struct GracePeriodTests {
-    /// Released after the timeout but within the grace period: a warning, the test passes
     @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(2)))
     func lateReleaseIsAWarning() async {
         await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
@@ -44,7 +40,6 @@ struct GracePeriodTests {
         }
     }
 
-    /// With the grace period off, a late release is a leak
     @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.zero))
     func zeroGracePeriodTurnsItOff() async {
         await withKnownIssue {
@@ -53,6 +48,14 @@ struct GracePeriodTests {
             issue.comments.contains { $0.rawValue.hasPrefix("DeallocTestsTests.PlainObject was not deallocated within 100 ms. Something") }
         }
     }
-}
 
-#endif
+    @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(3)), .deallocationIssues(.warning))
+    func warningSeveritySkipsTheGracePeriod() async {
+        let clock = ContinuousClock()
+        let start = clock.now
+
+        await expectDeallocation { RetainCycleObject() }
+
+        #expect(clock.now - start < .seconds(1))
+    }
+}

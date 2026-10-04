@@ -1,11 +1,13 @@
 //
 //  LeakReportTests.swift
-//  DeallocTestsCoreTests
+//  DeallocTests
 //
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-@testable import DeallocTestsCore
+import Combine
+@testable import DeallocTests
+import Foundation
 import Testing
 
 private final class PrivateObject {}
@@ -14,12 +16,26 @@ final class ClosureHolder {
     var onUpdate: (() -> Void)?
 }
 
-@Suite("Core")
+final class TimerService {}
+
+final class UnusedOptionals {
+    var onUpdate: (() -> Void)?
+    var timer: Timer?
+    var task: Task<Void, Never>?
+    var cancellables = Set<AnyCancellable>()
+    let timerService = TimerService()
+}
+
+final class TimerHolder {
+    var timer: Timer? = Timer(timeInterval: 60, repeats: false) { _ in }
+}
+
+@Suite("Leak reports")
 struct LeakReportTests {
     @Test func readableNameDropsUnknownContext() {
         let name = TypeNames.readableName(of: PrivateObject())
 
-        #expect(name == "DeallocTestsCoreTests.PrivateObject")
+        #expect(name == "DeallocTestsTests.PrivateObject")
     }
 
     @Test func messageWithoutHintsGivesGeneralAdvice() {
@@ -65,6 +81,14 @@ struct LeakReportTests {
         holder.onUpdate = {}
 
         #expect(LeakHints.hints(for: holder).contains { $0.hasPrefix("`onUpdate` is a closure") })
+    }
+
+    @Test func hintsSkipEmptyOptionalsAndCollections() {
+        #expect(LeakHints.hints(for: UnusedOptionals()).isEmpty)
+    }
+
+    @Test func hintsNameTimersByType() {
+        #expect(LeakHints.hints(for: TimerHolder()).contains { $0.hasPrefix("`timer` is a timer") })
     }
 
     @Test @MainActor func pollingReturnsAsSoonAsTheConditionHolds() async {

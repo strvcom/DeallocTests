@@ -10,8 +10,6 @@ import DependencyInjection
 import Testing
 @testable import DeallocTestsAppSPM
 
-/// The same checks as `MainCoordinatorDeallocTester` and `DependencyGraphDeallocTester`,
-/// written with `expectDeallocation`. No `DeallocTestable` conformances are needed.
 @Suite("Dealloc tests")
 @MainActor
 struct ExpectDeallocationTests {
@@ -21,7 +19,6 @@ struct ExpectDeallocationTests {
         await expectDeallocation(.present) { coordinator.createFirstViewController() }
     }
 
-    /// Fails on purpose: `SecondViewController` captures `self` strongly in `viewDidLoad`
     @Test func secondScreen() async {
         await expectDeallocation(.push) { coordinator.createSecondViewController() }
     }
@@ -45,10 +42,8 @@ struct ExpectDeallocationTests {
         await expectDeallocation(of: APIManaging.self, resolvedFrom: container)
     }
 
-    #if compiler(>=6.1)
-        @Test(.checksDeallocation) func trackedController() {
-            let controller = trackForDeallocation(coordinator.createThirdViewController())
-            controller.loadViewIfNeeded()
-        }
-    #endif
+    @Test(.checksDeallocation) func trackedController() {
+        let controller = trackForDeallocation(coordinator.createThirdViewController())
+        controller.loadViewIfNeeded()
+    }
 }

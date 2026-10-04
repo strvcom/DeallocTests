@@ -11,24 +11,13 @@ import XCTest
     import Testing
 #endif
 
-/// Place in the test source where a failure is reported
 struct TestSourceLocation: Sendable {
     let fileID: StaticString
     let filePath: StaticString
     let line: UInt
     let column: UInt
-
-    init(fileID: StaticString, filePath: StaticString, line: UInt, column: UInt) {
-        self.fileID = fileID
-        self.filePath = filePath
-        self.line = line
-        self.column = column
-    }
 }
 
-/// Reports an issue to Swift Testing when running inside a Swift Testing test, otherwise to
-/// XCTest. Exactly one framework gets it: since Swift 6.4 each framework also records the
-/// other's failures, so reporting to both would show every issue twice.
 func reportIssue(_ message: String, at location: TestSourceLocation, severity: DeallocationIssueSeverity = .error) {
     #if canImport(Testing)
         if Test.current != nil {
@@ -41,10 +30,9 @@ func reportIssue(_ message: String, at location: TestSourceLocation, severity: D
     case .error:
         XCTFail(message, file: location.filePath, line: location.line)
     case .warning:
-        // Shown as an expected failure; the test passes
         let options = XCTExpectedFailure.Options()
         options.isStrict = false
-        XCTExpectFailure("Reported as a warning (DeallocationConfiguration.severity)", options: options) {
+        XCTExpectFailure("Reported as a warning", options: options) {
             XCTFail(message, file: location.filePath, line: location.line)
         }
     }
@@ -67,7 +55,7 @@ private func recordSwiftTestingIssue(_ message: String, at location: TestSourceL
         #if compiler(>=6.3)
             Issue.record(Comment(rawValue: message), severity: .warning, sourceLocation: sourceLocation)
         #else
-            withKnownIssue("Reported as a warning (DeallocationConfiguration.severity)", isIntermittent: true) {
+            withKnownIssue("Reported as a warning", isIntermittent: true) {
                 Issue.record(Comment(rawValue: message), sourceLocation: sourceLocation)
             }
         #endif

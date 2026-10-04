@@ -5,8 +5,6 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import DeallocTestsCore
-import Foundation
 
 #if canImport(UIKit)
     import UIKit
@@ -21,8 +19,6 @@ import Foundation
 public struct Lifecycle<Object: AnyObject>: Sendable {
     public typealias Interaction = @MainActor (Object) async throws -> Void
 
-    /// Returns `false` when the lifecycle couldn't run. The failure is already reported then,
-    /// and the deallocation check is skipped because UIKit may still hold the object.
     let run: @MainActor (Object, TestSourceLocation) async -> Bool
 
     init(run: @escaping @MainActor (Object, TestSourceLocation) async -> Bool) {
@@ -58,8 +54,6 @@ extension Lifecycle {
     }
 }
 
-/// Waits for a UIKit state. The generous default only costs time when UIKit really is
-/// stuck, e.g. on a simulator loaded by many tests running in parallel.
 @MainActor
 func waitUntil(timeout: Duration = .seconds(10), _ condition: @MainActor () -> Bool) async -> Bool {
     await Polling.waitUntil(timeout: timeout, interval: .milliseconds(5), condition)
@@ -93,7 +87,6 @@ public extension Lifecycle where Object: UIViewController {
             let host = TestWindow(rootViewController: hostController)
             defer { host.close() }
 
-            // UIKit postpones presentations from a controller that hasn't appeared yet
             guard await host.waitUntilVisible(hostController, at: location) else {
                 return false
             }
@@ -159,18 +152,22 @@ public extension Lifecycle where Object: UIViewController {
     }
 }
 
-/// Window on top of everything that hosts the tested controllers
+@MainActor
+private func foregroundWindowScene() -> UIWindowScene? {
+    guard let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication else {
+        return nil
+    }
+
+    let windowScenes = application.connectedScenes.compactMap { $0 as? UIWindowScene }
+    return windowScenes.first { $0.activationState == .foregroundActive } ?? windowScenes.first
+}
+
 @MainActor
 final class TestWindow {
-    let rootViewController: UIViewController
     private let window: UIWindow
 
     init(rootViewController: UIViewController) {
-        self.rootViewController = rootViewController
-
-        // `UIApplication.shared` is accessed via KVC so the library stays app-extension safe
-        if let application = UIApplication.value(forKeyPath: #keyPath(UIApplication.shared)) as? UIApplication,
-           let windowScene = application.connectedScenes.first as? UIWindowScene {
+        if let windowScene = foregroundWindowScene() {
             window = UIWindow(windowScene: windowScene)
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
@@ -200,8 +197,6 @@ final class TestWindow {
     }
 }
 
-/// Empty controller that presents or pushes the tested controller once it has appeared
-@MainActor
 final class HostViewController: UIViewController {
     private(set) var hasAppeared = false
 
