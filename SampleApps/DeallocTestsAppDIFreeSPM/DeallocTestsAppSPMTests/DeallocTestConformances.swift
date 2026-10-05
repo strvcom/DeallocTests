@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import DeallocTestsDIFree
+import DeallocTests
 @testable import DeallocTestsAppSPM
 
 extension MainCoordinator: DeallocTestable {}
