@@ -37,3 +37,22 @@ jobs:
           xcodebuild test \
             -scheme DeallocTests \
             -destination "id=$UDID"
+
+  sample-apps:
+    name: Sample apps (iOS)
+    # Package traits in an Xcode project need Xcode 26.4 or later
+    runs-on: macos-26
+    strategy:
+      matrix:
+        sample: [DeallocTestsAppSPM, DeallocTestsAppDIFreeSPM]
+    steps:
+      - uses: actions/checkout@v4
+      # The samples contain an intentional leak, so their tests are expected to fail.
+      # CI only verifies that they compile.
+      - name: Build for testing
+        working-directory: SampleApps/${{ matrix.sample }}
+        run: |
+          xcodebuild build-for-testing \
+            -scheme DeallocTestsAppSPM \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
