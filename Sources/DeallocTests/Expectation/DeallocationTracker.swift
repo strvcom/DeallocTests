@@ -13,6 +13,8 @@ final class DeallocationTracker {
         let location: TestSourceLocation
     }
 
+    @TaskLocal static var current: DeallocationTracker?
+
     private var trackedObjects = [TrackedObject]()
 
     func track(_ object: AnyObject, at location: TestSourceLocation) {
@@ -21,7 +23,7 @@ final class DeallocationTracker {
         )
     }
 
-    func verifyDeallocation(timeout: Duration) async {
+    func verifyDeallocation(timeout: Duration = .seconds(2)) async {
         let objects = trackedObjects
         trackedObjects.removeAll()
 
@@ -33,9 +35,17 @@ final class DeallocationTracker {
             return
         }
 
-        for trackedObject in objects where trackedObject.object != nil {
+        for trackedObject in objects {
+            guard let object = trackedObject.object else {
+                continue
+            }
+
             reportIssue(
-                LeakReport(typeName: trackedObject.typeName, timeout: timeout).message,
+                LeakReport(
+                    typeName: trackedObject.typeName,
+                    timeout: timeout,
+                    hints: LeakHints.hints(for: object)
+                ).message,
                 at: trackedObject.location
             )
         }

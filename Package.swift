@@ -24,7 +24,7 @@ let package = Package(
     traits: [
         .trait(
             name: "DependencyInjection",
-            description: "Integration with STRV Dependency Injection: the AsyncContainer in DeallocTester"
+            description: "Integration with STRV Dependency Injection: expectDeallocation(of:resolvedFrom:)"
         ),
         .default(enabledTraits: ["DependencyInjection"]),
     ],
@@ -45,7 +45,12 @@ let package = Package(
         .testTarget(
             name: "DeallocTestsTests",
             dependencies: [
-                "DeallocTests"
+                "DeallocTests",
+                .product(
+                    name: "DependencyInjection",
+                    package: "ios-dependency-injection",
+                    condition: .when(traits: ["DependencyInjection"])
+                )
             ]
         ),
     ],
