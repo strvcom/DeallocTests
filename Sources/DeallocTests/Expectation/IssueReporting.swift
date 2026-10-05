@@ -18,20 +18,29 @@ struct TestSourceLocation: Sendable {
     let column: UInt
 }
 
-func reportIssue(_ message: String, at location: TestSourceLocation) {
+func reportIssue(_ message: String, at location: TestSourceLocation, severity: DeallocationIssueSeverity = .error) {
     #if canImport(Testing)
         if Test.current != nil {
-            recordSwiftTestingIssue(message, at: location)
+            recordSwiftTestingIssue(message, at: location, severity: severity)
             return
         }
     #endif
 
-    XCTFail(message, file: location.filePath, line: location.line)
+    switch severity {
+    case .error:
+        XCTFail(message, file: location.filePath, line: location.line)
+    case .warning:
+        let options = XCTExpectedFailure.Options()
+        options.isStrict = false
+        XCTExpectFailure("Reported as a warning", options: options) {
+            XCTFail(message, file: location.filePath, line: location.line)
+        }
+    }
 }
 
 #if canImport(Testing)
 
-private func recordSwiftTestingIssue(_ message: String, at location: TestSourceLocation) {
+private func recordSwiftTestingIssue(_ message: String, at location: TestSourceLocation, severity: DeallocationIssueSeverity) {
     let sourceLocation = SourceLocation(
         fileID: String(describing: location.fileID),
         filePath: String(describing: location.filePath),
@@ -39,7 +48,18 @@ private func recordSwiftTestingIssue(_ message: String, at location: TestSourceL
         column: Int(location.column)
     )
 
-    Issue.record(Comment(rawValue: message), sourceLocation: sourceLocation)
+    switch severity {
+    case .error:
+        Issue.record(Comment(rawValue: message), sourceLocation: sourceLocation)
+    case .warning:
+        #if compiler(>=6.3)
+            Issue.record(Comment(rawValue: message), severity: .warning, sourceLocation: sourceLocation)
+        #else
+            withKnownIssue("Reported as a warning", isIntermittent: true) {
+                Issue.record(Comment(rawValue: message), sourceLocation: sourceLocation)
+            }
+        #endif
+    }
 }
 
 #endif
