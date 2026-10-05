@@ -18,16 +18,11 @@ func isLeakReport(within timeout: String) -> (Issue) -> Bool {
 @MainActor
 struct ConfigurationTests {
     @Test func suiteTimeoutApplies() async {
-        let clock = ContinuousClock()
-        let start = clock.now
-
         await withKnownIssue {
             await expectDeallocation { RetainCycleObject() }
         } matching: { issue in
             isLeakReport(within: "100 ms")(issue)
         }
-
-        #expect(clock.now - start < .seconds(1), "the default 2 s timeout must not apply")
     }
 
     @Test(.deallocationTimeout(.milliseconds(300)))

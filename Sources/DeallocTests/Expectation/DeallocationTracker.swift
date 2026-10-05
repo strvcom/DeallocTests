@@ -34,7 +34,7 @@ final class DeallocationTracker {
         trackedObjects.removeAll()
 
         let timeout = timeout ?? configuration.timeout
-        let gracePeriod = configuration.severity == .error ? configuration.gracePeriod : .zero
+        let gracePeriod = configuration.effectiveGracePeriod
         let clock = ContinuousClock()
         let start = clock.now
 
