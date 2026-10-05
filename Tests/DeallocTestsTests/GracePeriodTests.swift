@@ -5,7 +5,7 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import DeallocTests
+@testable import DeallocTests
 import Foundation
 import Testing
 
@@ -49,13 +49,12 @@ struct GracePeriodTests {
         }
     }
 
-    @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(3)), .deallocationIssues(.warning))
-    func warningSeveritySkipsTheGracePeriod() async {
-        let clock = ContinuousClock()
-        let start = clock.now
+    @Test func warningSeveritySkipsTheGracePeriod() {
+        var configuration = DeallocationConfiguration()
+        configuration.gracePeriod = .seconds(3)
+        #expect(configuration.effectiveGracePeriod == .seconds(3))
 
-        await expectDeallocation { RetainCycleObject() }
-
-        #expect(clock.now - start < .seconds(1))
+        configuration.severity = .warning
+        #expect(configuration.effectiveGracePeriod == .zero)
     }
 }

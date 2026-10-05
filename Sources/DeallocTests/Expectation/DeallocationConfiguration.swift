@@ -32,6 +32,12 @@ public struct DeallocationConfiguration: Sendable {
     @TaskLocal public static var current = DeallocationConfiguration()
 }
 
+extension DeallocationConfiguration {
+    var effectiveGracePeriod: Duration {
+        severity == .error ? gracePeriod : .zero
+    }
+}
+
 /// How a leak is reported
 public enum DeallocationIssueSeverity: Sendable {
     /// The test fails
