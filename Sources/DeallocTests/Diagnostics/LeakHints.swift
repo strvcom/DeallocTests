@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// Looks at the stored properties of a leaked object and points at the usual suspects.
 enum LeakHints {
     static let maximumCycleDepth = 4
     static let maximumVisitedObjects = 300
