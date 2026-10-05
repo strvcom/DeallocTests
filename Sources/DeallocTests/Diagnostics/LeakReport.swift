@@ -5,7 +5,6 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-/// What is known about an object that wasn't deallocated, and how it's described in a failure
 struct LeakReport: Sendable {
     let typeName: String
     let timeout: Duration
