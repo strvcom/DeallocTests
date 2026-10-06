@@ -1,5 +1,5 @@
 //
-//  MainCoordinatorDeallocTester.swift
+//  MainCoordinatorDeallocTests.swift
 //  DeallocTestsAppTests
 //
 //  Created by Daniel Cech on 01/05/2020.
@@ -10,7 +10,7 @@ import DeallocTests
 import XCTest
 @testable import DeallocTestsAppSPM
 
-final class MainCoordinatorDeallocTester: XCTestCase {
+final class MainCoordinatorDeallocTests: XCTestCase {
     @MainActor
     func test_firstScreen() async {
         let coordinator = MainCoordinator()

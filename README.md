@@ -296,14 +296,14 @@ final class MainCoordinatorDeallocTests: XCTestCase {
 
 The folder `SampleApps` contains two demo projects. The application itself is very simple: there are just three screens in the navigation stack, all handled by `MainCoordinator`.
 
-- `DeallocTestsAppDIFreeSPM` checks the screens and the coordinator with `expectDeallocation` in **XCTest** (`MainCoordinatorDeallocTester.swift`).
+- `DeallocTestsAppDIFreeSPM` checks the screens and the coordinator with `expectDeallocation` in **XCTest** (`MainCoordinatorDeallocTests.swift`).
 - `DeallocTestsAppDIFreeSPM` turns the `DependencyInjection` trait off in its Xcode project, so STRV Dependency Injection isn't downloaded.
 - `DeallocTestsAppSPM` uses the default `DependencyInjection` trait. `ExpectDeallocationTests.swift` does the checks with `expectDeallocation` in **Swift Testing**, including a service resolved from an `AsyncContainer`.
 
 The sample app intentionally contains a memory leak in `SecondViewController.swift`. This class contains a closure with a strong reference to `self`. The test fails with:
 
 ```
-MainCoordinatorDeallocTester.swift:25: error: -[DeallocTestsAppSPMTests.MainCoordinatorDeallocTester test_secondScreen] : failed - DeallocTestsAppSPM.SecondViewController was not deallocated within 2 sec. It was watched for another 3 sec after that. Possible causes:
+MainCoordinatorDeallocTests.swift:23: error: -[DeallocTestsAppSPMTests.MainCoordinatorDeallocTests test_secondScreen] : failed - DeallocTestsAppSPM.SecondViewController was not deallocated within 2 sec. It was watched for another 3 sec after that. Possible causes:
   • `someClosure` is a closure. Make sure it captures self weakly
   • Or something outside still holds it: a parent's list of children, a cache or a singleton
 ```
