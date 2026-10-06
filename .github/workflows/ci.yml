@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   package:
-    name: Package build (macOS, ${{ matrix.traits.name }})
+    name: Package tests (macOS, ${{ matrix.traits.name }})
     runs-on: macos-15
     strategy:
       matrix:
@@ -20,16 +20,20 @@ jobs:
           - { name: "without DependencyInjection", flags: "--disable-default-traits" }
     steps:
       - uses: actions/checkout@v4
-      - name: Build
-        run: swift build ${{ matrix.traits.flags }}
+      - name: Run tests
+        run: swift test ${{ matrix.traits.flags }}
 
   package-ios:
-    name: Package build (iOS Simulator)
+    name: Package tests (iOS Simulator)
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+      - name: Run tests
         run: |
-          xcodebuild build \
+          # Use whichever iPhone simulator the runner's Xcode provides
+          UDID=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
+          echo "Simulator: $UDID"
+          xcodebuild test \
             -scheme DeallocTests \
-            -destination 'generic/platform=iOS Simulator'
+            -destination "id=$UDID"
