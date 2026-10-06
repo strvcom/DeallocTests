@@ -63,6 +63,10 @@ struct UIKitLifecycleTests {
         }
     }
 
+    @Test(.enabled("Modal presentation needs a host app") { await hasWindowScene() }) func presentAsPopoverIsAnchored() async {
+        await expectDeallocation(.present(style: .popover)) { CleanController() }
+    }
+
     @Test(.enabled("Modal presentation needs a host app") { await hasWindowScene() }) func presentInteractionRunsOnScreen() async {
         var wasOnScreen = false
 

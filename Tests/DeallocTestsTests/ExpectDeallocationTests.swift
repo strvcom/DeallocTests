@@ -5,7 +5,7 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
-import DeallocTests
+@testable import DeallocTests
 import Testing
 
 #if canImport(AppKit)
@@ -59,6 +59,24 @@ struct ExpectDeallocationTests {
         try? await Task.sleep(for: .milliseconds(100))
         check.cancel()
         await check.value
+    }
+
+    @Test func cancelledInteractionReportsNothing() async {
+        let check = Task { @MainActor in
+            await expectDeallocation(.custom { _ in try await Task.sleep(for: .seconds(5)) }) { PlainObject() }
+        }
+
+        try? await Task.sleep(for: .milliseconds(100))
+        check.cancel()
+        await check.value
+    }
+
+    @Test func afterReleaseRunsWhenTheLifecycleCannotRun() async {
+        var didRunAfterRelease = false
+
+        await expectDeallocation(Lifecycle { _, _ in false }, afterRelease: { didRunAfterRelease = true }) { PlainObject() }
+
+        #expect(didRunAfterRelease)
     }
 
     @Test func cleanObjectPasses() async {

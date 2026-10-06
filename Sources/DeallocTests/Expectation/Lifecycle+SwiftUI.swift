@@ -28,7 +28,16 @@ public extension Lifecycle {
         @ViewBuilder _ content: @escaping @MainActor (Object) -> Content
     ) -> Self {
         Self { object, location in
-            guard let host = await SwiftUIHost(rootView: content(object), location: location) else {
+            let presence = ViewPresence()
+            let rootView = PresenceReporting(content: content(object), presence: presence)
+
+            guard let host = await SwiftUIHost(rootView: rootView, location: location) else {
+                return false
+            }
+
+            guard await waitUntil({ presence.hasStartedTasks }) else {
+                reportIssue("The SwiftUI view did not appear", at: location)
+                host.remove()
                 return false
             }
 
@@ -40,6 +49,20 @@ public extension Lifecycle {
             await settle()
             return true
         }
+    }
+}
+
+@MainActor
+private final class ViewPresence {
+    var hasStartedTasks = false
+}
+
+private struct PresenceReporting<Content: View>: View {
+    let content: Content
+    let presence: ViewPresence
+
+    var body: some View {
+        content.task { presence.hasStartedTasks = true }
     }
 }
 
