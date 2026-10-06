@@ -23,6 +23,17 @@ jobs:
       - name: Run tests
         run: swift test ${{ matrix.traits.flags }}
 
+  package-latest-xcode:
+    name: Package tests (macOS, latest Xcode)
+    # Warning severity uses Issue.record(severity:) from Swift 6.3; macos-15 only builds the fallback
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: swift --version
+      - name: Run tests
+        run: swift test
+
   package-ios:
     name: Package tests (iOS Simulator)
     runs-on: macos-15

@@ -20,14 +20,14 @@
 ///
 /// - Parameters:
 ///   - lifecycle: What happens with the object before it's released, e.g. `.present` for a view controller
-///   - timeout: How long to wait for the object to deallocate
+///   - timeout: How long to wait for the object to deallocate. Defaults to `DeallocationConfiguration.current.timeout`
 ///   - afterRelease: Runs after the object is released and before the check, e.g. to release cached instances
 ///   - makeObject: Creates the tested object. Don't keep any other reference to it.
 ///     Objects passed to `trackForDeallocation(_:)` inside it are checked too.
 @MainActor
 public func expectDeallocation<Object: AnyObject>(
     _ lifecycle: Lifecycle<Object> = .none,
-    timeout: Duration = .seconds(2),
+    timeout: Duration? = nil,
     afterRelease: @MainActor () async -> Void = {},
     fileID: StaticString = #fileID,
     filePath: StaticString = #filePath,
