@@ -6,7 +6,21 @@
 //
 
 import DeallocTests
+import Foundation
 import Testing
+
+final class RecordedComments: @unchecked Sendable {
+    private let lock = NSLock()
+    private var comments = [String]()
+
+    func append(_ issue: Issue) {
+        lock.withLock { comments += issue.comments.map(\.rawValue) }
+    }
+
+    func contains(_ text: String) -> Bool {
+        lock.withLock { comments.contains { $0.contains(text) } }
+    }
+}
 
 func isLeakReport(within timeout: String) -> (Issue) -> Bool {
     { issue in
@@ -53,8 +67,44 @@ struct ConfigurationTests {
     }
 
     @Test(.deallocationIssues(.warning))
-    func warningSeverityDoesNotFailTheTest() async {
-        await expectDeallocation { RetainCycleObject() }
+    func warningSeverityRecordsAWarning() async {
+        #if compiler(>=6.3)
+            await withKnownIssue {
+                await expectDeallocation { RetainCycleObject() }
+            } matching: { issue in
+                issue.severity == .warning && isLeakReport(within: "100 ms")(issue)
+            }
+        #else
+            await expectDeallocation { RetainCycleObject() }
+        #endif
+    }
+
+    @Test func eachTrackedObjectUsesItsOwnConfiguration() async throws {
+        let test = try #require(Test.current)
+        let recorded = RecordedComments()
+
+        try await withKnownIssue {
+            try await DeallocationCheckTrait.checksDeallocation.provideScope(
+                for: test,
+                testCase: Test.Case.current,
+                performing: {
+                    await MainActor.run {
+                        withDeallocationConfiguration({ $0.timeout = .milliseconds(150) }) {
+                            _ = trackForDeallocation(RetainCycleObject())
+                        }
+                        withDeallocationConfiguration({ $0.timeout = .milliseconds(250) }) {
+                            _ = trackForDeallocation(RetainCycleObject())
+                        }
+                    }
+                }
+            )
+        } matching: { issue in
+            recorded.append(issue)
+            return isLeakReport(within: "150 ms")(issue) || isLeakReport(within: "250 ms")(issue)
+        }
+
+        #expect(recorded.contains("within 150 ms"))
+        #expect(recorded.contains("within 250 ms"))
     }
 
     @Test func trackedObjectsUseTheConfiguredTimeout() async throws {

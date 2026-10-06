@@ -8,7 +8,24 @@
 import DeallocTests
 import XCTest
 
+final class ExpectedFailureRecorder: NSObject, XCTestObservation, @unchecked Sendable {
+    private(set) var descriptions = [String]()
+
+    func testCase(_ testCase: XCTestCase, didRecord expectedFailure: XCTExpectedFailure) {
+        descriptions.append(expectedFailure.issue.compactDescription)
+    }
+}
+
 final class TrackForDeallocationXCTests: XCTestCase {
+    @MainActor
+    private func recordingExpectedFailures(_ operation: () async -> Void) async -> [String] {
+        let recorder = ExpectedFailureRecorder()
+        XCTestObservationCenter.shared.addTestObserver(recorder)
+        await operation()
+        XCTestObservationCenter.shared.removeTestObserver(recorder)
+        return recorder.descriptions
+    }
+
     override func invokeTest() {
         withDeallocationConfiguration({ $0.gracePeriod = .zero }) {
             super.invokeTest()
@@ -91,22 +108,30 @@ final class TrackForDeallocationXCTests: XCTestCase {
     }
 
     @MainActor
-    func test_warningSeverity_doesNotFailTheTest() async {
-        await withDeallocationConfiguration({
-            $0.timeout = .milliseconds(100)
-            $0.severity = .warning
-        }) {
-            await expectDeallocation { RetainCycleObject() }
+    func test_warningSeverity_isReportedAsAnExpectedFailure() async {
+        let warnings = await recordingExpectedFailures {
+            await withDeallocationConfiguration({
+                $0.timeout = .milliseconds(100)
+                $0.severity = .warning
+            }) {
+                await expectDeallocation { RetainCycleObject() }
+            }
         }
+
+        XCTAssertTrue(warnings.contains { $0.contains("RetainCycleObject was not deallocated within 100 ms") }, "\(warnings)")
     }
 
     @MainActor
     func test_lateRelease_isAWarning() async {
-        await withDeallocationConfiguration({
-            $0.timeout = .milliseconds(100)
-            $0.gracePeriod = .seconds(2)
-        }) {
-            await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+        let warnings = await recordingExpectedFailures {
+            await withDeallocationConfiguration({
+                $0.timeout = .milliseconds(100)
+                $0.gracePeriod = .seconds(2)
+            }) {
+                await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+            }
         }
+
+        XCTAssertTrue(warnings.contains { $0.contains("PlainObject was released after") }, "\(warnings)")
     }
 }

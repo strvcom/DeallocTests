@@ -12,78 +12,101 @@ final class DeallocationTracker {
         weak var object: AnyObject?
         let typeName: String
         let location: TestSourceLocation
+        let configuration: DeallocationConfiguration
+    }
+
+    private struct Check {
+        let trackedObject: TrackedObject
+        let timeout: Duration
+        let gracePeriod: Duration
     }
 
     @TaskLocal static var current: DeallocationTracker?
 
     private var trackedObjects = [TrackedObject]()
-    private var configuration = DeallocationConfiguration.current
 
     func track(_ object: AnyObject, at location: TestSourceLocation) {
-        if trackedObjects.isEmpty {
-            configuration = DeallocationConfiguration.current
-        }
-
         trackedObjects.append(
-            TrackedObject(object: object, typeName: TypeNames.readableName(of: object), location: location)
+            TrackedObject(
+                object: object,
+                typeName: TypeNames.readableName(of: object),
+                location: location,
+                configuration: DeallocationConfiguration.current
+            )
         )
     }
 
     func verifyDeallocation(timeout: Duration? = nil) async {
-        let objects = trackedObjects
+        let checks = trackedObjects.map { trackedObject in
+            Check(
+                trackedObject: trackedObject,
+                timeout: timeout ?? trackedObject.configuration.timeout,
+                gracePeriod: trackedObject.configuration.effectiveGracePeriod
+            )
+        }
         trackedObjects.removeAll()
 
-        let timeout = timeout ?? configuration.timeout
-        let gracePeriod = configuration.effectiveGracePeriod
         let clock = ContinuousClock()
         let start = clock.now
+        let longestWait = checks.map { $0.timeout + $0.gracePeriod }.max() ?? .zero
+        var pending = checks
+        var lateReleases = [(Check, Duration)]()
+        var leaks = [Check]()
 
-        _ = await Polling.waitUntil(timeout: timeout) {
-            !objects.contains { $0.object != nil }
-        }
+        _ = await Polling.waitUntil(timeout: longestWait) {
+            let elapsed = clock.now - start
 
-        var lateReleases = [(TrackedObject, Duration)]()
-        var pending = objects.filter { $0.object != nil }
-
-        if !pending.isEmpty, gracePeriod > .zero {
-            _ = await Polling.waitUntil(timeout: gracePeriod) {
-                pending.removeAll { trackedObject in
-                    guard trackedObject.object == nil else {
-                        return false
+            pending.removeAll { check in
+                if check.trackedObject.object == nil {
+                    if elapsed > check.timeout, check.gracePeriod > .zero {
+                        lateReleases.append((check, elapsed))
                     }
-                    lateReleases.append((trackedObject, clock.now - start))
                     return true
                 }
-                return pending.isEmpty
+
+                if elapsed >= check.timeout + check.gracePeriod {
+                    leaks.append(check)
+                    return true
+                }
+
+                return false
             }
+
+            return pending.isEmpty
         }
+
+        leaks += pending
 
         guard !Task.isCancelled else {
             return
         }
 
-        for (trackedObject, releasedAfter) in lateReleases {
+        for (check, releasedAfter) in lateReleases {
             reportIssue(
-                LeakReport.lateReleaseMessage(typeName: trackedObject.typeName, releasedAfter: releasedAfter, timeout: timeout),
-                at: trackedObject.location,
+                LeakReport.lateReleaseMessage(
+                    typeName: check.trackedObject.typeName,
+                    releasedAfter: releasedAfter,
+                    timeout: check.timeout
+                ),
+                at: check.trackedObject.location,
                 severity: .warning
             )
         }
 
-        for trackedObject in pending {
-            guard let object = trackedObject.object else {
+        for check in leaks {
+            guard let object = check.trackedObject.object else {
                 continue
             }
 
             reportIssue(
                 LeakReport(
-                    typeName: trackedObject.typeName,
-                    timeout: timeout,
-                    gracePeriod: gracePeriod,
+                    typeName: check.trackedObject.typeName,
+                    timeout: check.timeout,
+                    gracePeriod: check.gracePeriod,
                     hints: LeakHints.hints(for: object)
                 ).message,
-                at: trackedObject.location,
-                severity: configuration.severity
+                at: check.trackedObject.location,
+                severity: check.trackedObject.configuration.severity
             )
         }
     }
