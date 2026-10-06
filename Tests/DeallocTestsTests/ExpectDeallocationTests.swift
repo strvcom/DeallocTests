@@ -251,6 +251,25 @@ struct TrackForDeallocationTests {
         }
     }
 
+    @Test func trackedLeakIsReportedWhenTheTestThrows() async throws {
+        let test = try #require(Test.current)
+
+        await withKnownIssue {
+            _ = try? await DeallocationCheckTrait.checksDeallocation.provideScope(
+                for: test,
+                testCase: Test.Case.current,
+                performing: {
+                    await MainActor.run {
+                        _ = trackForDeallocation(RetainCycleObject())
+                    }
+                    throw LifecycleError()
+                }
+            )
+        } matching: { issue in
+            isLeakReport(of: "RetainCycleObject")(issue)
+        }
+    }
+
     @Test func missingTraitIsReported() {
         withKnownIssue {
             _ = trackForDeallocation(PlainObject())
