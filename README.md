@@ -27,195 +27,288 @@ DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) ar
 
 ## STRV Dependency Injection library
 
-The main version of DeallocTests uses [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection) as the only dependency. The support of dependency injection is great benefit but DeallocTests can work also without it, if needed. If you don't use STRV Dependency Injection in your app, please use DeallocTestsDIFree library:
-* For installation using SPM: Library `DeallocTestsDIFree`
-
-##  DeallocTests. Easy-to-use framework for custom deallocation tests.
-
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [License](#license)
+DeallocTests integrates with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection). The integration is the `DependencyInjection` [package trait](#installation), which is on by default. Projects that don't use STRV Dependency Injection can turn it off, and the library is then not even downloaded.
 
 ## Requirements
 
-- iOS 13.0+ / Mac OS X 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 12.0+
+- iOS 17.0+ / macOS 13.0+
+- Swift 6.1+ / Xcode 16.3+
+- Swift Testing or XCTest
+- Turning the `DependencyInjection` trait off from an Xcode project needs Xcode 26.4 or later
 
 ## Installation
 
-### Dependency Managers
-<details>
-  <summary><strong>Swift Package Manager</strong></summary>
-
-To use DeallocTests as a [Swift Package Manager](https://swift.org/package-manager/) package just add the following in your Package.swift file.
+DeallocTests is distributed via [Swift Package Manager](https://swift.org/package-manager/). Add it to the **test target** of your app:
 
 ``` swift
-// swift-tools-version:5.5
+// swift-tools-version:6.1
 
 import PackageDescription
 
 let package = Package(
     name: "HelloDeallocTests",
     dependencies: [
-        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "4.0.0"))
     ],
     targets: [
-        .target(name: "HelloDeallocTests", dependencies: ["DeallocTests"])
+        .testTarget(
+            name: "HelloDeallocTestsTests",
+            dependencies: [
+                "HelloDeallocTests",
+                .product(name: "DeallocTests", package: "DeallocTests")
+            ]
+        )
     ]
 )
 ```
-__WARNING__: When you install DeallocTests with SPM and you use Xcode 12.5+ you must set `ENABLE_TESTING_SEARCH_PATHS` to `YES` in your app target build settings.
 
-</details>
+This includes the STRV Dependency Injection integration. If your project doesn't use STRV Dependency Injection, turn off the default trait, so the library isn't downloaded:
 
-### Manually
-
-If you prefer not to use either of the aforementioned dependency managers, you can integrate DeallocTests into your project manually.
-
-<details>
-  <summary><strong>Git Submodules</strong></summary><p>
-
-- Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
-
-```bash
-$ git init
+``` swift
+.package(url: "https://github.com/strvcom/DeallocTests.git", .upToNextMajor(from: "4.0.0"), traits: [])
 ```
 
-- Add DeallocTests as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
+In Xcode, add the package via *File › Add Package Dependencies…* and link the `DeallocTests` product to your test target only. To turn the STRV Dependency Injection integration off, disable the package's default traits in Xcode 26.4 or later. The package reference in the project file then has an empty list:
 
-```bash
-$ git submodule add https://github.com/DanielCech/DeallocTests.git
-$ git submodule update --init --recursive
+```
+traits = (
+);
 ```
 
-- Open the new `DeallocTests` folder, and drag the `DeallocTests.xcodeproj` into the Project Navigator of your application's Xcode project.
+## Usage
 
-    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
+### `expectDeallocation`
 
-- Select the `DeallocTests.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
-- In the tab bar at the top of that window, open the "General" panel.
-- Click on the `+` button under the "Embedded Binaries" section.
-- You will see two different `DeallocTests.xcodeproj` folders each with two different versions of the `DeallocTests.framework` nested inside a `Products` folder.
-
-    > It does not matter which `Products` folder you choose from.
-
-- Select the `DeallocTests.framework`.
-
-- And that's it!
-
-> The `DeallocTests.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
-
-</p></details>
-
-<details>
-  <summary><strong>Embedded Binaries</strong></summary><p>
-
-- Download the latest release from https://github.com/DanielCech/DeallocTests/releases
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
-- In the tab bar at the top of that window, open the "General" panel.
-- Click on the `+` button under the "Embedded Binaries" section.
-- Add the downloaded `DeallocTests.framework`.
-- And that's it!
-
-</p></details>
-
-## Sample App
-
-The folder SampleApps contains a demo project that demonstrates at least some features. The application itself is very simple—there are just three screens in the navigation stack. All screens are handled by `MainCoordinator`.
-
-The Podfile adds DeallocTests support to the app's test target.
-
-```ruby
-target 'DeallocTestsAppCocoapodsTests' do
-  pod 'DeallocTests', :path=>'../../'
-end
-```
-
-The file `DeallocTestsConformances.swift` contains the DeallocTestable protocol conformances to all tested classes.
+`expectDeallocation` creates an object, runs its lifecycle, releases it and checks that it deallocates. It works in **Swift Testing and XCTest**, any class can be checked without conformances or changes to the app target, and a leak is reported at the line of your test.
 
 ```swift
 import DeallocTests
-@testable import DeallocTestsAppCocoapods
+import Testing
+@testable import MyApp
 
-extension MainCoordinator: DeallocTestable {}
-extension FirstViewController: DeallocTestable {}
-extension SecondViewController: DeallocTestable {}
-extension ThirdViewController: DeallocTestable {}
-```
+@MainActor
+struct LeakTests {
+    let coordinator = MainCoordinator()
 
-The file `MainCoordinatorDeallocTester.swift` is also very simple. It defines the testing scenario for MainCoordinator.
+    @Test func profileScreen() async {
+        await expectDeallocation(.present) { coordinator.createProfileViewController() }
+    }
 
-```swift
-var mainCoordinator: MainCoordinator? {
-    applyAssembliesToContainer()
-    return MainCoordinator()
+    @Test func settingsScreen() async {
+        await expectDeallocation(.push) { coordinator.createSettingsViewController() }
+    }
+
+    @Test func profileViewModel() async {
+        await expectDeallocation { ProfileViewModel(api: MockAPI()) }
+    }
 }
 ```
 
-This will initialize a dependency injection container and instantiate the main coordinator. The method `applyAssembliesToContainer` is defined in the main target. The scenario for the main coordinator test looks like this: (Don't be scared, it is almost boilerplate code which is common for every test scenario.)
+The same calls work inside an `XCTestCase`. A leak fails at the line of the test, and the message points at the likely cause:
+
+```
+LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec. It was watched for another 3 sec after that. Possible causes:
+  • `onUpdate` is a closure. Make sure it captures self weakly
+  • `self.viewModel.owner` refers back to the object. That's a retain cycle unless one of the references is weak
+  • Or something outside still holds it: a parent's list of children, a cache or a singleton
+```
+
+The hints come from the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers, and reference cycles through properties. Reflection can't tell weak properties from strong ones or look inside closures, so treat them as suggestions.
+
+Many leaks only appear once a screen loads or appears, so pick the lifecycle that exercises the object:
+
+| Lifecycle | What happens before release |
+|---|---|
+| `.none` (default) | Nothing, the object is released right away |
+| `.loadView` | The view controller loads its view (`viewDidLoad`). UIKit and AppKit. |
+| `.present`, `.present(style:interaction:)` | The view controller is presented in a test window, then dismissed |
+| `.push`, `.push(interaction:)` | The view controller is pushed onto a navigation controller in a test window, then popped |
+| `.hosting { object in SomeView(model: object) }` | A SwiftUI view built from the object is shown in a test window, then removed. `onAppear` and `.task` run. |
+| `.custom { object in … }` | Your code runs with the object, e.g. calls the methods you suspect of leaking |
+
+`interaction` runs while the controller is on screen:
 
 ```swift
-func test_mainCoordinatorDealloc() {
-    presentingController = showPresentingController()
+await expectDeallocation(.present(interaction: { controller in
+    controller.searchBar.text = "query"
+    await controller.search()
+})) {
+    coordinator.createSearchViewController()
+}
+```
 
-    deallocTests = [
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createFirstViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createSecondViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { [weak self] _ in
-                return self?.mainCoordinator?.createThirdViewController()
-            }
-        ),
-        DeallocTest(
-            objectCreation: { _ in
-                return MainCoordinator()
-            }
+SwiftUI views are values, so check the object behind them, typically the view model:
+
+```swift
+await expectDeallocation(.hosting { ProfileView(viewModel: $0) }) {
+    ProfileViewModel(api: MockAPI())
+}
+```
+
+To also check objects the tested one owns, wrap them in `trackForDeallocation` inside the closure. They must deallocate together with it:
+
+```swift
+await expectDeallocation(.present) {
+    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
+    return ProfileViewController(viewModel: viewModel)
+}
+```
+
+Other parameters:
+
+- `timeout` sets how long to wait for this object to deallocate (2 seconds by default). The check passes as soon as the object is gone.
+- `afterRelease` runs after the object is released and before the check, e.g. to clear a cache that legitimately holds it.
+
+#### Configuring a test, a suite or a test case class
+
+`timeout` is the only option a call takes, because it describes the object: some screens take longer to go away. Everything else is a policy for a whole test or suite, set through `DeallocationConfiguration`:
+
+| Option | Default | Swift Testing trait |
+|---|---|---|
+| `timeout` | 2 sec | `.deallocationTimeout(_:)` |
+| `gracePeriod` | 3 sec | `.deallocationGracePeriod(_:)` |
+| `severity` | `.error` | `.deallocationIssues(_:)` |
+
+- An object still alive at the timeout is watched for the **grace period**. If it goes away then, the check reports a warning, "released after 3.2 sec … bounded retention, not a leak", instead of failing. Passing checks never wait for it; only real leaks take the timeout plus the grace period to report. `.zero` turns it off.
+- With `severity` `.warning`, leaks are reported as warnings that don't fail the test, e.g. while adopting dealloc tests in an existing project. The grace period is skipped then, since it can't change the outcome.
+
+```swift
+@Suite(.deallocationTimeout(.seconds(5)))
+struct ScreenDeallocTests { … }
+
+// Adopting dealloc tests in an existing project: report leaks as warnings for now
+@Suite(.deallocationIssues(.warning))
+struct LegacyDeallocTests { … }
+```
+
+A test's own trait wins over its suite's, and a `timeout` passed to the call wins over both. In XCTest, use `withDeallocationConfiguration` around a test's code, or around `invokeTest()` for a whole test case class:
+
+```swift
+await withDeallocationConfiguration({ $0.timeout = .seconds(5) }) {
+    await expectDeallocation(.present) { makeProfileViewController() }
+}
+
+final class LegacyDeallocTests: XCTestCase {
+    override func invokeTest() {
+        withDeallocationConfiguration({ $0.severity = .warning }) {
+            super.invokeTest()
+        }
+    }
+}
+```
+
+`.present` needs a test target with a host app, because modal presentation needs a window scene. The other lifecycles also work in package tests.
+
+### Checking objects used in ordinary unit tests
+
+`trackForDeallocation` checks that an object deallocates when the test ends, so any unit test can catch leaks of its system under test.
+
+```swift
+// Swift Testing: add the trait to a test or a whole suite
+@Test(.checksDeallocation) @MainActor func loadsProfile() async {
+    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
+    await viewModel.load()
+    #expect(viewModel.name == "Daniel")
+}
+
+// XCTest
+@MainActor
+func test_loadsProfile() async {
+    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
+    await viewModel.load()
+    XCTAssertEqual(viewModel.name, "Daniel")
+}
+```
+
+In XCTest, keep the object in a local variable. A property of the test case lives until the test case is released. The check uses the configuration in effect where `trackForDeallocation` is called.
+
+### STRV Dependency Injection
+
+With the `DependencyInjection` trait, a dependency can be resolved from an `AsyncContainer`, released together with the container's shared instances and checked:
+
+```swift
+@Test func apiManager() async {
+    let container = AsyncContainer()
+    await container.register(type: APIManaging.self, in: .shared) { _ in APIManager() }
+
+    await expectDeallocation(of: APIManaging.self, resolvedFrom: container)
+}
+```
+
+Following the dependency graph, check the simplest dependencies first, then the ones that use them.
+
+## Migrating to 4.0
+
+**Dependency Injection.** The `DeallocTestsDIFree` product is gone. Everyone uses the `DeallocTests` product and `import DeallocTests`:
+
+- If you used `DeallocTests` with STRV Dependency Injection, nothing changes. The `DependencyInjection` trait is on by default.
+- If you used `DeallocTestsDIFree`, link the `DeallocTests` product instead, replace `import DeallocTestsDIFree` with `import DeallocTests`, and turn the default trait off (see [Installation](#installation)) so STRV Dependency Injection isn't downloaded.
+
+**`DeallocTester` is removed**, together with `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable`. Each `DeallocTest` becomes one `expectDeallocation` call, and the `DeallocTestable` conformances are deleted:
+
+```swift
+// Before
+final class MainCoordinatorDeallocTester: DeallocTester {
+    @MainActor
+    func test_mainCoordinatorDealloc() async {
+        let coordinator = MainCoordinator()
+        let expectation = expectation(description: "dealloc test")
+
+        await performDeallocTest(
+            deallocTests: [
+                DeallocTest(objectCreation: { _ in coordinator.createFirstViewController() }),
+                DeallocTest(objectCreation: { _ in MainCoordinator() })
+            ],
+            expectation: expectation
         )
-    ]
 
-    let expectation = self.expectation(description: "deallocTest test_mainCoordinatorDealloc")
+        await fulfillment(of: [expectation], timeout: 60)
+    }
+}
 
-    performDeallocTest(
-        deallocTests: deallocTests,
-        expectation: expectation
-    )
+// After (XCTest; in Swift Testing the calls are the same)
+final class MainCoordinatorDeallocTests: XCTestCase {
+    @MainActor
+    func test_firstScreen() async {
+        let coordinator = MainCoordinator()
+        await expectDeallocation(.present) { coordinator.createFirstViewController() }
+    }
 
-    waitForExpectations(timeout: 200, handler: nil)
+    @MainActor
+    func test_coordinator() async {
+        await expectDeallocation { MainCoordinator() }
+    }
 }
 ```
 
-The variable `presentingController` is just simple empty controller on top of everything - it is handled by DeallocTests framework. The array `deallocTests` consists of four items. The first three are for view controllers and the last one is for the view coordinator itself. The `objectCreation` closure initializes the particular view controller from the view coordinator. The `expectation` is a standard `XCTestExpectation` used to wait for the result of the test. The main test processing is hidden in the `performDeallocTest` call.
+| `DeallocTester` | `expectDeallocation` |
+|---|---|
+| View controllers are always presented | Choose `.present`, `.push`, `.loadView` or `.hosting` |
+| `registerDependencies()` + `objectCreation: { $0.resolve(...) }` | `expectDeallocation(of:resolvedFrom:)` with your own `AsyncContainer` |
+| `checkClasses` | `trackForDeallocation(_:)` inside the closure |
+| `actionBeforeCheck` | `afterRelease` |
+| `deallocationTimeout` | `timeout` |
+| `isLoggingEnabled` (`Alloc`/`Dealloc` output) | Leak messages name the leaked object and its likely causes |
 
-The sample app intentionally contains a memory leak in SecondViewController.swift. This class contains the closure with a strong reference to `self`. The DeallocTests console output looks like this:
+**`DefaultInitializable`** is removed. It wasn't related to dealloc testing.
+
+## Sample Apps
+
+The folder `SampleApps` contains two demo projects. The application itself is very simple: there are just three screens in the navigation stack, all handled by `MainCoordinator`.
+
+- `DeallocTestsAppDIFreeSPM` checks the screens and the coordinator with `expectDeallocation` in **XCTest** (`MainCoordinatorDeallocTests.swift`).
+- `DeallocTestsAppDIFreeSPM` turns the `DependencyInjection` trait off in its Xcode project, so STRV Dependency Injection isn't downloaded.
+- `DeallocTestsAppSPM` uses the default `DependencyInjection` trait. `ExpectDeallocationTests.swift` does the checks with `expectDeallocation` in **Swift Testing**, including a service resolved from an `AsyncContainer`.
+
+The sample app intentionally contains a memory leak in `SecondViewController.swift`. This class contains a closure with a strong reference to `self`. The test fails with:
 
 ```
-Checking:
-Alloc FirstViewController
-Dealloc FirstViewController
-
-Checking:
-Alloc SecondViewController
-/Users/danielcech/Documents/[Development]/[Projects]/ios-research-dealloc-tests/Sources/Core/DeallocTester.swift:175: error: -[DeallocTestsAppCocoapodsTests.MainCoordinatorDeallocTester test_mainCoordinatorDealloc] : failed - Failed: dealloc test failed on classes: [DeallocTestsAppCocoapods.SecondViewController]
-
-Checking:
-Alloc ThirdViewController
-Dealloc ThirdViewController
-
-Checking:
-Alloc MainCoordinator
-Dealloc MainCoordinator
+MainCoordinatorDeallocTests.swift:23: error: -[DeallocTestsAppSPMTests.MainCoordinatorDeallocTests test_secondScreen] : failed - DeallocTestsAppSPM.SecondViewController was not deallocated within 2 sec. It was watched for another 3 sec after that. Possible causes:
+  • `someClosure` is a closure. Make sure it captures self weakly
+  • Or something outside still holds it: a parent's list of children, a cache or a singleton
 ```
 
-If you comment out the first line and uncomment the second one, you will see that the retain cycle disappears and the test will succeed.
+If you comment out the first line and uncomment the second one, the retain cycle disappears and the test will succeed.
 
 ```swift
     someClosure = { number in self.view(number) }
@@ -233,4 +326,4 @@ Issues and pull requests are welcome!
 
 ## License
 
-DeallocTests is released under the MIT license. See [LICENSE](https://github.com/DanielCech/DeallocTests/blob/master/LICENSE) for details.
+DeallocTests is released under the MIT license. See [LICENSE](https://github.com/strvcom/DeallocTests/blob/master/LICENSE) for details.
