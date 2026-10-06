@@ -38,11 +38,13 @@ public func expectDeallocation<Object: AnyObject>(
     let location = TestSourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
     let tracker = DeallocationTracker()
 
-    guard try await createAndRun(makeObject, lifecycle: lifecycle, tracker: tracker, location: location) else {
+    let didRunLifecycle = try await createAndRun(makeObject, lifecycle: lifecycle, tracker: tracker, location: location)
+    await afterRelease()
+
+    guard didRunLifecycle else {
         return
     }
 
-    await afterRelease()
     await tracker.verifyDeallocation(timeout: timeout)
 }
 

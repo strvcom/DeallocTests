@@ -24,7 +24,16 @@ func makeObjectReleasedAfter(_ delay: Duration) -> PlainObject {
 struct GracePeriodTests {
     @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(2)))
     func lateReleaseIsAWarning() async {
-        await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+        #if compiler(>=6.3)
+            await withKnownIssue {
+                await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+            } matching: { issue in
+                issue.severity == .warning
+                    && issue.comments.contains { $0.rawValue.hasPrefix("DeallocTestsTests.PlainObject was released after") }
+            }
+        #else
+            await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
+        #endif
     }
 
     @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.milliseconds(300)))
