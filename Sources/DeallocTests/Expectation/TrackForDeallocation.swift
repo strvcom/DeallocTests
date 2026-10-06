@@ -107,8 +107,13 @@ public struct DeallocationCheckTrait: TestTrait, SuiteTrait, TestScoping {
 
         let tracker = await DeallocationTracker()
 
-        try await DeallocationTracker.$current.withValue(tracker) {
-            try await function()
+        do {
+            try await DeallocationTracker.$current.withValue(tracker) {
+                try await function()
+            }
+        } catch {
+            await tracker.verifyDeallocation()
+            throw error
         }
 
         await tracker.verifyDeallocation()
