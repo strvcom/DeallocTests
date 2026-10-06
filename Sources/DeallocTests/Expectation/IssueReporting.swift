@@ -19,6 +19,10 @@ struct TestSourceLocation: Sendable {
 }
 
 func reportIssue(_ message: String, at location: TestSourceLocation) {
+    guard !Task.isCancelled else {
+        return
+    }
+
     #if canImport(Testing)
         if Test.current != nil {
             recordSwiftTestingIssue(message, at: location)

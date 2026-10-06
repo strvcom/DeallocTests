@@ -48,6 +48,8 @@ extension Lifecycle {
 
         do {
             try await interaction(object)
+        } catch is CancellationError {
+            return
         } catch {
             reportIssue("Lifecycle interaction with \(type(of: object)) threw an error: \(error)", at: location)
         }
@@ -92,6 +94,11 @@ public extension Lifecycle where Object: UIViewController {
             }
 
             controller.modalPresentationStyle = style
+            if let popover = controller.popoverPresentationController {
+                let bounds = hostController.view.bounds
+                popover.sourceView = hostController.view
+                popover.sourceRect = CGRect(x: bounds.midX, y: bounds.midY, width: 0, height: 0)
+            }
             hostController.present(controller, animated: false)
 
             guard await waitUntil({ controller.viewIfLoaded?.window != nil }) else {
