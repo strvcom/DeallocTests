@@ -238,12 +238,18 @@ struct SwiftUIHostingTests {
     }
 
     @Test func taskStartedOnAppearLeaks() async {
+        weak var leakedModel: TaskLeakModel?
+
         await withKnownIssue {
             await expectDeallocation(.hosting { TaskLeakView(model: $0) }, timeout: .milliseconds(200)) {
-                TaskLeakModel()
+                let model = TaskLeakModel()
+                leakedModel = model
+                return model
             }
         } matching: { issue in
             isLeakReport(of: "TaskLeakModel", mentioning: "`task` is a task")(issue)
         }
+
+        leakedModel?.task?.cancel()
     }
 }
