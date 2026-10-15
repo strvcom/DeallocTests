@@ -29,6 +29,7 @@ See "Migrating to 4.0" in the README.
 
 ### Fixed
 - The dependency URL uses https, so the package resolves without SSH access to GitHub.
+- The package compiles for visionOS, which has no `UIScreen`. The UIKit lifecycles there need a host app, like `.present` everywhere.
 
 ### Removed
 - Travis CI, Danger, Carthage, jazzy and unused headers.

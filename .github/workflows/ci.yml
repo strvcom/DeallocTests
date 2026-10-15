@@ -49,6 +49,18 @@ jobs:
             -scheme DeallocTests \
             -destination "id=$UDID"
 
+  package-visionos:
+    name: Package build (visionOS Simulator)
+    # visionOS has no UIScreen; this only checks that the package compiles there
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          xcodebuild build \
+            -scheme DeallocTests \
+            -destination 'generic/platform=visionOS Simulator'
+
   sample-apps:
     name: Sample apps (iOS)
     # Package traits in an Xcode project need Xcode 26.4 or later
