@@ -17,6 +17,7 @@ public extension XCTestCase {
     /// Checks that the object deallocates when the test ends.
     ///
     /// Keep the object in a local variable. A property of the test case lives until the test case is released.
+    /// The check uses the `DeallocationConfiguration` in effect where this method is called.
     ///
     /// ```swift
     /// func test_viewModel() {
