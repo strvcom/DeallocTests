@@ -177,7 +177,7 @@ final class TestWindow {
         if let windowScene = foregroundWindowScene() {
             window = UIWindow(windowScene: windowScene)
         } else {
-            window = UIWindow(frame: UIScreen.main.bounds)
+            window = Self.makeWindowWithoutScene()
         }
 
         window.rootViewController = rootViewController
@@ -187,6 +187,17 @@ final class TestWindow {
 
     var hasWindowScene: Bool {
         window.windowScene != nil
+    }
+
+    /// Package tests have no host app and therefore no window scene
+    private static func makeWindowWithoutScene() -> UIWindow {
+        #if os(visionOS)
+            // visionOS has no UIScreen, and a window without a scene is never shown there,
+            // so `waitUntilVisible` reports that a host app is needed
+            UIWindow()
+        #else
+            UIWindow(frame: UIScreen.main.bounds)
+        #endif
     }
 
     func waitUntilVisible(_ hostController: HostViewController, at location: TestSourceLocation) async -> Bool {
