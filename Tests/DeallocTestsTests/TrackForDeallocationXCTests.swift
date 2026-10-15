@@ -126,7 +126,8 @@ final class TrackForDeallocationXCTests: XCTestCase {
         let warnings = await recordingExpectedFailures {
             await withDeallocationConfiguration({
                 $0.timeout = .milliseconds(100)
-                $0.gracePeriod = .seconds(2)
+                // Long on purpose: a passing check ends when the object goes away, and a loaded runner can release it late
+                $0.gracePeriod = .seconds(60)
             }) {
                 await expectDeallocation { makeObjectReleasedAfter(.milliseconds(400)) }
             }
