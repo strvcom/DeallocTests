@@ -22,7 +22,9 @@ func makeObjectReleasedAfter(_ delay: Duration) -> PlainObject {
 @Suite("Grace period")
 @MainActor
 struct GracePeriodTests {
-    @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(2)))
+    // A passing check ends as soon as the object goes away, so the long grace period only
+    // matters on a loaded runner, where the release can come seconds late
+    @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.seconds(60)))
     func lateReleaseIsAWarning() async {
         #if compiler(>=6.3)
             await withKnownIssue {
