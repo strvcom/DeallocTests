@@ -5,11 +5,65 @@
 //  Copyright © 2026 STRV. All rights reserved.
 //
 
+import Combine
+import Observation
 import DeallocTests
 import SwiftUI
 import Testing
 
 // MARK: - Fixtures
+
+final class ClosureLeak {
+    var onUpdate: (() -> Void)?
+
+    init() {
+        onUpdate = { _ = self }
+    }
+}
+
+@available(macOS 14, iOS 17, *)
+@Observable
+final class ObservableClosureLeak {
+    var onUpdate: (() -> Void)?
+
+    init() {
+        onUpdate = { _ = self }
+    }
+}
+
+final class CycleParent {
+    var child: CycleChild?
+
+    init() {
+        child = CycleChild(parent: self)
+    }
+}
+
+final class CycleChild {
+    let parent: CycleParent
+
+    init(parent: CycleParent) {
+        self.parent = parent
+    }
+}
+
+final class SubscriptionLeak {
+    let updates = PassthroughSubject<Int, Never>()
+    var cancellables = Set<AnyCancellable>()
+    var value = 0
+
+    init() {
+        updates.sink { self.value = $0 }.store(in: &cancellables)
+    }
+}
+
+final class OwnerObject {
+    let viewModel: PlainObject
+
+    init(viewModel: PlainObject) {
+        self.viewModel = viewModel
+    }
+}
 
 @MainActor
 final class TaskLeakModel {
@@ -57,6 +111,112 @@ struct TaskModifierView: View {
     }
 }
 
+func isLeakReport(of typeName: String, mentioning hint: String) -> (Issue) -> Bool {
+    { issue in
+        isLeakReport(of: typeName)(issue) && issue.comments.contains { $0.rawValue.contains(hint) }
+    }
+}
+
+final class SelfReference {
+    var me: SelfReference?
+
+    init() {
+        me = self
+    }
+}
+
+// MARK: - Leak hints
+
+@Suite("Leak hints")
+@MainActor
+struct LeakHintsTests {
+    @Test func closurePropertyIsNamed() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ClosureLeak", mentioning: "`onUpdate` is a closure")(issue)
+        }
+    }
+
+    @Test @available(macOS 14, iOS 17, *)
+    func observablePropertyNamesAreReadable() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ObservableClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ObservableClosureLeak", mentioning: "• `onUpdate` is a closure")(issue)
+                && !issue.comments.contains { $0.rawValue.contains("observationRegistrar") }
+        }
+    }
+
+    @Test func propertyCycleIsShown() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { CycleParent() }
+        } matching: { issue in
+            isLeakReport(of: "CycleParent", mentioning: "`self.child.parent` refers back to the object")(issue)
+        }
+    }
+
+    @Test func directSelfReferenceIsShown() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { SelfReference() }
+        } matching: { issue in
+            isLeakReport(of: "SelfReference", mentioning: "`self.me` refers back to the object")(issue)
+        }
+    }
+
+    @Test func subscriptionIsNamed() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { SubscriptionLeak() }
+        } matching: { issue in
+            isLeakReport(of: "SubscriptionLeak", mentioning: "`cancellables` is a Combine subscription")(issue)
+        }
+    }
+
+    @Test func hintsMentionExternalOwners() async {
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) { ClosureLeak() }
+        } matching: { issue in
+            isLeakReport(of: "ClosureLeak", mentioning: "something outside still holds it")(issue)
+        }
+    }
+
+    @Test func leakWithoutSuspectsGetsGenericMessage() async {
+        let cache = Cache()
+
+        await withKnownIssue {
+            await expectDeallocation(.custom { cache.objects.append($0) }, timeout: .milliseconds(100)) { PlainObject() }
+        } matching: { issue in
+            isLeakReport(of: "PlainObject", mentioning: "Something still holds a strong reference")(issue)
+        }
+    }
+}
+
+// MARK: - Tracking objects inside expectDeallocation
+
+@Suite("trackForDeallocation inside expectDeallocation")
+@MainActor
+struct NestedTrackingTests {
+    @Test func trackedChildPasses() async {
+        await expectDeallocation {
+            OwnerObject(viewModel: trackForDeallocation(PlainObject()))
+        }
+    }
+
+    @Test func leakedChildIsReported() async {
+        let cache = Cache()
+
+        await withKnownIssue {
+            await expectDeallocation(timeout: .milliseconds(100)) {
+                let viewModel = trackForDeallocation(PlainObject())
+                cache.objects.append(viewModel)
+                return OwnerObject(viewModel: viewModel)
+            }
+        } matching: { issue in
+            isLeakReport(of: "PlainObject")(issue)
+        }
+    }
+}
+
 // MARK: - SwiftUI
 
 @Suite("SwiftUI hosting", .serialized)
@@ -87,7 +247,7 @@ struct SwiftUIHostingTests {
                 return model
             }
         } matching: { issue in
-            isLeakReport(of: "TaskLeakModel")(issue)
+            isLeakReport(of: "TaskLeakModel", mentioning: "`task` is a task")(issue)
         }
 
         leakedModel?.task?.cancel()

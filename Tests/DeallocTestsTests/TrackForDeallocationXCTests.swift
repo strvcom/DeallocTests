@@ -10,6 +10,19 @@ import XCTest
 
 final class TrackForDeallocationXCTests: XCTestCase {
     @MainActor
+    func test_trackedObject_passes() {
+        let object = trackForDeallocation(PlainObject())
+        _ = object
+    }
+
+    @MainActor
+    func test_trackedLeak_fails() {
+        XCTExpectFailure("RetainCycleObject has a retain cycle")
+
+        trackForDeallocation(RetainCycleObject())
+    }
+
+    @MainActor
     func test_expectDeallocation_cleanObject_passes() async {
         await expectDeallocation { PlainObject() }
     }
@@ -19,5 +32,17 @@ final class TrackForDeallocationXCTests: XCTestCase {
         XCTExpectFailure("RetainCycleObject has a retain cycle")
 
         await expectDeallocation(timeout: .milliseconds(100)) { RetainCycleObject() }
+    }
+
+    @MainActor
+    func test_trackedChildInsideExpectDeallocation_isCheckedWithIt() async {
+        XCTExpectFailure("The child is kept alive by the cache")
+        let cache = Cache()
+
+        await expectDeallocation(timeout: .milliseconds(100)) {
+            let child = trackForDeallocation(PlainObject())
+            cache.objects.append(child)
+            return OwnerObject(viewModel: child)
+        }
     }
 }
