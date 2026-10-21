@@ -127,6 +127,20 @@ struct ExpectDeallocationTests {
         }
     }
 
+    @Test func interactionThrowingCancellationErrorIsReported() async {
+        await withKnownIssue {
+            await expectDeallocation(.custom { _ in
+                // A child throws CancellationError while the test task itself is still active
+                try await withThrowingTaskGroup(of: Void.self) { group in
+                    group.addTask { throw CancellationError() }
+                    try await group.waitForAll()
+                }
+            }) { PlainObject() }
+        } matching: { issue in
+            issue.comments.contains { $0.rawValue.contains("threw an error: CancellationError") }
+        }
+    }
+
     @Test func throwingFactoryRethrows() async {
         await #expect(throws: LifecycleError.self) {
             try await expectDeallocation { () throws -> PlainObject in throw LifecycleError() }
