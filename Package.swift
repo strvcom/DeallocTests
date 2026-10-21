@@ -42,6 +42,12 @@ let package = Package(
                 )
             ]
         ),
+        .testTarget(
+            name: "DeallocTestsTests",
+            dependencies: [
+                "DeallocTests"
+            ]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
