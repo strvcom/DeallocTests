@@ -48,8 +48,6 @@ extension Lifecycle {
 
         do {
             try await interaction(object)
-        } catch is CancellationError {
-            return
         } catch {
             reportIssue("Lifecycle interaction with \(type(of: object)) threw an error: \(error)", at: location)
         }
