@@ -11,7 +11,7 @@ import Foundation
 let delayTime: Double = 0.1
 let presentationAnimated = false
 
-#if canImport(DependencyInjection)
+#if DependencyInjection
     import DependencyInjection
 #endif
 
@@ -22,7 +22,7 @@ import XCTest
 #endif
 
 public struct DeallocTest {
-#if canImport(DependencyInjection)
+#if DependencyInjection
     public typealias ObjectCreationClosure = @MainActor (AsyncContainer) async -> AnyObject?
 #else
     public typealias ObjectCreationClosure = @MainActor () async -> AnyObject?
@@ -84,7 +84,7 @@ open class DeallocTester: XCTestCase {
     }
 #endif
 
-#if canImport(DependencyInjection)
+#if DependencyInjection
     /// Dependency Injection container
     // swiftlint:disable:next implicitly_unwrapped_optional
     public var container: AsyncContainer!
@@ -93,7 +93,7 @@ open class DeallocTester: XCTestCase {
     public override func setUp() async throws {
         try await super.setUp()
 
-        #if canImport(DependencyInjection)
+        #if DependencyInjection
             container = AsyncContainer()
         #endif
 
@@ -133,7 +133,7 @@ open class DeallocTester: XCTestCase {
         allocatedClasses = []
         deallocatedClasses = []
 
-        #if canImport(DependencyInjection)
+        #if DependencyInjection
             await container.clean()
             await registerDependencies()
         #endif
@@ -144,7 +144,7 @@ open class DeallocTester: XCTestCase {
 
         let dependencyDeallocTest = deallocTests[index]
 
-        #if canImport(DependencyInjection)
+        #if DependencyInjection
             var instance: AnyObject? = await dependencyDeallocTest.objectCreation(self.container)
         #else
             var instance: AnyObject? = await dependencyDeallocTest.objectCreation()
@@ -188,7 +188,7 @@ open class DeallocTester: XCTestCase {
     /// Start testing of next item
     @MainActor
     private func continueWithNextStep(deallocTests: [DeallocTest], index: Int, expectation: XCTestExpectation) async {
-        #if canImport(DependencyInjection)
+        #if DependencyInjection
             await container.releaseSharedInstances()
         #endif
 

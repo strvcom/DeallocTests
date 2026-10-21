@@ -1,6 +1,6 @@
-// swift-tools-version:6.0.0
+// swift-tools-version:6.1
 //
-//  DeallocTests.swift
+//  Package.swift
 //  DeallocTests
 //
 //  Created by Daniel Cech on 01/04/19.
@@ -20,29 +20,27 @@ let package = Package(
             name: "DeallocTests",
             targets: ["DeallocTests"]
         ),
-        .library(
-            name: "DeallocTestsDIFree",
-            targets: ["DeallocTestsDIFree"]
+    ],
+    traits: [
+        .trait(
+            name: "DependencyInjection",
+            description: "Integration with STRV Dependency Injection: the AsyncContainer in DeallocTester"
         ),
+        .default(enabledTraits: ["DependencyInjection"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        .package(url: "git@github.com:strvcom/ios-dependency-injection.git", .upToNextMajor(from: "2.0.0"))
+        .package(url: "https://github.com/strvcom/ios-dependency-injection.git", "1.0.4" ..< "3.0.0")
     ],
     targets: [
         .target(
             name: "DeallocTests",
-            dependencies: [.product(name: "DependencyInjection", package: "ios-dependency-injection")],
-            path: "Sources/DeallocTests"
-        ),
-        .target(
-            name: "DeallocTestsDIFree",
-            path: "Sources/DeallocTestsDIFree"
-        ),
-        .testTarget(
-            name: "DeallocTestsTests",
-            dependencies: ["DeallocTests"],
-            path: "Tests"
+            dependencies: [
+                .product(
+                    name: "DependencyInjection",
+                    package: "ios-dependency-injection",
+                    condition: .when(traits: ["DependencyInjection"])
+                )
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

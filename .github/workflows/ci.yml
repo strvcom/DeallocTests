@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Package build (macOS, ${{ matrix.traits.name }})
+    runs-on: macos-15
+    strategy:
+      matrix:
+        traits:
+          - { name: "DependencyInjection (default)", flags: "" }
+          - { name: "without DependencyInjection", flags: "--disable-default-traits" }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: swift build ${{ matrix.traits.flags }}
+
+  package-ios:
+    name: Package build (iOS Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          xcodebuild build \
+            -scheme DeallocTests \
+            -destination 'generic/platform=iOS Simulator'

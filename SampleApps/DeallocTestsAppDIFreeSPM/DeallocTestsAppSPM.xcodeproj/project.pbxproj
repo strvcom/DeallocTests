@@ -21,7 +21,7 @@
 		27A08053245CBA7A0037F1DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08052245CBA790037F1DB /* SceneDelegate.swift */; };
 		27A08055245CBBD10037F1DB /* DeallocTestConformances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */; };
 		27A08057245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */; };
-		ADCB58E527FD840C009E0DEB /* DeallocTestsDIFree in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */; };
+		ADCB58E527FD840C009E0DEB /* DeallocTests in Frameworks */ = {isa = PBXBuildFile; productRef = ADCB58E427FD840C009E0DEB /* DeallocTests */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,6 @@
 		27A08054245CBBD10037F1DB /* DeallocTestConformances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeallocTestConformances.swift; sourceTree = "<group>"; };
 		27A08056245CBBFA0037F1DB /* MainCoordinatorDeallocTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorDeallocTester.swift; sourceTree = "<group>"; };
 		7E877B2A5D7E5C94D45AE696 /* Pods_DeallocTestsAppCocoapodsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeallocTestsAppCocoapodsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ADCB58E327FD82B4009E0DEB /* DeallocTests */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DeallocTests; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADCB58E527FD840C009E0DEB /* DeallocTestsDIFree in Frameworks */,
+				ADCB58E527FD840C009E0DEB /* DeallocTests in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +152,6 @@
 		ADCB58E227FD82B4009E0DEB /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				ADCB58E327FD82B4009E0DEB /* DeallocTests */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -195,7 +193,7 @@
 			);
 			name = DeallocTestsAppSPMTests;
 			packageProductDependencies = (
-				ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */,
+				ADCB58E427FD840C009E0DEB /* DeallocTests */,
 			);
 			productName = DeallocTestsAppCocoapodsTests;
 			productReference = 27A08039245C859E0037F1DB /* DeallocTestsAppSPMTests.xctest */;
@@ -230,6 +228,7 @@
 			);
 			mainGroup = 27A0801A245C859C0037F1DB;
 			packageReferences = (
+				AD0E0E0E2F00000100000020 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 27A08024245C859C0037F1DB /* Products */;
 			projectDirPath = "";
@@ -543,10 +542,20 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		AD0E0E0E2F00000100000020 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+			traits = (
+			);
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		ADCB58E427FD840C009E0DEB /* DeallocTestsDIFree */ = {
+		ADCB58E427FD840C009E0DEB /* DeallocTests */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DeallocTestsDIFree;
+			package = AD0E0E0E2F00000100000020 /* XCLocalSwiftPackageReference "../.." */;
+			productName = DeallocTests;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

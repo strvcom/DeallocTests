@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import DeallocTestsDIFree
+import DeallocTests
 @testable import DeallocTestsAppSPM
 
 
@@ -16,8 +16,9 @@ class MainCoordinatorDeallocTester: DeallocTester {
         return MainCoordinator()
     }
 
+    @MainActor
     func test_mainCoordinatorDealloc() async {
-        presentingController = showPresentingController()
+        presentingController = await showPresentingController()
 
         try? await Task.sleep(for: .milliseconds(200))
 
