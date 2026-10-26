@@ -256,7 +256,9 @@ struct TrackForDeallocationTests {
                 testCase: Test.Case.current,
                 performing: {
                     await MainActor.run {
-                        _ = trackForDeallocation(RetainCycleObject())
+                        withDeallocationConfiguration({ $0.timeout = .milliseconds(100) }) {
+                            _ = trackForDeallocation(RetainCycleObject())
+                        }
                     }
                 }
             )
@@ -274,7 +276,9 @@ struct TrackForDeallocationTests {
                 testCase: Test.Case.current,
                 performing: {
                     await MainActor.run {
-                        _ = trackForDeallocation(RetainCycleObject())
+                        withDeallocationConfiguration({ $0.timeout = .milliseconds(100) }) {
+                            _ = trackForDeallocation(RetainCycleObject())
+                        }
                     }
                     throw LifecycleError()
                 }
