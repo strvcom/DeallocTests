@@ -19,6 +19,28 @@ func makeObjectReleasedAfter(_ delay: Duration) -> PlainObject {
     return object
 }
 
+private final class ReleasingBox: @unchecked Sendable {
+    var object: PlainObject?
+}
+
+/// Releases the object on a background queue while the main thread is blocked,
+/// so the check can only notice the release once the main thread is free again
+@MainActor
+func makeObjectReleasedWhileMainThreadIsBlocked(releaseAfter: Duration, blockMainThreadFor: Duration) -> PlainObject {
+    let object = PlainObject()
+    let box = ReleasingBox()
+    box.object = object
+
+    DispatchQueue.main.async {
+        Thread.sleep(forTimeInterval: blockMainThreadFor / .seconds(1))
+    }
+    DispatchQueue.global().asyncAfter(deadline: .now() + releaseAfter / .seconds(1)) {
+        box.object = nil
+    }
+
+    return object
+}
+
 @Suite("Grace period")
 @MainActor
 struct GracePeriodTests {
@@ -46,6 +68,23 @@ struct GracePeriodTests {
             issue.comments.contains {
                 $0.rawValue.hasPrefix(
                     "DeallocTestsTests.RetainCycleObject was not deallocated within 100 ms. It was watched for another 300 ms after that."
+                )
+            }
+        }
+    }
+
+    // The release happens after the grace period, but the check only gets to look once the
+    // main thread is free again, so it has to judge by when the object actually went away
+    @Test(.deallocationTimeout(.milliseconds(100)), .deallocationGracePeriod(.milliseconds(200)))
+    func releaseAfterTheGracePeriodIsALeakEvenWhenNoticedLate() async {
+        await withKnownIssue {
+            await expectDeallocation {
+                makeObjectReleasedWhileMainThreadIsBlocked(releaseAfter: .milliseconds(400), blockMainThreadFor: .milliseconds(700))
+            }
+        } matching: { issue in
+            issue.comments.contains {
+                $0.rawValue.hasPrefix(
+                    "DeallocTestsTests.PlainObject was not deallocated within 100 ms. It was watched for another 200 ms after that."
                 )
             }
         }
