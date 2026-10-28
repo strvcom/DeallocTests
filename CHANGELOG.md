@@ -2,7 +2,7 @@
 
 ## 4.0.0
 
-See "Migrating to 4.0" in the README.
+See [Migrating to 4.0](https://swiftpackageindex.com/strvcom/DeallocTests/documentation/dealloctests/migratingto4) in the documentation.
 
 ### Added
 - `expectDeallocation(_:timeout:afterRelease:of:)`: creates an object, runs its lifecycle, releases it and checks that it deallocates. Works in Swift Testing and XCTest, checks any class without conformances and reports leaks at the line of the test.
@@ -17,6 +17,7 @@ See "Migrating to 4.0" in the README.
 - `DeallocationConfiguration` with the `.deallocationTimeout(_:)`, `.deallocationGracePeriod(_:)` and `.deallocationIssues(_:)` Swift Testing traits for a test or a whole suite, and `withDeallocationConfiguration(_:operation:)` for XCTest (also around `invokeTest()` for a whole class). Leaks can be reported as warnings that don't fail the test.
 - Grace period: an object still alive at the timeout is watched a little longer (3 s by default). If it goes away then, it's reported as a warning, "released after 3.2 sec … bounded retention, not a leak", instead of a failure. It's skipped when leaks are reported as warnings anyway.
 - `expectDeallocation(of:resolvedFrom:)` for dependencies resolved from an `AsyncContainer`. A dependency that turns out to be a value type is reported with its concrete type, since it can't leak.
+- DocC documentation with Getting Started, Configuration and Grace Period, and Migrating to 4.0 articles, hosted on Swift Package Index.
 - Swift Testing and XCTest tests of the library on macOS and the iOS simulator, and GitHub Actions CI.
 
 ### Breaking
@@ -25,7 +26,7 @@ See "Migrating to 4.0" in the README.
 - The `DeallocTestsDIFree` product is removed. Use the `DeallocTests` product and `import DeallocTests`.
 - Swift 6.1 (Xcode 16.3) is required. Turning the trait off from an Xcode project needs Xcode 26.4.
 - `DefaultInitializable` is removed.
-- `DeallocTester`, `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable` are removed. Each `DeallocTest` becomes one `expectDeallocation` call; see "Migrating to 4.0" in the README.
+- `DeallocTester`, `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable` are removed. Each `DeallocTest` becomes one `expectDeallocation` call; see "Migrating to 4.0" in the documentation.
 
 ### Fixed
 - The dependency URL uses https, so the package resolves without SSH access to GitHub.

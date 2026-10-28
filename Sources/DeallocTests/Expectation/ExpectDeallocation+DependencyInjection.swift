@@ -25,6 +25,10 @@ import DependencyInjection
 ///   - type: Registered type to resolve. The resolved instance must be a class instance.
 ///   - container: Container with the registration
 ///   - timeout: How long to wait for the object to deallocate. Defaults to `DeallocationConfiguration.current.timeout`
+///   - fileID: Where a leak is reported. Defaults to the caller.
+///   - filePath: Where a leak is reported. Defaults to the caller.
+///   - line: Where a leak is reported. Defaults to the caller.
+///   - column: Where a leak is reported. Defaults to the caller.
 @MainActor
 public func expectDeallocation<Dependency: Sendable>(
     of type: Dependency.Type,

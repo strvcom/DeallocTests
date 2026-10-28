@@ -61,6 +61,25 @@ jobs:
             -scheme DeallocTests \
             -destination 'generic/platform=visionOS Simulator'
 
+  documentation:
+    name: Documentation (iOS)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      # Fails on unresolved symbol links and undocumented parameters in this package; the
+      # dependency's own documentation warnings are ignored
+      - name: Build documentation
+        run: |
+          set -o pipefail
+          xcodebuild docbuild \
+            -scheme DeallocTests \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath .build/docbuild 2>&1 | tee docbuild.log
+          if grep "warning:" docbuild.log | grep -v "/checkouts/" | grep -q .; then
+            grep "warning:" docbuild.log | grep -v "/checkouts/"
+            exit 1
+          fi
+
   sample-apps:
     name: Sample apps (iOS)
     # Package traits in an Xcode project need Xcode 26.4 or later

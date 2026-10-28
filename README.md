@@ -9,22 +9,6 @@ Of course, there are also other tools for memory leak detection, namely Instrume
 
 It is very easy to create a memory leak by mistake. Memory leaks have various forms; it’s not always about just forgetting to add `[weak self]` to closures. That's why it is very important to prevent them from happening. DeallocTests can help with their detection.
 
-## When can I use DeallocTests?
-
-DeallocTests work well with apps that use MVVM-C (MVVM with ViewCoordinators) architecture. Using coordinators helps to make the ViewControllers independent and easily constructible. DeallocTests work great with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection). And best of all—DeallocTests don’t need any modifications of the main target of your app.
-
-####  Does it sound too good to be true :-)? Hold on…
-
-## Testing
-
-1) We can focus on view controller testing. Apps written in MVVM-C architecture often have many screens (view controllers) that are grouped with view coordinators. The recommended approach is to create a separate deallocation test scenario for each view coordinator. DeallocTests present the view controllers in view coordinator one-by-one (the method of presentation is not important). If a memory leak is found, the test fails with an error that can help you find the leak. After successful tests of all of the coordinator's controllers, the coordinator itself is checked for memory leaks.
-
-2) Testing of "invisible" objects. Apps often have plenty of classes that encapsulate business logic: Managers, Services, Models, ViewModels, etc. These objects can be checked for deallocation, too. The recommended approach here is to create the testing scenario in order of simplicity. The most simple classes with no dependencies should be checked first, followed by the classes that use the already-tested classes as their dependencies, etc. On the following figure you are supposed to test the `APIManager` first, then `WeatherService` and only then `ForecastViewModel`:
-
-<p align="center">
-    <img src="https://i.ibb.co/GCfh7Ty/Dependency-Graph.png" width="400" max-width="90%" alt="DependencyGraph" />
-</p>
-
 ## STRV Dependency Injection library
 
 DeallocTests integrates with [STRV Dependency Injection library](https://github.com/strvcom/ios-dependency-injection). The integration is the `DependencyInjection` [package trait](#installation), which is on by default. Projects that don't use STRV Dependency Injection can turn it off, and the library is then not even downloaded.
@@ -77,8 +61,6 @@ traits = (
 
 ## Usage
 
-### `expectDeallocation`
-
 `expectDeallocation` creates an object, runs its lifecycle, releases it and checks that it deallocates. It works in **Swift Testing and XCTest**, any class can be checked without conformances or changes to the app target, and a leak is reported at the line of your test.
 
 ```swift
@@ -94,17 +76,13 @@ struct LeakTests {
         await expectDeallocation(.present) { coordinator.createProfileViewController() }
     }
 
-    @Test func settingsScreen() async {
-        await expectDeallocation(.push) { coordinator.createSettingsViewController() }
-    }
-
     @Test func profileViewModel() async {
         await expectDeallocation { ProfileViewModel(api: MockAPI()) }
     }
 }
 ```
 
-The same calls work inside an `XCTestCase`. A leak fails at the line of the test, and the message points at the likely cause:
+A leak fails at the line of the test, and the message points at the likely cause:
 
 ```
 LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec. It was watched for another 3 sec after that. Possible causes:
@@ -113,184 +91,17 @@ LeakTests.swift:12: MyApp.ProfileViewController was not deallocated within 2 sec
   • Or something outside still holds it: a parent's list of children, a cache or a singleton
 ```
 
-The hints come from the leaked object's stored properties: closures, `Task`s, Combine subscriptions, timers, and reference cycles through properties. Reflection can't tell weak properties from strong ones or look inside closures, so treat them as suggestions.
+Many leaks only appear once a screen loads or appears, so pick the lifecycle that exercises the object: `.loadView`, `.present`, `.push`, `.hosting` for SwiftUI views or `.custom`. Ordinary unit tests can check their system under test with `trackForDeallocation`, and a dependency can be resolved from an STRV Dependency Injection `AsyncContainer` and checked.
 
-Many leaks only appear once a screen loads or appears, so pick the lifecycle that exercises the object:
+## Documentation
 
-| Lifecycle | What happens before release |
-|---|---|
-| `.none` (default) | Nothing, the object is released right away |
-| `.loadView` | The view controller loads its view (`viewDidLoad`). UIKit and AppKit. |
-| `.present`, `.present(style:interaction:)` | The view controller is presented in a test window, then dismissed |
-| `.push`, `.push(interaction:)` | The view controller is pushed onto a navigation controller in a test window, then popped |
-| `.hosting { object in SomeView(model: object) }` | A SwiftUI view built from the object is shown in a test window, then removed. `onAppear` and `.task` run. |
-| `.custom { object in … }` | Your code runs with the object, e.g. calls the methods you suspect of leaking |
+The [documentation](https://swiftpackageindex.com/strvcom/DeallocTests/documentation/dealloctests) covers the whole API and has these articles:
 
-`interaction` runs while the controller is on screen:
+- [Getting Started](https://swiftpackageindex.com/strvcom/DeallocTests/documentation/dealloctests/gettingstarted): lifecycles, checking owned objects, checks in ordinary unit tests and STRV Dependency Injection
+- [Configuration and Grace Period](https://swiftpackageindex.com/strvcom/DeallocTests/documentation/dealloctests/configurationandgraceperiod): timeouts, the grace period for late releases and reporting leaks as warnings
+- [Migrating to 4.0](https://swiftpackageindex.com/strvcom/DeallocTests/documentation/dealloctests/migratingto4): replacing `DeallocTester` and `DeallocTestsDIFree`
 
-```swift
-await expectDeallocation(.present(interaction: { controller in
-    controller.searchBar.text = "query"
-    await controller.search()
-})) {
-    coordinator.createSearchViewController()
-}
-```
-
-SwiftUI views are values, so check the object behind them, typically the view model:
-
-```swift
-await expectDeallocation(.hosting { ProfileView(viewModel: $0) }) {
-    ProfileViewModel(api: MockAPI())
-}
-```
-
-To also check objects the tested one owns, wrap them in `trackForDeallocation` inside the closure. They must deallocate together with it:
-
-```swift
-await expectDeallocation(.present) {
-    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
-    return ProfileViewController(viewModel: viewModel)
-}
-```
-
-Other parameters:
-
-- `timeout` sets how long to wait for this object to deallocate (2 seconds by default). The check passes as soon as the object is gone.
-- `afterRelease` runs after the object is released and before the check, e.g. to clear a cache that legitimately holds it.
-
-#### Configuring a test, a suite or a test case class
-
-`timeout` is the only option a call takes, because it describes the object: some screens take longer to go away. Everything else is a policy for a whole test or suite, set through `DeallocationConfiguration`:
-
-| Option | Default | Swift Testing trait |
-|---|---|---|
-| `timeout` | 2 sec | `.deallocationTimeout(_:)` |
-| `gracePeriod` | 3 sec | `.deallocationGracePeriod(_:)` |
-| `severity` | `.error` | `.deallocationIssues(_:)` |
-
-- An object still alive at the timeout is watched for the **grace period**. If it goes away then, the check reports a warning, "released after 3.2 sec … bounded retention, not a leak", instead of failing. Passing checks never wait for it; only real leaks take the timeout plus the grace period to report. `.zero` turns it off.
-- With `severity` `.warning`, leaks are reported as warnings that don't fail the test, e.g. while adopting dealloc tests in an existing project. The grace period is skipped then, since it can't change the outcome.
-
-```swift
-@Suite(.deallocationTimeout(.seconds(5)))
-struct ScreenDeallocTests { … }
-
-// Adopting dealloc tests in an existing project: report leaks as warnings for now
-@Suite(.deallocationIssues(.warning))
-struct LegacyDeallocTests { … }
-```
-
-A test's own trait wins over its suite's, and a `timeout` passed to the call wins over both. In XCTest, use `withDeallocationConfiguration` around a test's code, or around `invokeTest()` for a whole test case class:
-
-```swift
-await withDeallocationConfiguration({ $0.timeout = .seconds(5) }) {
-    await expectDeallocation(.present) { makeProfileViewController() }
-}
-
-final class LegacyDeallocTests: XCTestCase {
-    override func invokeTest() {
-        withDeallocationConfiguration({ $0.severity = .warning }) {
-            super.invokeTest()
-        }
-    }
-}
-```
-
-`.present` needs a test target with a host app, because modal presentation needs a window scene. The other lifecycles also work in package tests.
-
-### Checking objects used in ordinary unit tests
-
-`trackForDeallocation` checks that an object deallocates when the test ends, so any unit test can catch leaks of its system under test.
-
-```swift
-// Swift Testing: add the trait to a test or a whole suite
-@Test(.checksDeallocation) @MainActor func loadsProfile() async {
-    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
-    await viewModel.load()
-    #expect(viewModel.name == "Daniel")
-}
-
-// XCTest
-@MainActor
-func test_loadsProfile() async {
-    let viewModel = trackForDeallocation(ProfileViewModel(api: MockAPI()))
-    await viewModel.load()
-    XCTAssertEqual(viewModel.name, "Daniel")
-}
-```
-
-In XCTest, keep the object in a local variable. A property of the test case lives until the test case is released. The check uses the configuration in effect where `trackForDeallocation` is called.
-
-### STRV Dependency Injection
-
-With the `DependencyInjection` trait, a dependency can be resolved from an `AsyncContainer`, released together with the container's shared instances and checked:
-
-```swift
-@Test func apiManager() async {
-    let container = AsyncContainer()
-    await container.register(type: APIManaging.self, in: .shared) { _ in APIManager() }
-
-    await expectDeallocation(of: APIManaging.self, resolvedFrom: container)
-}
-```
-
-Following the dependency graph, check the simplest dependencies first, then the ones that use them.
-
-## Migrating to 4.0
-
-**Dependency Injection.** The `DeallocTestsDIFree` product is gone. Everyone uses the `DeallocTests` product and `import DeallocTests`:
-
-- If you used `DeallocTests` with STRV Dependency Injection, nothing changes. The `DependencyInjection` trait is on by default.
-- If you used `DeallocTestsDIFree`, link the `DeallocTests` product instead, replace `import DeallocTestsDIFree` with `import DeallocTests`, and turn the default trait off (see [Installation](#installation)) so STRV Dependency Injection isn't downloaded.
-
-**`DeallocTester` is removed**, together with `DeallocTest`, `DeallocTestable` and `ClassNameIdentifiable`. Each `DeallocTest` becomes one `expectDeallocation` call, and the `DeallocTestable` conformances are deleted:
-
-```swift
-// Before
-final class MainCoordinatorDeallocTester: DeallocTester {
-    @MainActor
-    func test_mainCoordinatorDealloc() async {
-        let coordinator = MainCoordinator()
-        let expectation = expectation(description: "dealloc test")
-
-        await performDeallocTest(
-            deallocTests: [
-                DeallocTest(objectCreation: { _ in coordinator.createFirstViewController() }),
-                DeallocTest(objectCreation: { _ in MainCoordinator() })
-            ],
-            expectation: expectation
-        )
-
-        await fulfillment(of: [expectation], timeout: 60)
-    }
-}
-
-// After (XCTest; in Swift Testing the calls are the same)
-final class MainCoordinatorDeallocTests: XCTestCase {
-    @MainActor
-    func test_firstScreen() async {
-        let coordinator = MainCoordinator()
-        await expectDeallocation(.present) { coordinator.createFirstViewController() }
-    }
-
-    @MainActor
-    func test_coordinator() async {
-        await expectDeallocation { MainCoordinator() }
-    }
-}
-```
-
-| `DeallocTester` | `expectDeallocation` |
-|---|---|
-| View controllers are always presented | Choose `.present`, `.push`, `.loadView` or `.hosting` |
-| `registerDependencies()` + `objectCreation: { $0.resolve(...) }` | `expectDeallocation(of:resolvedFrom:)` with your own `AsyncContainer` |
-| `checkClasses` | `trackForDeallocation(_:)` inside the closure |
-| `actionBeforeCheck` | `afterRelease` |
-| `deallocationTimeout` | `timeout` |
-| `isLoggingEnabled` (`Alloc`/`Dealloc` output) | Leak messages name the leaked object and its likely causes |
-
-**`DefaultInitializable`** is removed. It wasn't related to dealloc testing.
+In Xcode, *Product › Build Documentation* builds it locally.
 
 ## Sample Apps
 
