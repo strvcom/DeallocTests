@@ -22,6 +22,10 @@
 ///   - lifecycle: What happens with the object before it's released, e.g. `.present` for a view controller
 ///   - timeout: How long to wait for the object to deallocate. Defaults to `DeallocationConfiguration.current.timeout`
 ///   - afterRelease: Runs after the object is released and before the check, e.g. to release cached instances
+///   - fileID: Where a leak is reported. Defaults to the caller.
+///   - filePath: Where a leak is reported. Defaults to the caller.
+///   - line: Where a leak is reported. Defaults to the caller.
+///   - column: Where a leak is reported. Defaults to the caller.
 ///   - makeObject: Creates the tested object. Don't keep any other reference to it.
 ///     Objects passed to `trackForDeallocation(_:)` inside it are checked too.
 @MainActor

@@ -1,0 +1,6 @@
+version: 1
+builder:
+  configs:
+    # The UIKit lifecycles (.present, .push) only exist in the iOS variant
+    - documentation_targets: [DeallocTests]
+      platform: ios
